@@ -14,6 +14,7 @@ function App() {
   const [textValue, setTextValue] = useState('')
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   return (
     <>
@@ -71,11 +72,50 @@ function App() {
           ></md-filled-text-field>
         </div>
 
+        {loggedInUser && (
+          <div style={{ marginTop: '20px', padding: '10px', border: '1px solid green', borderRadius: '5px' }}>
+            <p>Login bem-sucedido!</p>
+            <p>Bem-vindo(a), <strong>{loggedInUser.username || email}</strong>!</p>
+            {/* Você pode exibir outros dados do usuário aqui, e.g., loggedInUser.id */}
+          </div>
+        )}
+
         <md-outlined-button onClick={() => alert('Botão "Back" clicado!')}>Back</md-outlined-button>
         <md-filled-button
-          onClick={() => alert(`Botão "Next" clicado! Valor digitado: ${textValue}`)}
-          disabled={!textValue}
-        >Next</md-filled-button>
+          onClick={async () => {
+            if (!email) {
+              alert("Por favor, digite seu email.");
+              return;
+            }
+            // A senha não é validada pelo backend atual, mas é bom tê-la para futuras implementações
+            // if (!password) {
+            //   alert("Por favor, digite sua senha.");
+            //   return;
+            // }
+            try {
+              const response = await fetch(`http://localhost:3000/login?email=${encodeURIComponent(email)}`);
+              if (!response.ok) {
+                throw new Error(`Erro HTTP: ${response.status}`);
+              }
+              const data = await response.json();
+              if (data && data.length > 0) {
+                setLoggedInUser(data[0]); // Armazena o primeiro usuário encontrado
+                // Atualiza o campo "Digite seu nome" com o username do usuário logado
+                if (data[0].username) {
+                  setTextValue(data[0].username);
+                }
+              } else {
+                alert("Email não encontrado. Verifique o email ou cadastre-se.");
+                setLoggedInUser(null);
+              }
+            } catch (error) {
+              console.error("Erro ao tentar fazer login:", error);
+              alert(`Ocorreu um erro ao tentar fazer login: ${error.message}`);
+              setLoggedInUser(null);
+            }
+          }}
+          disabled={!email} // Habilita o botão se o email estiver preenchido
+        >Login</md-filled-button>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
