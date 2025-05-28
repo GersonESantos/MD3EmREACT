@@ -9,6 +9,7 @@ import '@material/web/checkbox/checkbox.js';
 
 function App() {
   const [count, setCount] = useState(0)
+  const [isChecked, setIsChecked] = useState(false)
 
   return (
     <>
@@ -29,12 +30,17 @@ function App() {
           Edit <code>src/App.jsx</code> and save to test HMR
         </p>
 
-<script type="module" src="./index.js"></script>
+        <div style={{ marginTop: '20px', marginBottom: '20px' }}>
+          <md-checkbox 
+            aria-label="Toggle feature"
+            checked={isChecked} 
+            onInput={(e) => setIsChecked(e.target.checked)}
+          ></md-checkbox>
+          <label style={{ marginLeft: '8px' }}> {isChecked ? 'Funcionalidade Ativada!' : 'Funcionalidade Desativada.'}</label>
+        </div>
 
-
-<md-outlined-button>Back</md-outlined-button>
-<md-filled-button>Next</md-filled-button>
-
+        <md-outlined-button onClick={() => alert('Botão "Back" clicado!')}>Back</md-outlined-button>
+        <md-filled-button onClick={() => alert('Botão "Next" clicado!')}>Next</md-filled-button>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
