@@ -6,10 +6,12 @@ import './App.css'
 import '@material/web/button/filled-button.js';
 import '@material/web/button/outlined-button.js';
 import '@material/web/checkbox/checkbox.js';
+import '@material/web/textfield/filled-text-field.js';
 
 function App() {
   const [count, setCount] = useState(0)
   const [isChecked, setIsChecked] = useState(false)
+  const [textValue, setTextValue] = useState('')
 
   return (
     <>
@@ -39,8 +41,21 @@ function App() {
           <label style={{ marginLeft: '8px' }}> {isChecked ? 'Funcionalidade Ativada!' : 'Funcionalidade Desativada.'}</label>
         </div>
 
+        <div style={{ marginTop: '20px', marginBottom: '20px', width: '300px' }}>
+          <md-filled-text-field
+            label="Digite seu nome"
+            value={textValue}
+            onInput={(e) => setTextValue(e.target.value)}
+            style={{ width: '100%' }}
+          ></md-filled-text-field>
+          {textValue && <p style={{ marginTop: '8px' }}>Olá, {textValue}!</p>}
+        </div>
+
         <md-outlined-button onClick={() => alert('Botão "Back" clicado!')}>Back</md-outlined-button>
-        <md-filled-button onClick={() => alert('Botão "Next" clicado!')}>Next</md-filled-button>
+        <md-filled-button
+          onClick={() => alert(`Botão "Next" clicado! Valor digitado: ${textValue}`)}
+          disabled={!textValue}
+        >Next</md-filled-button>
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
