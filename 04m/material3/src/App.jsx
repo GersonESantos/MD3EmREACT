@@ -12,6 +12,8 @@ function App() {
   const [count, setCount] = useState(0)
   const [isChecked, setIsChecked] = useState(false)
   const [textValue, setTextValue] = useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <>
@@ -48,7 +50,25 @@ function App() {
             onInput={(e) => setTextValue(e.target.value)}
             style={{ width: '100%' }}
           ></md-filled-text-field>
-          {textValue && <p style={{ marginTop: '8px' }}>Olá, {textValue}!</p>}
+          {textValue && <p style={{ marginTop: '8px', marginBottom: '10px' }}>Olá, {textValue}!</p>}
+
+          <md-filled-text-field
+            label="Email"
+            type="email"
+            value={email}
+            onInput={(e) => setEmail(e.target.value)}
+            style={{ width: '100%', marginTop: '10px' }}
+            autocomplete="username"
+          ></md-filled-text-field>
+
+          <md-filled-text-field
+            label="Senha"
+            type="password"
+            value={password}
+            onInput={(e) => setPassword(e.target.value)}
+            style={{ width: '100%', marginTop: '10px' }}
+            autocomplete="current-password"
+          ></md-filled-text-field>
         </div>
 
         <md-outlined-button onClick={() => alert('Botão "Back" clicado!')}>Back</md-outlined-button>
