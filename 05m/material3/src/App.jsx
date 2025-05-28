@@ -46,9 +46,10 @@ function App() {
 
         <div style={{ marginTop: '20px', marginBottom: '20px', width: '300px' }}>
           <md-filled-text-field
-            label="Digite seu nome"
+            label="Usuario"
             value={textValue}
             onInput={(e) => setTextValue(e.target.value)}
+            readOnly={!!loggedInUser} // Torna o campo somente leitura se o usuário estiver logado
             style={{ width: '100%' }}
           ></md-filled-text-field>
           {textValue && <p style={{ marginTop: '8px', marginBottom: '10px' }}>Olá, {textValue}!</p>}
