@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="login.css">
+<style>
+
+.btn-google,
+.btn-github {
+    background-color: #f8f9fa; /* Fundo dos botões Google/Github */
+    color: #3c4043; /* Cor do texto dos botões Google/Github */
+    border: 1px solid #dadce0; /* Borda dos botões Google/Github */
+    margin-bottom: 15px;
+    font-weight: 500; /* Peso da fonte um pouco menor */
+}
+
+        .btn-google:hover,
+        .btn-github:hover {
+            background-color: #f1f3f4; /* Cor de hover dos botões Google/Github */
+        }
+
+
+        .btn img {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+        }
+
+        .separator {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+
+        .separator::before,
+        .separator::after {
+            content: '';
+            flex: 1;
+            border-bottom: 1px solid #eee;
+        }
+
+        .separator:not(:empty)::before {
+            margin-right: .25em;
+        }
+
+        .separator:not(:empty)::after {
+            margin-left: .25em;
+        }
+
+        .signup-section { /* Alterado de .signup-link para .signup-section */
+            text-align: center;
+            margin-top: 15px;
+            margin-bottom: 20px;
+        }
+
+        .signup-section .btn-link { /* Estilizando o botão para parecer um link */
+            font-weight: normal; /* Pode ajustar conforme preferir */
+            text-decoration: none;
+            padding: 0;
+            vertical-align: baseline; /* Alinha melhor com o texto */
+        }
+        .signup-section .btn-link:hover {
+            text-decoration: underline;
+        }
+
+</style>
+
+</head>
+<body class="d-flex align-items-center py-4 bg-body-tertiary">
+    <main class="form-signin w-100 m-auto">
+        <form>
+            <h1 class="h3 mb-3 fw-normal text-center">Faça login</h1>
+
+            <img
+                src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg "
+                alt=""
+                class="mb-4 d-block mx-auto"
+                height="54"
+                width="72"
+>
+
+    <div class="form-floating position-relative">
+    <input type="email" class="form-control ps-5" id="floatingInput" placeholder="nome@exemplo.com" required>
+    <label for="floatingInput">📧 Endereço de e-mail</label>
+    <span class="position-absolute top-50 start-0 translate-middle-y ms-2 text-muted">
+    </span>
+    </div>
+
+            <div class="form-floating position-relative">
+                <input type="password" class="form-control pe-5" id="floatingPassword" placeholder="Senha" required>
+                <label for="floatingPassword">🔑 Senha</label>
+                <button type="button" class="btn btn-outline-secondary position-absolute end-0 top-50 translate-middle-y" id="togglePassword" style="border: none; background: transparent;">
+                    <span class="eye-icon">👁️</span>
+                </button>
+            </div>
+
+            <div class="form-check text-start my-3">
+                <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Lembrar-me
+                </label>
+            </div>
+            <button class="btn btn-primary w-100 py-2" type="submit">Entrar</button>
+
+            <div class="separator">ou</div>
+
+            <div class="signup-section">
+                Não tem uma conta?
+                <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#signupModal">
+                    INSCREVA-SE
+                </button>
+            </div>
+            <button class="btn btn-google w-100 py-2">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png" alt="Google logo">
+                Continuar com Google
+            </button>
+            <button class="btn btn-github w-100 py-2">
+                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="Github logo">
+                Continuar com Github
+            </button>
+
+            <p class="footer-text mt-3">
+                O seu login constitui a aceitação dos <a href="#">Termos de utilização</a> e <a href="#">Acordo de privacidade</a>
+            </p>
+
+
+            <p class="mt-5 mb-3 text-body-secondary text-center">© 2025</p>
+        </form>
+    </main>
+
+    <div class="theme-toggle dropdown">
+        <button class="btn btn-secondary theme-btn dropdown-toggle" type="button" id="themeButton" data-bs-toggle="dropdown" aria-expanded="false">
+            ☀️
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#" data-theme="light">☀️ Light</a></li>
+            <li><a class="dropdown-item" href="#" data-theme="dark">🌙 Dark</a></li>
+            <li><a class="dropdown-item" href="#" data-theme="auto">Auto</a></li>
+        </ul>
+    </div>
+
+    <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered"> {/* Adicionado modal-dialog-centered para centralizar verticalmente */}
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="signupModalLabel">Criar Nova Conta</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formNovoUsuario">
+                        <div class="mb-3">
+                            <label for="signupNome" class="form-label">Nome completo</label>
+                            <input type="text" class="form-control" id="signupNome" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupEmailModal" class="form-label">Endereço de e-mail</label>
+                            <input type="email" class="form-control" id="signupEmailModal" required>
+                            {/* Usei signupEmailModal para não conflitar com o ID do email do login, caso haja alguma validação JS específica */}
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupPasswordModal" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="signupPasswordModal" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupConfirmPassword" class="form-label">Confirmar Senha</label>
+                            <input type="password" class="form-control" id="signupConfirmPassword" required>
+                        </div>
+                        {/* Você pode adicionar mais campos aqui, como data de nascimento, etc. */}
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="submit" form="formNovoUsuario" class="btn btn-primary">Criar Conta</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="login.js"></script>
+</body>
+</html>
