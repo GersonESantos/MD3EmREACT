@@ -1,0 +1,66 @@
+html,
+body {
+    height: 100%;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    padding-right: 40px; /* Espaço para o botão do olho */
+}
+
+.theme-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.theme-btn {
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    width: 60px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilo para o botão do olho */
+#togglePassword {
+    z-index: 3;
+    height: 100%;
+    padding: 0 10px;
+}
+
+.signup-section { /* Alterado de .signup-link para .signup-section */
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.signup-section .btn-link { /* Estilizando o botão para parecer um link */
+    font-weight: normal;
+    text-decoration: none;
+    padding: 0;
+    vertical-align: baseline; /* Alinha melhor com o texto */
+}
+.signup-section .btn-link:hover {
+    text-decoration: underline;
+}

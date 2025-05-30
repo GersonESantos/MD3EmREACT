@@ -58,10 +58,10 @@ function App() {
 
   return (
     <>
-      <div className="login-container">
-        <form onSubmit={handleSubmit} className="login-form">
-          <h1 className="login-title">Login</h1>
-
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '20px' }}>
+        <form onSubmit={handleSubmit} style={{ padding: '30px', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', backgroundColor: '#fff', width: '100%', maxWidth: '400px' }}>
+          <h1 style={{ textAlign: 'center', marginBottom: '25px', color: '#333' }}>Login</h1>
+          
           <md-filled-text-field
             label="Usuario" // Este campo exibe o username após o login
             value={textValue}
