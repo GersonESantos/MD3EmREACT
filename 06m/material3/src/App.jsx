@@ -60,14 +60,20 @@ function App() {
     <>
       <div className="login-container">
         <form onSubmit={handleSubmit} className="login-form">
+          <img
+            src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg"
+            alt="Logotipo" // Sugestão: um texto alternativo mais descritivo
+            className="mb-4 d-block mx-auto" // Estas são classes Bootstrap, podem não ter efeito sem Bootstrap CSS
+            height="54"
+            width="72"
+          />
           <h1 className="login-title">Login</h1>
-
           <md-filled-text-field
             label="Usuario" // Este campo exibe o username após o login
             value={textValue}
-            onInput={(e) => !loggedInUser && setTextValue(e.target.value)} // Permite edição apenas se não estiver logado
-            readOnly={!!loggedInUser}
-            style={{ width: '100%', marginBottom: '10px' }}
+            // Removido onInput para impedir a digitação pelo usuário
+            readOnly={true} // Define o campo como somente leitura permanentemente
+            className="user-display-field"
           ></md-filled-text-field>
 
           <md-filled-text-field

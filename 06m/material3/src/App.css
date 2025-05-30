@@ -64,3 +64,11 @@
   margin-bottom: 25px;
   color: #333;
 }
+
+.user-display-field {
+  width: 100%;
+  margin-bottom: 10px;
+  cursor: default; /* Indica que o campo não é interativo */
+  /* Remove o efeito de hover da camada de estado do Material Web Text Field */
+  --md-filled-text-field-hover-state-layer-opacity: 0;
+}
