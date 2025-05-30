@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 // index.js
 import '@material/web/button/filled-button.js';
@@ -13,6 +13,7 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [theme, setTheme] = useState('light'); // 'light' or 'dark'
 
   const handleLogin = async () => {
     setErrorMessage(''); // Clear previous errors
@@ -56,14 +57,30 @@ function App() {
     handleLogin();
   };
 
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
   return (
     <>
       <div className="login-container">
+        <div className="theme-selector-container">
+          <label htmlFor="theme-select" className="theme-selector-label"> </label>
+          <select
+            id="theme-select"
+            value={theme}
+            onChange={(e) => setTheme(e.target.value)}
+            className="theme-selector"
+          >
+            <option value="light">Claro ☀️</option>
+            <option value="dark">Escuro 🌙</option>
+          </select>
+        </div>
         <form onSubmit={handleSubmit} className="login-form">
           <img
             src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg"
-            alt="Logotipo" // Sugestão: um texto alternativo mais descritivo
-            className="mb-4 d-block mx-auto" // Estas são classes Bootstrap, podem não ter efeito sem Bootstrap CSS
+            alt="Logotipo"
+            className="login-logo"
             height="54"
             width="72"
           />
@@ -73,7 +90,7 @@ function App() {
             value={textValue}
             // Removido onInput para impedir a digitação pelo usuário
             readOnly={true} // Define o campo como somente leitura permanentemente
-            className="user-display-field"
+            className="user-display-field form-field" // Adicionada classe form-field
           ></md-filled-text-field>
 
           <md-filled-text-field
@@ -81,8 +98,8 @@ function App() {
             type="email"
             value={email}
             onInput={(e) => setEmail(e.target.value)} // Assume-se que o evento é 'input'
-            style={{ width: '100%', marginTop: '10px' }}
             autocomplete="username"
+            className="form-field"
             disabled={isLoading || !!loggedInUser}
           ></md-filled-text-field>
 
@@ -91,26 +108,26 @@ function App() {
             type="password"
             value={password}
             onInput={(e) => setPassword(e.target.value)} // Assume-se que o evento é 'input'
-            style={{ width: '100%', marginTop: '10px' }}
             autocomplete="current-password"
+            className="form-field"
             disabled={isLoading || !!loggedInUser}
           ></md-filled-text-field>
 
           {errorMessage && (
-            <p style={{ color: 'red', marginTop: '15px', textAlign: 'center' }}>{errorMessage}</p>
+            <p className="error-message">{errorMessage}</p>
           )}
 
           {loggedInUser && !isLoading && (
-            <div style={{ marginTop: '20px', padding: '15px', border: '1px solid green', borderRadius: '5px', backgroundColor: '#e6ffed', textAlign: 'center' }}>
-              <p style={{ color: 'green', fontWeight: 'bold' }}>Login bem-sucedido!</p>
-              <p style={{ color: '#333' }}>Bem-vindo(a), <strong>{loggedInUser.username || email}</strong>!</p>
+            <div className="success-message">
+              <p>Login bem-sucedido!</p>
+              <p>Bem-vindo(a), <strong>{loggedInUser.username || email}</strong>!</p>
             </div>
           )}
           {!loggedInUser && (
             <md-filled-button
               type="submit" // Importante para o <form>
               disabled={!email || isLoading}
-              style={{ width: '100%', marginTop: '25px', height: '48px' }}
+              className="login-button"
             >
               {isLoading ? 'Entrando...' : 'Login'}
             </md-filled-button>
