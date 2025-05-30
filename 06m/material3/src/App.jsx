@@ -4,6 +4,8 @@ import './App.css'
 import '@material/web/button/filled-button.js';
 import '@material/web/textfield/filled-text-field.js';
 
+const API_LOGIN_URL = 'http://localhost:3000/login';
+
 function App() {
   const [textValue, setTextValue] = useState('')
   const [email, setEmail] = useState('');
@@ -26,7 +28,7 @@ function App() {
     // }
 
     try {
-      const response = await fetch(`http://localhost:3000/login?email=${encodeURIComponent(email)}`);
+      const response = await fetch(`${API_LOGIN_URL}?email=${encodeURIComponent(email)}`);
       if (!response.ok) {
         throw new Error(`Erro HTTP: ${response.status}`);
       }

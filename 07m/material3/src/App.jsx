@@ -1,44 +1,114 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 // index.js
 import '@material/web/button/filled-button.js';
-import '@material/web/button/outlined-button.js';
-import '@material/web/checkbox/checkbox.js';
+import '@material/web/textfield/filled-text-field.js';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [textValue, setTextValue] = useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleLogin = async () => {
+    setErrorMessage(''); // Clear previous errors
+    setIsLoading(true);
+    if (!email) {
+      setErrorMessage("Por favor, digite seu email.");
+      return;
+    }
+    // Basic password check (optional, as backend doesn't validate it yet)
+    // if (!password) {
+    //   setErrorMessage("Por favor, digite sua senha.");
+    //   return;
+    // }
+
+    try {
+      const response = await fetch(`http://localhost:3000/login?email=${encodeURIComponent(email)}`);
+      if (!response.ok) {
+        throw new Error(`Erro HTTP: ${response.status}`);
+      }
+      const data = await response.json();
+      if (data && data.length > 0) {
+        setLoggedInUser(data[0]);
+        if (data[0].username) {
+          setTextValue(data[0].username);
+        }
+      } else {
+        setErrorMessage("Email não encontrado. Verifique o email ou cadastre-se.");
+        setLoggedInUser(null);
+      }
+    } catch (error) {
+      console.error("Erro ao tentar fazer login:", error);
+      setErrorMessage(`Ocorreu um erro ao tentar fazer login: ${error.message}`);
+      setLoggedInUser(null);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Previne o comportamento padrão de submissão do formulário HTML
+    handleLogin();
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '20px' }}>
+        <form onSubmit={handleSubmit} style={{ padding: '30px', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', backgroundColor: '#fff', width: '100%', maxWidth: '400px' }}>
+          <h1 style={{ textAlign: 'center', marginBottom: '25px', color: '#333' }}>Login</h1>
+          
+          <md-filled-text-field
+            label="Usuario" // Este campo exibe o username após o login
+            value={textValue}
+            onInput={(e) => !loggedInUser && setTextValue(e.target.value)} // Permite edição apenas se não estiver logado
+            readOnly={!!loggedInUser}
+            style={{ width: '100%', marginBottom: '10px' }}
+          ></md-filled-text-field>
+
+          <md-filled-text-field
+            label="Email"
+            type="email"
+            value={email}
+            onInput={(e) => setEmail(e.target.value)} // Assume-se que o evento é 'input'
+            style={{ width: '100%', marginTop: '10px' }}
+            autocomplete="username"
+            disabled={isLoading || !!loggedInUser}
+          ></md-filled-text-field>
+
+          <md-filled-text-field
+            label="Senha"
+            type="password"
+            value={password}
+            onInput={(e) => setPassword(e.target.value)} // Assume-se que o evento é 'input'
+            style={{ width: '100%', marginTop: '10px' }}
+            autocomplete="current-password"
+            disabled={isLoading || !!loggedInUser}
+          ></md-filled-text-field>
+
+          {errorMessage && (
+            <p style={{ color: 'red', marginTop: '15px', textAlign: 'center' }}>{errorMessage}</p>
+          )}
+
+          {loggedInUser && !isLoading && (
+            <div style={{ marginTop: '20px', padding: '15px', border: '1px solid green', borderRadius: '5px', backgroundColor: '#e6ffed', textAlign: 'center' }}>
+              <p style={{ color: 'green', fontWeight: 'bold' }}>Login bem-sucedido!</p>
+              <p style={{ color: '#333' }}>Bem-vindo(a), <strong>{loggedInUser.username || email}</strong>!</p>
+            </div>
+          )}
+          {!loggedInUser && (
+            <md-filled-button
+              type="submit" // Importante para o <form>
+              disabled={!email || isLoading}
+              style={{ width: '100%', marginTop: '25px', height: '48px' }}
+            >
+              {isLoading ? 'Entrando...' : 'Login'}
+            </md-filled-button>
+          )}
+        </form>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-
-<script type="module" src="./index.js"></script>
-
-
-<md-outlined-button>Back</md-outlined-button>
-<md-filled-button>Next</md-filled-button>
-
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
