@@ -62,6 +62,15 @@ body {
   border-color: #007bff; /* Ou qualquer cor de destaque que preferir */
 }
 
+/* Estilo para o campo de formulário adicionado */
+.form-field {
+  margin-top: 1rem; /* Espaço acima do campo */
+  display: block; /* Para ocupar a largura disponível ou definida */
+  width: 100%;    /* Ocupa a largura do contêiner pai */
+  max-width: 400px; /* Limita a largura máxima para melhor aparência */
+  margin-left: auto; /* Centraliza o campo se max-width for atingido */
+  margin-right: auto;/* Centraliza o campo se max-width for atingido */
+}
 /* Você pode remover os logos se não estiverem sendo usados */
 /*
 #root {
