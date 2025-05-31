@@ -1,3 +1,8 @@
+/*
+   Ensure this Google Fonts import is at the very top of your App.css
+*/
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Pacifico&family=Poppins:wght@500;700&display=swap');
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -36,41 +41,8 @@
 .card {
   padding: 2em;
 }
-
 .read-the-docs {
   color: #888;
-}
-.login-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 20px;
-  box-sizing: border-box; /* Adicionado para melhor controle do padding */
-}
-
-.login-form {
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  background-color: #fff;
-  width: 100%;
-  max-width: 400px;
-}
-
-.login-title {
-  text-align: center;
-  margin-bottom: 25px;
-  color: #333;
-}
-
-.user-display-field {
-  width: 100%;
-  margin-bottom: 10px;
-  cursor: default; /* Indica que o campo não é interativo */
-  /* Remove o efeito de hover da camada de estado do Material Web Text Field */
-  --md-filled-text-field-hover-state-layer-opacity: 0;
 }
 * Global Styles & Variables */
 :root {
@@ -267,3 +239,83 @@ body {
   border-color: var(--primary-color);
   box-shadow: 0 0 0 2px rgba(var(--primary-color), 0.25); /* Simplificado */
 }
+/* Add these styles to c:\Repo2024\MD3EmREACT\06m\material3\src\App.css */
+
+/* Expressive Font for Names (from index.html) */
+.font-name {
+    font-family: 'Poppins', sans-serif; /* Fonte um pouco mais marcante para nomes */
+    font-weight: 700; /* Poppins bold for emphasis */
+}
+
+/* Expressive Colors (from index.html) */
+.text-expressive-primary {
+    color: #6A0DAD; /* Roxo mais profundo */
+}
+/* If you plan to use other expressive colors elsewhere, define them here: */
+/* .bg-expressive-primary { background-color: #6A0DAD; } */
+/* .text-expressive-on-surface { color: #4B0082; } */ /* Indigo para texto sobre a superfície */
+/* .bg-expressive-surface { background-color: #FDF5E6; } */ /* Um bege muito claro */
+
+/* Expressive Shapes (from index.html) */
+.shape-expressive-card {
+    border-radius: 28px; /* Cantos ainda mais arredondados */
+}
+
+/* Expressive Shadow (from index.html) */
+.shadow-expressive {
+    box-shadow: 0px 10px 20px rgba(106, 13, 173, 0.15); /* Sombra suave e colorida */
+}
+
+/* Expressive Animation (from index.html) */
+/* Renamed animation to avoid potential global conflicts */
+.card-enter-animation {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInSlideUpProfileCard 0.5s ease-out forwards;
+}
+
+@keyframes fadeInSlideUpProfileCard {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* UserProfileCard specific styling */
+.user-profile-card-container {
+    background-color: var(--form-bg); /* Use theme variable for card background */
+    padding: 24px; /* Equivalent to p-6 in Tailwind */
+    margin-top: 20px; /* Spacing from elements above */
+    text-align: center;
+    color: var(--text-color); /* Use theme variable for default text color */
+    font-family: 'Inter', sans-serif; /* Default font for text inside the card */
+    /* Inherits shape-expressive-card, shadow-expressive, card-enter-animation via class names */
+}
+
+.user-profile-card-container .login-success-text {
+    font-size: 1.0rem;
+    margin-bottom: 8px;
+    color: var(--success-text-color); /* Use theme variable for success text color */
+}
+
+.user-profile-card-container .welcome-text {
+    font-size: 1.1rem;
+    margin-bottom: 0; /* No margin if it's the last element */
+    color: var(--text-color); /* Ensure welcome text also uses theme variable */
+}
+
+.user-profile-card-container .welcome-text strong.font-name {
+    /* The .font-name class provides Poppins font and weight */
+    /* The .text-expressive-primary class provides the purple color */
+    font-size: 1.2em; /* Makes the username/email slightly larger within the welcome text */
+    display: inline-block; /* Ensures proper rendering of font styles if needed */
+}
+
+/*
+  The original .success-message styles in App.css might conflict if they are too general.
+  The UserProfileCard now uses 'user-profile-card-container' as its main class,
+  which should help in scoping these new styles.
+  If you had styles for a generic '.success-message p' or '.success-message strong',
+  ensure they don't unintentionally affect this new card structure,
+  or update them to be more specific.
+*/
