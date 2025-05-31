@@ -329,8 +329,10 @@ body {
 }
 
 .user-profile-card-container .login-success-text {
-    font-size: 1.0rem;
-    margin-bottom: 8px;
+    font-size: 1.0rem; /* Mantido */
+    /* margin-bottom: 8px; Removido pois o container pai terá o margin-bottom */
+    margin-left: 0.5rem; /* Espaço entre a bolinha e o texto */
+    margin-bottom: 0; /* Reset margin-bottom para o p, o container cuidará disso */
     color: var(--success-text-color); /* Use theme variable for success text color */
 }
 
@@ -353,7 +355,7 @@ body {
     flex-direction: column; /* Organiza os itens em coluna */
     align-items: center;   /* Centraliza os itens horizontalmente na coluna */
     justify-content: center;
-    margin-bottom: 1rem; /* Corresponds to mb-4 */
+    margin-bottom: 0.5rem; /* Reduzido de 1rem para diminuir o espaço */
 }
 
 .user-avatar {
@@ -374,6 +376,25 @@ body {
     margin-top: 0.75rem; /* Corresponds to mb-3 or a bit more spacing */
     font-size: 1.5rem; /* text-2xl equivalent, adjust as needed */
     line-height: 1.2;
+}
+
+/* Container for login status indicator and text */
+.login-status-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px; /* Espaçamento abaixo da linha de status */
+}
+
+/* Status Indicator Styles */
+.status-indicator {
+    width: 0.6rem; /* Tamanho da bolinha (w-2.5 em Tailwind é 0.625rem) */
+    height: 0.6rem; /* Tamanho da bolinha (h-2.5 em Tailwind é 0.625rem) */
+    border-radius: 50%; /* Faz ser um círculo */
+    /* margin-right: 0.375rem; /* Espaço à direita da bolinha (mr-1.5 em Tailwind) - movido para margin-left do texto */
+}
+.status-indicator.online {
+    background-color: #34d399; /* Verde para online (similar a bg-green-400 do Tailwind) */
 }
 
 /* Wrapper for the entire UserProfileCard section including the new header */

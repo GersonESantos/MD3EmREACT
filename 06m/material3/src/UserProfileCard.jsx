@@ -29,7 +29,10 @@ function UserProfileCard({ username, email }) {
             {displayName}
           </h3>
         </div>
-        <p className="login-success-text">Login bem-sucedido!</p>
+        <div className="login-status-container">
+          <span className="status-indicator online"></span>
+          <p className="login-success-text">Login bem-sucedido!</p>
+        </div>
         <p className="welcome-text">
           Bem-vindo(a), <strong className="font-name text-expressive-primary">{username || email}</strong>!
         </p>
