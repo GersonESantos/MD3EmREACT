@@ -1,0 +1,269 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box; /* Adicionado para melhor controle do padding */
+}
+
+.login-form {
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background-color: #fff;
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-title {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.user-display-field {
+  width: 100%;
+  margin-bottom: 10px;
+  cursor: default; /* Indica que o campo não é interativo */
+  /* Remove o efeito de hover da camada de estado do Material Web Text Field */
+  --md-filled-text-field-hover-state-layer-opacity: 0;
+}
+* Global Styles & Variables */
+:root {
+  --body-bg: #f8f9fa;
+  --form-bg: #ffffff;
+  --text-color: #212529;
+  --muted-text-color: #6c757d;
+  --primary-color: #0d6efd; /* Blue */
+  --primary-text-color: #ffffff;
+  --error-color: #dc3545; /* Red */
+  --error-text-color-on-form: var(--error-color);
+  --success-bg: #d1e7dd; /* Light green */
+  --success-text-color: #0f5132; /* Dark green */
+  --border-color: #dee2e6;
+  --input-bg: #ffffff;
+  --input-text: #212529;
+  --input-label: #6c757d;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --link-color: var(--primary-color);
+
+  /* Material Web specific - Light Theme */
+  --md-sys-color-surface-container-highest: var(--input-bg);
+  --md-sys-color-on-surface: var(--input-text);
+  --md-sys-color-on-surface-variant: var(--input-label);
+  --md-sys-color-primary: var(--primary-color);
+  --md-sys-color-error: var(--error-color);
+
+  --md-filled-button-container-color: var(--primary-color);
+  --md-filled-button-label-text-color: var(--primary-text-color);
+  --md-filled-button-disabled-container-color: #ced4da;
+  --md-filled-button-disabled-label-text-color: #6c757d;
+  --md-filled-button-hover-state-layer-color: #ffffff;
+  --md-filled-button-hover-state-layer-opacity: 0.08;
+
+  --md-filled-text-field-container-color: var(--md-sys-color-surface-container-highest);
+  --md-filled-text-field-input-text-color: var(--md-sys-color-on-surface);
+  --md-filled-text-field-label-text-color: var(--md-sys-color-on-surface-variant);
+  --md-filled-text-field-focus-label-text-color: var(--md-sys-color-primary);
+  --md-filled-text-field-active-indicator-color: var(--md-sys-color-primary);
+  --md-filled-text-field-error-label-text-color: var(--md-sys-color-error);
+  --md-filled-text-field-error-active-indicator-color: var(--md-sys-color-error);
+  --md-filled-text-field-error-supporting-text-color: var(--md-sys-color-error);
+  --md-filled-text-field-error-focus-label-text-color: var(--md-sys-color-error);
+
+  --user-display-field-bg: #e9ecef;
+  --user-display-field-text: #495057;
+}
+
+[data-theme="dark"] {
+  --body-bg: #212529;
+  --form-bg: #2c3035;
+  --text-color: #dee2e6;
+  --muted-text-color: #adb5bd;
+  --primary-color: #378BFF; /* Lighter blue for dark mode */
+  --primary-text-color: #ffffff;
+  --error-color: #f8d7da; /* Lighter red for dark mode text */
+  --error-text-color-on-form: var(--error-color);
+  --success-bg: #143623; /* Darker green bg */
+  --success-text-color: #a3cfbb; /* Lighter green text */
+  --border-color: #495057;
+  --input-bg: #343a40;
+  --input-text: #f8f9fa;
+  --input-label: #adb5bd;
+  --shadow-color: rgba(255, 255, 255, 0.05);
+  --link-color: var(--primary-color);
+
+  --md-filled-button-disabled-container-color: #343a40;
+  --md-filled-button-disabled-label-text-color: #6c757d;
+  --md-filled-button-hover-state-layer-color: #000000;
+
+  --user-display-field-bg: #343a40;
+  --user-display-field-text: #adb5bd;
+}
+
+/* Você pode adicionar estilos globais a este arquivo, e também importar outros arquivos de estilo */
+
+.login-container {
+  padding: 20px;
+  box-sizing: border-box; /* Adicionado para melhor controle do padding */
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--body-bg);
+  color: var(--text-color);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.login-form {
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background-color: #fff;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  background-color: var(--form-bg);
+  width: 100%;
+  max-width: 400px;
+}
+.login-title {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+  color: var(--text-color);
+}
+
+.login-logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1.5rem; /* ~24px, similar to Bootstrap's mb-4 */
+}
+
+.form-field {
+  width: 100%;
+  margin-top: 15px;
+}
+
+.user-display-field {
+  width: 100%;
+  margin-bottom: 10px; /* Specific margin for this field */
+  cursor: default; /* Indica que o campo não é interativo */
+  /* Remove o efeito de hover da camada de estado do Material Web Text Field */
+  --md-filled-text-field-hover-state-layer-opacity: 0;
+  --md-filled-text-field-container-color: var(--user-display-field-bg);
+  --md-filled-text-field-input-text-color: var(--user-display-field-text);
+  --md-filled-text-field-label-text-color: var(--user-display-field-text);
+  /* Ensure no hover effect on border for read-only field */
+  --md-filled-text-field-hover-active-indicator-color: var(--md-filled-text-field-active-indicator-color);
+  --md-filled-text-field-disabled-container-color: var(--user-display-field-bg); /* Ensure consistency when disabled */
+  --md-filled-text-field-disabled-input-text-color: var(--user-display-field-text);
+  --md-filled-text-field-disabled-label-text-color: var(--user-display-field-text);
+}
+
+.login-button {
+  width: 100%;
+  margin-top: 25px;
+  height: 48px; /* Material spec suggests 40px or 48px */
+}
+
+.error-message {
+  color: var(--error-text-color-on-form);
+  margin-top: 15px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.success-message {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid var(--success-text-color);
+  border-radius: 5px;
+  background-color: var(--success-bg);
+  text-align: center;
+}
+.success-message p:first-child {
+  color: var(--success-text-color);
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.success-message p:last-child {
+  color: var(--text-color);
+}
+
+.theme-selector-container {
+  margin-bottom: 20px;
+  text-align: right; /* Alinha o seletor à direita do container do formulário */
+  width: 100%;
+  max-width: 400px; /* Mesma largura do formulário para alinhamento */
+  padding-right: 5px; /* Pequeno ajuste para não colar na borda */
+}
+
+.theme-selector-label {
+  margin-right: 8px;
+  color: var(--text-color);
+  font-size: 0.9rem;
+}
+.theme-selector {
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  background-color: var(--form-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.theme-selector:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(var(--primary-color), 0.25); /* Simplificado */
+}
