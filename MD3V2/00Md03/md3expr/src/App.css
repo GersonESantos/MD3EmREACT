@@ -4,13 +4,106 @@
   padding: 2rem;
   text-align: center;
 }
+/* c:\Repo2024\MD3EmREACT\MD3V2\00Md03\md3expr\src\App.css */
 
-/* Estilo para o campo de formulário adicionado */
-.form-field {
-  margin-top: 1rem; /* Espaço acima do campo */
-  display: block; /* Para ocupar a largura disponível ou definida */
-  width: 100%;    /* Ocupa a largura do contêiner pai */
-  max-width: 400px; /* Limita a largura máxima para melhor aparência */
-  margin-left: auto; /* Centraliza o campo se max-width for atingido */
-  margin-right: auto;/* Centraliza o campo se max-width for atingido */
+/* Estilos gerais que podem ser afetados pelo tema */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+/* Tema Claro (Padrão) */
+.light-theme {
+  background-color: #ffffff;
+  color: #242424;
+}
+
+/* Tema Escuro */
+.dark-theme {
+  background-color: #242424;
+  color: #ffffff;
+}
+
+.light-theme .theme-selector-container select,
+.light-theme .theme-selector-container label {
+  color: #242424; /* Cor do texto para o seletor no tema claro */
+  background-color: #f0f0f0; /* Fundo para o seletor no tema claro */
+}
+
+.dark-theme .theme-selector-container select,
+.dark-theme .theme-selector-container label {
+  color: #ffffff; /* Cor do texto para o seletor no tema escuro */
+  background-color: #333333; /* Fundo para o seletor no tema escuro */
+}
+
+
+/* Estilos para o seletor de tema */
+.theme-selector-container {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centraliza o seletor */
+}
+
+.theme-selector-label {
+  margin-right: 10px;
+  font-size: 1em;
+}
+
+.theme-selector {
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.theme-selector:focus {
+  outline: none;
+  border-color: #007bff; /* Ou qualquer cor de destaque que preferir */
+}
+
+/* Você pode remover os logos se não estiverem sendo usados */
+/*
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+*/
