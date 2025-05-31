@@ -8,11 +8,20 @@ import React from 'react';
 function UserProfileCard({ username, email }) {
   return (
     // Apply expressive card styling
-    <div className="user-profile-card-container shape-expressive-card shadow-expressive card-enter-animation">
-      <p className="login-success-text">Login bem-sucedido!</p>
-      <p className="welcome-text">
-        Bem-vindo(a), <strong className="font-name text-expressive-primary">{username || email}</strong>!
-      </p>
+    <div className="user-profile-card-wrapper"> {/* Added a wrapper for better structure if needed */}
+      {/* Header from index.html example */}
+      <header className="text-center mb-8">
+        <h1 className="font-display text-5xl text-expressive-primary mb-3">Nossa Comunidade</h1>
+        <p className="text-lg text-expressive-on-surface-alpha-80">Conheça os membros incríveis!</p>
+      </header>
+
+      {/* Existing content, now styled as part of the card */}
+      <div className="user-profile-card-container shape-expressive-card shadow-expressive card-enter-animation">
+        <p className="login-success-text">Login bem-sucedido!</p>
+        <p className="welcome-text">
+          Bem-vindo(a), <strong className="font-name text-expressive-primary">{username || email}</strong>!
+        </p>
+      </div>
     </div>
   );
 }
