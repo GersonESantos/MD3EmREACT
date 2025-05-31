@@ -17,6 +17,7 @@ function App() {
 
   return (
     <>
+      {/* Envolvemos todo o conteúdo em um único Fragmento pai */}
       <div>
         <p>
           Login
@@ -34,6 +35,12 @@ function App() {
           <option value="light">Claro ☀️</option>
           <option value="dark">Escuro 🌙</option>
         </select>
+      </div>
+
+      {/* Caixa de email */}
+      <div className="email-input-container">
+        <label htmlFor="email" className="email-input-label">Email:</label>
+        <input type="email" id="email" className="email-input" placeholder="Digite seu email aqui" />
       </div>
     </>
   )
