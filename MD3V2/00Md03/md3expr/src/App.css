@@ -1,9 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Pacifico&display=swap');
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+
+  /* Expressive Theme Colors & Variables */
+  --expressive-purple: #6A0DAD;         /* Roxo Vibrante */
+  --expressive-purple-rgb: 106, 13, 173;
+  --expressive-pink: #FF1493;           /* Rosa Choque */
+  --expressive-pink-rgb: 255, 20, 147;
+  --expressive-green: #32CD32;          /* Verde Primavera */
+  --expressive-green-rgb: 50, 205, 50;
+  --expressive-lavender-bg: #F3E8FF;    /* Lavanda Muito Claro (Fundo) */
+  --expressive-text-primary: #333333;   /* Cor de texto primária para o fundo lavanda */
+  --expressive-text-on-primary: #FFFFFF;/* Cor de texto para usar sobre o roxo/rosa */
+
+  /* Expressive Shapes */
+  --expressive-corner-radius-card: 20px;
+  --expressive-corner-radius-button: 16px;
+  --expressive-corner-radius-fab: 50%;
 }
+
 /* c:\Repo2024\MD3EmREACT\MD3V2\00Md03\md3expr\src\App.css */
 
 /* Estilos gerais que podem ser afetados pelo tema */
@@ -33,6 +52,19 @@ body {
 .dark-theme .theme-selector-container label {
   color: #ffffff; /* Cor do texto para o seletor no tema escuro */
   background-color: #333333; /* Fundo para o seletor no tema escuro */
+}
+
+/* Estilos para o seletor de tema no tema Expressivo */
+.expressive-theme .theme-selector-container select,
+.expressive-theme .theme-selector-container label {
+  color: var(--expressive-purple);
+  background-color: white;
+  border: 1px solid var(--expressive-purple); /* Adiciona borda para destaque */
+}
+
+.expressive-theme .theme-selector:focus {
+  border-color: var(--expressive-pink); /* Destaque no foco */
+  box-shadow: 0 0 0 0.2rem rgba(var(--expressive-pink-rgb), 0.25);
 }
 
 
@@ -158,4 +190,110 @@ body {
 
 .dark-theme .email-input::placeholder {
   color: #adb5bd; /* Cor do placeholder no tema escuro */
+}
+
+/* === Estilos do Tema Expressivo === */
+.expressive-theme {
+  background-color: var(--expressive-lavender-bg);
+  color: var(--expressive-text-primary);
+  font-family: 'Inter', sans-serif; /* Corpo do texto padrão */
+}
+
+.expressive-theme h1,
+.expressive-theme h2,
+.expressive-theme h3,
+.expressive-theme .expressive-header { /* Classe para forçar a fonte Pacifico */
+  font-family: 'Pacifico', cursive;
+  color: var(--expressive-purple);
+  margin-bottom: 0.5em; /* Espaçamento padrão para cabeçalhos */
+}
+
+/* Formas Acentuadas e Sombras Coloridas */
+.shape-expressive-card {
+  border-radius: var(--expressive-corner-radius-card);
+  background-color: white; /* Contraste com o fundo lavanda */
+  padding: 25px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.shadow-expressive {
+  box-shadow: 0 5px 15px rgba(var(--expressive-purple-rgb), 0.25); /* Sombra roxa sutil */
+}
+
+/* Botões */
+.shape-expressive-button {
+  border-radius: var(--expressive-corner-radius-button);
+  padding: 12px 24px;
+  font-size: 1em;
+  font-weight: bold;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.shape-expressive-button:hover {
+  transform: scale(1.05);
+}
+
+.expressive-theme .btn-expressive-primary {
+  background-color: var(--expressive-purple);
+  color: var(--expressive-text-on-primary);
+}
+.expressive-theme .btn-expressive-primary:hover {
+  box-shadow: 0 4px 10px rgba(var(--expressive-purple-rgb), 0.4);
+}
+
+.expressive-theme .btn-expressive-secondary {
+  background-color: transparent;
+  color: var(--expressive-purple);
+  border: 2px solid var(--expressive-purple);
+}
+.expressive-theme .btn-expressive-secondary:hover {
+  background-color: rgba(var(--expressive-purple-rgb), 0.05);
+}
+
+/* FAB (Floating Action Button) */
+.shape-expressive-fab {
+  border-radius: var(--expressive-corner-radius-fab);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px; /* Tamanho do ícone/texto no FAB */
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease-in-out; /* Efeito de mola */
+  position: fixed; /* Posicionamento fixo */
+  bottom: 30px;
+  right: 30px;
+  background-color: var(--expressive-pink);
+  color: var(--expressive-text-on-primary);
+}
+.shape-expressive-fab:hover {
+  transform: scale(1.15) rotate(20deg);
+  box-shadow: 0 8px 20px rgba(var(--expressive-pink-rgb), 0.4);
+}
+
+/* Notificação/Lembrete */
+.expressive-theme .notification-expressive {
+  border: 2px dashed var(--expressive-green);
+  padding: 20px;
+  border-radius: var(--expressive-corner-radius-card); /* Reutiliza o raio do cartão */
+  background-color: rgba(var(--expressive-green-rgb), 0.08);
+  color: var(--expressive-green); /* Cor do texto principal da notificação */
+  margin-top: 30px;
+  text-align: left; /* Alinhamento para conteúdo de notificação */
+}
+.expressive-theme .notification-expressive .expressive-header {
+  color: var(--expressive-green); /* Cabeçalho da notificação em verde */
+  margin-top: 0;
+  font-size: 1.5em; /* Ajuste de tamanho para o cabeçalho da notificação */
+}
+.expressive-theme .notification-expressive p {
+ color: var(--expressive-text-primary); /* Texto do parágrafo da notificação */
+ font-family: 'Inter', sans-serif;
+ margin-bottom: 0;
 }
