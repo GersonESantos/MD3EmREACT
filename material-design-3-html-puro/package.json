@@ -1,0 +1,15 @@
+{
+  "name": "material-design-3-html-puro",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@material/web": "^2.3.0"
+  }
+}
