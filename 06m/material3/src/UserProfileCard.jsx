@@ -23,7 +23,11 @@ const UserProfileCard = ({ user }) => {
 
   return (
     <div className="bg-white shape-expressive-card shadow-expressive p-6 flex flex-col items-center text-center card-enter-animation w-full max-w-sm">
-      <div className={`w-24 h-24 ${avatarColor} shape-expressive-avatar flex items-center justify-center text-4xl text-white font-name mb-4 ring-4 ring-white ring-offset-2 ring-offset-${avatarColor}/50`}>
+      {/*
+        Corrected ring-offset-color. Since the card background is white, ring-offset-white is appropriate.
+        The previous ring-offset-${avatarColor}/50 was not a valid Tailwind class.
+      */}
+      <div className={`w-24 h-24 ${avatarColor} shape-expressive-avatar flex items-center justify-center text-4xl text-white font-name mb-4 ring-4 ring-white ring-offset-2 ring-offset-white`}>
         {avatarInitial}
       </div>
       <h3 className="font-name text-2xl text-expressive-primary mb-1">
