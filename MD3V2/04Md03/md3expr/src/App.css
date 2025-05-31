@@ -1,0 +1,161 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+/* c:\Repo2024\MD3EmREACT\MD3V2\00Md03\md3expr\src\App.css */
+
+/* Estilos gerais que podem ser afetados pelo tema */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Tema Claro (Padrão) */
+.light-theme {
+  background-color: #ffffff;
+  color: #242424;
+}
+
+/* Tema Escuro */
+.dark-theme {
+  background-color: #242424;
+  color: #ffffff;
+}
+
+.light-theme .theme-selector-container select,
+.light-theme .theme-selector-container label {
+  color: #242424; /* Cor do texto para o seletor no tema claro */
+  background-color: #f0f0f0; /* Fundo para o seletor no tema claro */
+}
+
+.dark-theme .theme-selector-container select,
+.dark-theme .theme-selector-container label {
+  color: #ffffff; /* Cor do texto para o seletor no tema escuro */
+  background-color: #333333; /* Fundo para o seletor no tema escuro */
+}
+
+
+/* Estilos para o seletor de tema */
+.theme-selector-container {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centraliza o seletor */
+}
+
+.theme-selector-label {
+  margin-right: 10px;
+  font-size: 1em;
+}
+
+.theme-selector {
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.theme-selector:focus {
+  outline: none;
+  border-color: #007bff; /* Ou qualquer cor de destaque que preferir */
+}
+
+/* Você pode remover os logos se não estiverem sendo usados */
+/*
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+*/
+
+/* Estilos para o campo de email */
+.email-input-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column; /* Organiza label e input verticalmente */
+  align-items: center; /* Centraliza os itens */
+  justify-content: center;
+}
+
+.email-input-label {
+  margin-bottom: 8px; /* Espaço entre o label e o input */
+  font-size: 1em;
+  /* A cor do label será herdada do tema (light/dark) */
+}
+
+.email-input {
+  padding: 10px 15px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+  width: 100%; /* Faz o input ocupar a largura do container */
+  max-width: 300px; /* Define uma largura máxima para o input */
+  box-sizing: border-box; /* Garante que padding e border não aumentem a largura total */
+}
+
+.email-input:focus {
+  outline: none;
+  border-color: #007bff; /* Cor de destaque ao focar, similar ao seletor de tema */
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25); /* Adiciona um brilho suave ao focar */
+}
+
+/* Ajustes de cor para o input de email nos temas claro e escuro */
+.light-theme .email-input {
+  background-color: #ffffff;
+  color: #242424;
+  border-color: #ccc;
+}
+
+.dark-theme .email-input {
+  background-color: #333333;
+  color: #ffffff;
+  border-color: #555555;
+}
+
+.light-theme .email-input::placeholder {
+  color: #6c757d; /* Cor do placeholder no tema claro */
+}
+
+.dark-theme .email-input::placeholder {
+  color: #adb5bd; /* Cor do placeholder no tema escuro */
+}
