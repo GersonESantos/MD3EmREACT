@@ -12,6 +12,8 @@ function App() {
   // Estado para o valor do email e para controlar a visibilidade do cartão
   const [emailValue, setEmailValue] = useState('');
   const [showProfileCard, setShowProfileCard] = useState(false);
+  const [fetchedUsername, setFetchedUsername] = useState(null); // Para armazenar o nome do usuário vindo da API
+  const [isLoading, setIsLoading] = useState(false); // Para feedback de carregamento
 
   // Efeito para aplicar a classe do tema ao body e salvar no localStorage
   useEffect(() => {
@@ -20,14 +22,44 @@ function App() {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const handleShowCard = () => {
-    if (emailValue.trim() !== '') {
-      setShowProfileCard(true);
-    } else {
+  const handleShowCard = async () => {
+    if (emailValue.trim() === '') {
       alert('Por favor, digite um email para mostrar o cartão.');
-      // setShowProfileCard(false); // Opcional: esconder o cartão se o email estiver vazio ao clicar
+      return;
+    }
+
+    setIsLoading(true);
+    setShowProfileCard(false); // Esconde o cartão enquanto busca novos dados
+    setFetchedUsername(null);  // Reseta o nome de usuário anterior
+
+    try {
+      const response = await fetch(`http://localhost:3000/login?email=${encodeURIComponent(emailValue)}`);
+      if (!response.ok) {
+        // Tenta ler uma mensagem de erro do backend se houver
+        const errorData = await response.text();
+        throw new Error(`Erro na API: ${response.statusText} - ${errorData}`);
+      }
+      const users = await response.json();
+
+      if (users.length > 0) {
+        // Assumindo que o objeto do usuário tem um campo 'name' ou 'username'
+        // Ajuste 'users[0].name' se o nome da coluna no seu DB for diferente (ex: users[0].nome_completo)
+        const userNameFromDB = users[0].name || users[0].username; // Prioriza 'name', depois 'username'
+        setFetchedUsername(userNameFromDB); // Pode ser null se nem 'name' nem 'username' existirem
+        setShowProfileCard(true);
+      } else {
+        alert('Usuário não encontrado.');
+        setShowProfileCard(false); // Garante que o cartão não seja mostrado se o usuário não for encontrado
+      }
+    } catch (error) {
+      console.error("Erro ao buscar usuário:", error);
+      alert(`Não foi possível buscar o usuário: ${error.message}`);
+      setShowProfileCard(false);
+    } finally {
+      setIsLoading(false);
     }
   };
+
 
   return (
     <>
@@ -62,12 +94,12 @@ function App() {
           value={emailValue}
           onChange={(e) => setEmailValue(e.target.value)}
         />
-        <button onClick={handleShowCard} className="action-button">
-          Mostrar Cartão
+        <button onClick={handleShowCard} className="action-button" disabled={isLoading}>
+          {isLoading ? 'Buscando...' : 'Mostrar Cartão'}
         </button>
       </div>
 
-      {showProfileCard && <UserProfileCard email={emailValue} />}
+      {showProfileCard && <UserProfileCard email={emailValue} username={fetchedUsername} />}
     </>
   )
 }

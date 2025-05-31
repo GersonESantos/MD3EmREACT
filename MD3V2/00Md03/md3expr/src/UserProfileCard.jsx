@@ -6,8 +6,28 @@ import React from 'react';
 // import './UserProfileCard.css';
 
 function UserProfileCard({ username, email }) {
-  const displayName = username || email;
-  const avatarInitial = displayName ? displayName.charAt(0).toUpperCase() : '?';
+  // Lógica aprimorada para determinar o nome de exibição
+  let finalDisplayName;
+
+  // Prioriza um username válido (não nulo, não apenas espaços em branco)
+  const trimmedUsername = username && typeof username === 'string' ? username.trim() : null;
+
+  if (trimmedUsername) {
+    finalDisplayName = trimmedUsername;
+  } else if (email && typeof email === 'string') {
+    // Se não houver username válido, tente extrair a parte antes do "@" do email
+    const emailParts = email.split('@');
+    const emailUserPart = emailParts[0] ? emailParts[0].trim() : '';
+    if (emailUserPart) {
+      finalDisplayName = emailUserPart;
+    } else {
+      finalDisplayName = email; // Fallback para o email completo se a parte do usuário for vazia
+    }
+  } else {
+    finalDisplayName = "Usuário"; // Default se nenhum username ou email válido for fornecido
+  }
+
+  const avatarInitial = finalDisplayName ? finalDisplayName.charAt(0).toUpperCase() : '?';
   return (
     // Apply expressive card styling
     <div className="user-profile-card-wrapper"> {/* Added a wrapper for better structure if needed */}
@@ -26,7 +46,7 @@ function UserProfileCard({ username, email }) {
           </div>
           {/* Display the full name/email below the avatar */}
           <h3 className="user-avatar-name font-name text-expressive-primary">
-            {displayName}
+            {finalDisplayName}
           </h3>
         </div>
         <div className="login-status-container">
@@ -34,7 +54,7 @@ function UserProfileCard({ username, email }) {
           <p className="login-success-text">Login bem-sucedido!</p>
         </div>
         <p className="welcome-text">
-          Bem-vindo(a), <strong className="font-name text-expressive-primary">{username || email}</strong>!
+          Bem-vindo(a), <strong className="font-name text-expressive-primary">{finalDisplayName}</strong>!
         </p>
 
         {/* Action Buttons Area */}
