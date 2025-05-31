@@ -24,6 +24,10 @@ function UserProfileCard({ username, email }) {
           <div className="user-avatar shape-expressive-avatar bg-expressive-secondary font-name">
             {avatarInitial}
           </div>
+          {/* Display the full name/email below the avatar */}
+          <h3 className="user-avatar-name font-name text-expressive-primary">
+            {displayName}
+          </h3>
         </div>
         <p className="login-success-text">Login bem-sucedido!</p>
         <p className="welcome-text">
