@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <title>Cómo Usar Material Design 3 en HTML Puro</title>
+    <meta charset="UTF-8">
+
+    <!-- Usamos Material Design 3 desde un CDN -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+      {
+        "imports": {
+          "@material/web/": "https://esm.run/@material/web/"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import '@material/web/all.js';
+      import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+  
+      document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <!-- Usamos Material Design 3 desde un CDN -->
+    
+  </head>
+  <body>
+    <h1 class="md-typescale-display-medium">Usar Material Design 3 en HTML Puro</h1>
+
+    <!-- Botón creado con Material Design 3  -->
+    <md-elevated-button>Mi Botón</md-elevated-button>
+
+  </body>
+</html>
