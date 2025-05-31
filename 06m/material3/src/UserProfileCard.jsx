@@ -11,16 +11,19 @@ const UserProfileCard = ({ user }) => {
   const status = user.status || "Online";
   const statusIndicator = status === "Online" ? "bg-green-400" : (status === "Ausente" ? "bg-yellow-400" : "bg-gray-400");
 
+  // Linha de depuração temporária:
+  console.log('[UserProfileCard] User:', user, 'Computed Status:', status, 'Indicator Class:', statusIndicator);
+
   const handleViewProfile = () => {
     // Replace with actual navigation or modal logic if needed
     alert(`Visualizando perfil de ${displayName}...`);
   };
-
+  
   const handleConnect = () => {
     // Replace with actual connection logic
     alert(`Pedido de conexão enviado para ${displayName}!`);
   };
-
+  
   return (
     <div className="bg-white shape-expressive-card shadow-expressive p-6 flex flex-col items-center text-center card-enter-animation w-full max-w-sm">
       {/*
@@ -34,7 +37,10 @@ const UserProfileCard = ({ user }) => {
         {displayName}
       </h3>
       <p className="text-xs text-gray-500 mb-3 flex items-center justify-center">
-        <span className={`w-2 h-2 ${statusIndicator} rounded-full mr-1.5`}></span>
+        <span
+          className={`w-2 h-2 ${statusIndicator} rounded-full mr-1.5`}
+          // Estilo de depuração temporário para ajudar a visualizar o span:
+          style={{ border: '1px dashed red' }} ></span>
         {status}
       </p>
       <p className="text-sm text-expressive-on-surface/70 mb-5 leading-relaxed">
