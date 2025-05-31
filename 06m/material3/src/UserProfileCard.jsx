@@ -36,6 +36,13 @@ function UserProfileCard({ username, email }) {
         <p className="welcome-text">
           Bem-vindo(a), <strong className="font-name text-expressive-primary">{username || email}</strong>!
         </p>
+
+        {/* Action Buttons Area */}
+        <div className="user-profile-actions">
+          <button className="expressive-button expressive-button-primary shape-expressive-button">
+            Ver Perfil
+          </button>
+        </div>
       </div>
     </div>
   );

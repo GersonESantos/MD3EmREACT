@@ -277,6 +277,9 @@ body {
 .shape-expressive-avatar {
     border-radius: 40% 60% 60% 40% / 50% 50% 50% 50%; /* Forma orgânica para avatares */
 }
+.shape-expressive-button {
+    border-radius: 20px; /* From index.html */
+}
 
 /* Expressive Shadow (from index.html) */
 .shadow-expressive {
@@ -410,3 +413,43 @@ body {
   ensure they don't unintentionally affect this new card structure,
   or update them to be more specific.
 */
+
+/* User Profile Card Actions */
+.user-profile-actions {
+    margin-top: 1.5rem; /* Space above the button(s) */
+    display: flex;
+    justify-content: center; /* Center button if only one */
+    gap: 0.75rem; /* Space between buttons if more are added */
+}
+
+.expressive-button {
+    /* flex: 1; /* Uncomment if you want buttons to take equal width in a row */
+    padding: 0.625rem 1rem; /* Corresponds to py-2.5 (10px) px-4 (16px) */
+    font-weight: 600; /* Corresponds to font-semibold */
+    color: white; /* Default text color for expressive buttons */
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+    /* shape-expressive-button class will be applied for border-radius */
+}
+
+.expressive-button:hover {
+    transform: scale(1.05);
+}
+
+.expressive-button:focus {
+    outline: none;
+}
+
+.expressive-button-primary {
+    background-color: #6A0DAD; /* bg-expressive-primary */
+}
+
+.expressive-button-primary:hover {
+    background-color: rgba(106, 13, 173, 0.8); /* bg-opacity-80 for #6A0DAD */
+}
+
+.expressive-button-primary:focus {
+    box-shadow: 0 0 0 2px var(--form-bg), 0 0 0 4px #6A0DAD; /* focus:ring-2 focus:ring-expressive-primary focus:ring-offset-2 (offset color is form-bg) */
+}
