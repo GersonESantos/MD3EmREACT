@@ -6,6 +6,8 @@ import React from 'react';
 // import './UserProfileCard.css';
 
 function UserProfileCard({ username, email }) {
+  const displayName = username || email;
+  const avatarInitial = displayName ? displayName.charAt(0).toUpperCase() : '?';
   return (
     // Apply expressive card styling
     <div className="user-profile-card-wrapper"> {/* Added a wrapper for better structure if needed */}
@@ -17,6 +19,12 @@ function UserProfileCard({ username, email }) {
 
       {/* Existing content, now styled as part of the card */}
       <div className="user-profile-card-container shape-expressive-card shadow-expressive card-enter-animation">
+        {/* Avatar Element */}
+        <div className="user-avatar-container">
+          <div className="user-avatar shape-expressive-avatar bg-expressive-secondary font-name">
+            {avatarInitial}
+          </div>
+        </div>
         <p className="login-success-text">Login bem-sucedido!</p>
         <p className="welcome-text">
           Bem-vindo(a), <strong className="font-name text-expressive-primary">{username || email}</strong>!

@@ -262,6 +262,10 @@ body {
 .text-expressive-primary {
     color: #6A0DAD; /* Roxo mais profundo */
 }
+.bg-expressive-secondary {
+    background-color: #FF7F50; /* Coral Vibrante from index.html */
+}
+
 /* If you plan to use other expressive colors elsewhere, define them here: */
 /* .bg-expressive-primary { background-color: #6A0DAD; } */
 /* .text-expressive-on-surface { color: #4B0082; } */ /* Indigo para texto sobre a superfície */
@@ -269,6 +273,9 @@ body {
 /* Expressive Shapes (from index.html) */
 .shape-expressive-card {
     border-radius: 28px; /* Cantos ainda mais arredondados */
+}
+.shape-expressive-avatar {
+    border-radius: 40% 60% 60% 40% / 50% 50% 50% 50%; /* Forma orgânica para avatares */
 }
 
 /* Expressive Shadow (from index.html) */
@@ -338,6 +345,26 @@ body {
     /* The .text-expressive-primary class provides the purple color */
     font-size: 1.2em; /* Makes the username/email slightly larger within the welcome text */
     display: inline-block; /* Ensures proper rendering of font styles if needed */
+}
+
+/* Avatar Styles for UserProfileCard */
+.user-avatar-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem; /* Corresponds to mb-4 */
+}
+
+.user-avatar {
+    width: 6rem; /* Corresponds to w-24 (96px) */
+    height: 6rem; /* Corresponds to h-24 (96px) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.25rem; /* Corresponds to text-4xl (36px) */
+    color: white; /* Text color for the initial */
+    /* font-name class is applied directly in JSX for Poppins font */
+    /* shape-expressive-avatar class is applied directly in JSX */
+    /* bg-expressive-secondary class is applied directly in JSX for background */
 }
 
 /* Wrapper for the entire UserProfileCard section including the new header */
