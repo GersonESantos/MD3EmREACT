@@ -323,8 +323,8 @@ body.bg-expressive-surface {
 .shape-expressive-button {
   border-radius: 20px; /* As per previous definition */
 }
-.shape-expressive-avatar { /* Organic shape */
-  border-radius: 40% 60% 60% 40% / 50% 50% 50% 50%;
+.shape-expressive-avatar { /* Changed to perfect circle */
+  border-radius: 50%;
 }
 
 /* Expressive Shadow - subtle and colored with primary */
