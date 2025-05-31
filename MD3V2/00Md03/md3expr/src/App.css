@@ -4,3 +4,94 @@
   padding: 2rem;
   text-align: center;
 }
+/* Estilos base que se aplicam a ambos os temas */
+.app-container {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transição suave */
+  min-height: 100vh; /* Ocupar toda a altura da tela */
+  display: flex;
+  flex-direction: column;
+}
+
+.app-container header {
+  border-bottom: 1px solid #ccc; /* Apenas um exemplo */
+}
+
+.app-container main {
+  flex-grow: 1; /* Para o conteúdo principal ocupar o espaço restante */
+  padding: 20px;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+/* Tema Claro (Padrão) */
+.app-container.light {
+  background-color: #ffffff;
+  color: #213547;
+}
+
+.app-container.light header {
+  background-color: #f0f0f0;
+  border-bottom-color: #e0e0e0;
+}
+
+.app-container.light button {
+  background-color: #e9e9e9;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+.app-container.light button:hover {
+  background-color: #dcdcdc;
+}
+
+
+/* Tema Escuro */
+.app-container.dark {
+  background-color: #242424; /* Um cinza escuro */
+  color: rgba(255, 255, 255, 0.87); /* Texto mais claro */
+}
+
+.app-container.dark header {
+  background-color: #1a1a1a;
+  border-bottom-color: #333;
+}
+
+.app-container.dark button {
+  background-color: #444;
+  color: #fff;
+  border: 1px solid #555;
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+
+.app-container.dark button:hover {
+  background-color: #555;
+}
+
+/* Você pode querer ajustar os filtros dos logos para o tema escuro também */
+.app-container.dark .logo:hover {
+  filter: drop-shadow(0 0 2em #9095f0aa); /* Cor de sombra ajustada para tema escuro */
+}
+.app-container.dark .logo.react:hover {
+  filter: drop-shadow(0 0 2em #82f3ffaa); /* Cor de sombra ajustada para tema escuro */
+}
+
+/* Estilos para o conteúdo de login, se necessário */
+.app-container p {
+  /* Estilos para o parágrafo de Login */
+}
