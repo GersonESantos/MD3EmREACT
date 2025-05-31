@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo Material 3 Expressive - Usuários</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Pacifico&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-display {
+            font-family: 'Pacifico', cursive; /* Fonte expressiva para títulos principais */
+        }
+        .font-name {
+            font-family: 'Poppins', sans-serif; /* Fonte um pouco mais marcante para nomes */
+        }
+
+        /* Cores personalizadas para o tema Expressive (ligeiramente ajustadas para o tema) */
+        .bg-expressive-primary { background-color: #6A0DAD; } /* Roxo mais profundo */
+        .text-expressive-primary { color: #6A0DAD; }
+        .border-expressive-primary { border-color: #6A0DAD; }
+
+        .bg-expressive-secondary { background-color: #FF7F50; } /* Coral Vibrante */
+        .text-expressive-secondary { color: #FF7F50; }
+        .border-expressive-secondary { border-color: #FF7F50; }
+
+        .bg-expressive-accent { background-color: #40E0D0; } /* Turquesa */
+        .text-expressive-accent { color: #40E0D0; }
+
+        .bg-expressive-surface { background-color: #FDF5E6; } /* Um bege muito claro (como papel antigo) */
+        .text-expressive-on-surface { color: #4B0082; } /* Indigo para texto sobre a superfície */
+
+        /* Formas expressivas */
+        .shape-expressive-card {
+            border-radius: 28px; /* Cantos ainda mais arredondados */
+            /* border-top-left-radius: 50px;
+            border-bottom-right-radius: 50px; Formas assimétricas podem ser exploradas */
+        }
+        .shape-expressive-button {
+            border-radius: 20px;
+        }
+        .shape-expressive-avatar {
+            border-radius: 40% 60% 60% 40% / 50% 50% 50% 50%; /* Forma orgânica para avatares */
+            /* Ou simplesmente border-radius: 9999px; para círculo perfeito */
+        }
+        .shape-expressive-fab {
+            border-radius: 28px;
+        }
+
+        /* Sombra suave e colorida */
+        .shadow-expressive {
+            box-shadow: 0px 10px 20px rgba(106, 13, 173, 0.15);
+        }
+        .shadow-expressive-secondary {
+            box-shadow: 0px 8px 16px rgba(255, 127, 80, 0.2);
+        }
+
+        /* Animação subtil para entrada de cartões */
+        .card-enter-animation {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInSlideUp 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeInSlideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-expressive-surface text-expressive-on-surface min-h-screen flex flex-col items-center p-4 sm:p-8 selection:bg-expressive-secondary selection:text-white">
+
+    <div class="w-full max-w-4xl space-y-10">
+
+        <header class="text-center mb-8">
+            <h1 class="font-display text-5xl sm:text-7xl text-expressive-primary mb-3">Nossa Comunidade</h1>
+            <p class="text-lg text-expressive-on-surface/80">Conheça os membros incríveis!</p>
+        </header>
+
+        <div id="userGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            </div>
+
+        <div class="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-20">
+            <button id="addUserButton" class="bg-expressive-secondary text-white w-16 h-16 shape-expressive-fab shadow-expressive-secondary flex items-center justify-center transform hover:scale-110 hover:rotate-[360deg] transition-all duration-500 ease-in-out focus:outline-none focus:ring-4 focus:ring-expressive-secondary/50">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+            </button>
+        </div>
+
+    </div>
+
+    <div id="messageBox" class="fixed top-5 left-1/2 -translate-x-1/2 p-4 bg-expressive-accent text-white text-center rounded-xl shadow-lg transform -translate-y-[150%] transition-transform duration-500 ease-in-out z-50 min-w-[250px]">
+        <p id="messageText">Mensagem aqui!</p>
+    </div>
+
+    <script>
+        const userGrid = document.getElementById('userGrid');
+        const addUserButton = document.getElementById('addUserButton');
+        const messageBox = document.getElementById('messageBox');
+        const messageText = document.getElementById('messageText');
+
+        const usersData = [
+            {
+                name: "Ana Criativa",
+                bio: "Designer de interfaces e amante de cores vibrantes. Sempre a explorar novas formas de expressão visual.",
+                avatarColor: "bg-pink-400", // Tailwind color class
+                avatarInitial: "A",
+                status: "Online"
+            },
+            {
+                name: "Bruno Inovador",
+                bio: "Desenvolvedor front-end com paixão por animações fluidas e experiências de utilizador únicas.",
+                avatarColor: "bg-blue-500",
+                avatarInitial: "B",
+                status: "Ausente"
+            },
+            {
+                name: "Carla Conectada",
+                bio: "Gestora de comunidade e entusiasta de novas tecnologias. Adora um bom desafio criativo.",
+                avatarColor: "bg-green-500",
+                avatarInitial: "C",
+                status: "Online"
+            },
+            {
+                name: "David Dinâmico",
+                bio: "Artista digital e explorador de novas mídias. Acredita que a arte pode mudar o mundo.",
+                avatarColor: "bg-yellow-500",
+                avatarInitial: "D",
+                status: "Offline"
+            }
+        ];
+
+        let userCounter = 0;
+
+        function showMessage(text, type = 'accent') {
+            messageText.textContent = text;
+            messageBox.className = `fixed top-5 left-1/2 -translate-x-1/2 p-4 text-white text-center rounded-xl shadow-lg transform -translate-y-[150%] transition-transform duration-500 ease-in-out z-50 min-w-[250px]`; // Reset classes
+            if (type === 'accent') {
+                messageBox.classList.add('bg-expressive-accent');
+            } else if (type === 'primary') {
+                messageBox.classList.add('bg-expressive-primary');
+            } else {
+                messageBox.classList.add('bg-gray-700');
+            }
+
+            messageBox.classList.remove('-translate-y-[150%]');
+            messageBox.classList.add('translate-y-0');
+
+            setTimeout(() => {
+                messageBox.classList.remove('translate-y-0');
+                messageBox.classList.add('-translate-y-[150%]');
+            }, 3000);
+        }
+
+        function createUserCard(user, index) {
+            const card = document.createElement('div');
+            card.className = 'bg-white shape-expressive-card shadow-expressive p-6 flex flex-col items-center text-center card-enter-animation';
+            card.style.animationDelay = `${index * 100}ms`; // Stagger animation
+
+            // Avatar
+            const avatar = document.createElement('div');
+            avatar.className = `w-24 h-24 ${user.avatarColor} shape-expressive-avatar flex items-center justify-center text-4xl text-white font-name mb-4 ring-4 ring-white ring-offset-2 ring-offset-${user.avatarColor}/50`;
+            avatar.textContent = user.avatarInitial;
+
+            // Nome
+            const name = document.createElement('h3');
+            name.className = 'font-name text-2xl text-expressive-primary mb-1';
+            name.textContent = user.name;
+
+            // Status
+            const statusIndicator = user.status === "Online" ? "bg-green-400" : "bg-gray-400";
+            const statusText = document.createElement('p');
+            statusText.className = 'text-xs text-gray-500 mb-3 flex items-center justify-center';
+            statusText.innerHTML = `<span class="w-2 h-2 ${statusIndicator} rounded-full mr-1.5"></span>${user.status}`;
+
+
+            // Bio
+            const bio = document.createElement('p');
+            bio.className = 'text-sm text-expressive-on-surface/70 mb-5 leading-relaxed';
+            bio.textContent = user.bio;
+
+            // Botões de Ação
+            const actionsWrapper = document.createElement('div');
+            actionsWrapper.className = 'flex space-x-3 mt-auto w-full';
+
+            const viewProfileButton = document.createElement('button');
+            viewProfileButton.className = 'flex-1 bg-expressive-primary text-white font-semibold py-2.5 px-4 shape-expressive-button hover:bg-opacity-80 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-expressive-primary focus:ring-offset-2';
+            viewProfileButton.textContent = 'Ver Perfil';
+            viewProfileButton.onclick = () => showMessage(`A ver perfil de ${user.name}...`, 'primary');
+
+            const connectButton = document.createElement('button');
+            connectButton.className = 'flex-1 border-2 border-expressive-secondary text-expressive-secondary font-semibold py-2.5 px-4 shape-expressive-button hover:bg-expressive-secondary/10 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-expressive-secondary focus:ring-offset-1';
+            connectButton.textContent = 'Conectar';
+            connectButton.onclick = () => showMessage(`Pedido de conexão enviado para ${user.name}!`, 'accent');
+
+            actionsWrapper.appendChild(viewProfileButton);
+actionsWrapper.appendChild(connectButton);
+
+            card.appendChild(avatar);
+            card.appendChild(name);
+            card.appendChild(statusText);
+            card.appendChild(bio);
+            card.appendChild(actionsWrapper);
+
+            return card;
+        }
+
+        function renderUsers() {
+            userGrid.innerHTML = ''; // Limpar grelha antes de renderizar
+            usersData.slice(0, userCounter + 1).forEach((user, index) => { // Mostrar até ao userCounter
+                const cardElement = createUserCard(user, index);
+                userGrid.appendChild(cardElement);
+            });
+             if (userCounter >= usersData.length -1) {
+                addUserButton.style.display = 'none'; // Ocultar botão se todos os utilizadores foram adicionados
+            } else {
+                addUserButton.style.display = 'flex';
+            }
+        }
+
+        // Renderizar o primeiro usuário inicialmente
+        if (usersData.length > 0) {
+             renderUsers();
+        }
+
+
+        // Adicionar novo usuário (simulado)
+        addUserButton.addEventListener('click', () => {
+            if (userCounter < usersData.length - 1) {
+                userCounter++;
+                renderUsers(); // Re-renderizar para incluir o novo usuário com animação
+                showMessage('Novo membro descoberto!', 'accent');
+            }
+        });
+
+    </script>
+
+</body>
+</html>

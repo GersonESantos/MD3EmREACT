@@ -3,6 +3,7 @@ import './App.css'
 // index.js
 import '@material/web/button/filled-button.js';
 import '@material/web/textfield/filled-text-field.js';
+import UserProfileCard from './UserProfileCard'; // Import the new component
 
 const API_LOGIN_URL = 'http://localhost:3000/login';
 
@@ -61,9 +62,29 @@ function App() {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
+  useEffect(() => {
+    if (loggedInUser) {
+      document.body.classList.add('bg-expressive-surface', 'text-expressive-on-surface');
+    } else {
+      document.body.classList.remove('bg-expressive-surface', 'text-expressive-on-surface');
+    }
+    // Cleanup on component unmount or when loggedInUser changes back
+    return () => {
+      document.body.classList.remove('bg-expressive-surface', 'text-expressive-on-surface');
+    };
+  }, [loggedInUser]);
+
+  const handleLogout = () => {
+    setLoggedInUser(null);
+    setEmail('');
+    setPassword('');
+    setTextValue(''); // Clear the displayed username from the old field
+    setErrorMessage('');
+  };
+
   return (
     <>
-      <div className="login-container">
+      <div className={`app-main-container ${loggedInUser ? 'profile-view-active' : 'login-view-active'}`}>
         <div className="theme-selector-container">
           <label htmlFor="theme-select" className="theme-selector-label"> </label>
           <select
@@ -76,63 +97,78 @@ function App() {
             <option value="dark">Escuro 🌙</option>
           </select>
         </div>
-        <form onSubmit={handleSubmit} className="login-form">
-          <img
-            src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg"
-            alt="Logotipo"
-            className="login-logo"
-            height="54"
-            width="72"
-          />
-          <h1 className="login-title">Login</h1>
-          <md-filled-text-field
-            label="Usuario" // Este campo exibe o username após o login
-            value={textValue}
-            // Removido onInput para impedir a digitação pelo usuário
-            readOnly={true} // Define o campo como somente leitura permanentemente
-            className="user-display-field form-field" // Adicionada classe form-field
-          ></md-filled-text-field>
 
-          <md-filled-text-field
-            label="Email"
-            type="email"
-            value={email}
-            onInput={(e) => setEmail(e.target.value)} // Assume-se que o evento é 'input'
-            autocomplete="username"
-            className="form-field"
-            disabled={isLoading || !!loggedInUser}
-          ></md-filled-text-field>
+        {!loggedInUser ? (
+          <div className="login-container">
+            <form onSubmit={handleSubmit} className="login-form">
+              <img
+                src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg"
+                alt="Logotipo"
+                className="login-logo"
+                height="54"
+                width="72"
+              />
+              <h1 className="login-title">Login</h1>
+              {/* O campo de usuário read-only é removido pois o perfil mostrará o nome */}
+              {/* <md-filled-text-field
+                label="Usuario"
+                value={textValue}
+                readOnly={true}
+                className="user-display-field form-field"
+              ></md-filled-text-field> */}
 
-          <md-filled-text-field
-            label="Senha"
-            type="password"
-            value={password}
-            onInput={(e) => setPassword(e.target.value)} // Assume-se que o evento é 'input'
-            autocomplete="current-password"
-            className="form-field"
-            disabled={isLoading || !!loggedInUser}
-          ></md-filled-text-field>
+              <md-filled-text-field
+                label="Email"
+                type="email"
+                value={email}
+                onInput={(e) => setEmail(e.target.value)}
+                autocomplete="username"
+                className="form-field"
+                disabled={isLoading}
+              ></md-filled-text-field>
 
-          {errorMessage && (
-            <p className="error-message">{errorMessage}</p>
-          )}
+              <md-filled-text-field
+                label="Senha"
+                type="password"
+                value={password}
+                onInput={(e) => setPassword(e.target.value)}
+                autocomplete="current-password"
+                className="form-field"
+                disabled={isLoading}
+              ></md-filled-text-field>
 
-          {loggedInUser && !isLoading && (
-            <div className="success-message">
-              <p>Login bem-sucedido!</p>
-              <p>Bem-vindo(a), <strong>{loggedInUser.username || email}</strong>!</p>
+              {errorMessage && (
+                <p className="error-message">{errorMessage}</p>
+              )}
+
+              <md-filled-button
+                type="submit"
+                disabled={!email || isLoading}
+                className="login-button"
+              >
+                {isLoading ? 'Entrando...' : 'Login'}
+              </md-filled-button>
+            </form>
+          </div>
+        ) : (
+          !isLoading && (
+            <div className="profile-view-container w-full min-h-[calc(100vh-80px)] flex flex-col items-center justify-center p-4 sm:p-8"> {/* Adjusted min-height for theme selector */}
+              <div className="w-full max-w-md space-y-10 text-center">
+                <header className="mb-8">
+                  <h1 className="font-display text-5xl sm:text-7xl text-expressive-primary mb-3">Perfil em Destaque</h1>
+                  <p className="text-lg text-expressive-on-surface/80">Conheça um membro incrível!</p>
+                </header>
+                <div className="flex justify-center">
+                  <UserProfileCard user={loggedInUser} />
+                </div>
+                <md-filled-button onClick={handleLogout} className="logout-button mt-8">
+                  Logout
+                </md-filled-button>
+              </div>
             </div>
-          )}
-          {!loggedInUser && (
-            <md-filled-button
-              type="submit" // Importante para o <form>
-              disabled={!email || isLoading}
-              className="login-button"
-            >
-              {isLoading ? 'Entrando...' : 'Login'}
-            </md-filled-button>
-          )}
-        </form>
+          )
+        )}
+        {isLoading && <p className="loading-message">Carregando...</p>}
       </div>
     </>
   )
