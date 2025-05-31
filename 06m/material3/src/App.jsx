@@ -85,7 +85,7 @@ function App() {
             height="54"
             width="72"
           />
-          <h1 className="login-title">Login</h1>
+          <h1 className="font-display text-5xl text-expressive-primary text-center mb-3">Login</h1>
           <md-filled-text-field
             label="Usuario" // Este campo exibe o username após o login
             value={textValue}
