@@ -159,3 +159,21 @@ body {
 .dark-theme .email-input::placeholder {
   color: #adb5bd; /* Cor do placeholder no tema escuro */
 }
+
+/* Estilo para o botão de ação genérico */
+.action-button {
+  padding: 10px 20px;
+  margin-top: 15px; /* Espaço acima do botão */
+  border-radius: 4px;
+  border: 1px solid #007bff;
+  background-color: #007bff;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.action-button:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
