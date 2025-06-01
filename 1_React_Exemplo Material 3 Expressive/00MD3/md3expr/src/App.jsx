@@ -28,6 +28,16 @@ function App() {
     <div className="app-container">
       <header className="app-header">
         <h1 className="login-title">Login</h1>
+        <p className="login-subtitle">Desbloqueie seu potencial. Faça login para continuar.</p>
+      <form className="form-wrapper">
+        <div className="form-group">
+          <label htmlFor="email">Seu Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="   
+            </form>
         <div className="theme-selector-container">
           <label htmlFor="theme-select" className="theme-label">Tema:</label>
           <select id="theme-select" value={theme} onChange={handleThemeChange} className="theme-select">
