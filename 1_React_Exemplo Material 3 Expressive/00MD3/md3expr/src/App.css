@@ -1,135 +1,414 @@
-/* Importa as fontes do Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Pacifico&display=swap');
+/* Import Google Fonts - Coloque no topo do seu App.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Pacifico&display=swap');
 
-/* --- Variáveis de Tema e Estilos Base --- */
-:root {
-  /* Fontes base */
-  --font-family-sans: 'Inter', sans-serif;
-  --font-family-display: 'Pacifico', cursive;
+/* =============================================== */
+/* ESTILOS GERAIS E RESET BÁSICO                   */
+/* =============================================== */
 
-  /* Cores padrão (serão sobrescritas pelos temas) */
-  --bg-color: #ffffff;
-  --text-color: #212529;
-  --title-color: #333333;
-  --title-font-family: var(--font-family-sans);
-  --select-bg-color: #f8f9fa;
-  --select-text-color: #495057;
-  --select-border-color: #ced4da;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  font-family: var(--font-family-sans);
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 1rem;
-  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  background-color: #f0f2f5; /* Cor de fundo padrão */
+  color: #333; /* Cor de texto padrão */
   transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* --- Definições de Tema --- */
-
-/* Tema Claro (light-theme) - já coberto pelo :root, mas pode ser explícito */
-.light-theme {
-  --bg-color: #ffffff;
-  --text-color: #212529;
-  --title-color: #333333;
-  --title-font-family: var(--font-family-sans); /* Título padrão no tema claro */
-  --select-bg-color: #f8f9fa;
-  --select-text-color: #495057;
-  --select-border-color: #ced4da;
+html {
+  font-size: 16px; /* Base para REM units */
 }
 
-/* Tema Escuro (dark-theme) */
-.dark-theme {
-  --bg-color: #1a1a1a; /* Um cinza escuro, não preto puro */
-  --text-color: #e0e0e0;
-  --title-color: #f5f5f5;
-  --title-font-family: var(--font-family-sans); /* Título padrão no tema escuro */
-  --select-bg-color: #343a40;
-  --select-text-color: #f8f9fa;
-  --select-border-color: #495057;
+a {
+  text-decoration: none;
+  color: inherit; /* Herda a cor do pai por padrão */
 }
 
-/* Tema Expressivo (expressive-theme) */
-.expressive-theme {
-  --bg-color: #F3E8FF; /* Lavanda claro de fundo */
-  --text-color: #4A235A; /* Roxo escuro para texto */
-  --title-color: #6A0DAD; /* Roxo vibrante para o título */
-  --title-font-family: var(--font-family-display); /* Fonte Pacifico para o título */
-  --select-bg-color: #ffffff;
-  --select-text-color: #6A0DAD;
-  --select-border-color: #D1C4E9; /* Borda lavanda mais clara para o select */
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
 }
 
-/* --- Estilos dos Componentes --- */
+input,
+select,
+button {
+  font-size: 1rem;
+}
+
+/* =============================================== */
+/* ESTILOS DE COMPONENTES COMUNS                   */
+/* (Serão sobrescritos/ajustados pelos temas)    */
+/* =============================================== */
 
 .app-container {
-  text-align: center;
-  padding: 2rem;
-  border-radius: 12px;
-  /* Sombra sutil que se adapta ao fundo do body */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  /* O fundo do container pode ser diferente do body para destaque */
-  background-color: var(--bg-color); /* Usa o mesmo do body por padrão, mas pode ser sobrescrito */
-  width: 100%;
-  max-width: 500px;
-}
-
-/* No tema expressivo, o container pode ter um fundo branco para contrastar com o body lavanda */
-.expressive-theme .app-container {
-  background-color: #ffffff;
-  box-shadow: 0 6px 20px rgba(106, 13, 173, 0.15); /* Sombra com cor do tema */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: background-color 0.3s ease;
 }
 
 .app-header {
-  margin-bottom: 2rem;
-}
-
-.login-title {
-  font-family: var(--title-font-family);
-  color: var(--title-color);
-  font-size: 3rem; /* Tamanho base do título */
-  margin-bottom: 1.5rem;
-  transition: color 0.3s ease, font-family 0.3s ease;
-}
-
-.expressive-theme .login-title {
-  font-size: 3.5rem; /* Título um pouco maior no tema expressivo */
+  width: 100%;
+  display: flex;
+  justify-content: flex-end; /* Alinha o seletor de tema à direita */
+  padding: 15px 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .theme-selector-container {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 0.5rem; /* Espaço entre o label e o select */
+  gap: 8px;
 }
 
 .theme-label {
-  font-size: 1rem;
-  font-weight: bold;
-  color: var(--text-color); /* Usa a cor de texto principal do tema */
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .theme-select {
-  padding: 0.5em 0.8em;
+  padding: 8px 12px;
   border-radius: 6px;
-  border: 1px solid var(--select-border-color);
-  background-color: var(--select-bg-color);
-  color: var(--select-text-color);
-  font-family: var(--font-family-sans);
+  border: 1px solid #ccc;
+  background-color: #fff;
   font-size: 0.9rem;
   cursor: pointer;
-  min-width: 160px;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  outline: none;
 }
 
 .theme-select:focus {
-  outline: none;
-  border-color: var(--title-color); /* Usa a cor do título para o foco, para destaque */
-  box-shadow: 0 0 0 2px rgba(var(--title-color), 0.25); /* Adapta a cor do box-shadow */
+  border-color: #007bff; /* Cor de foco genérica */
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
+
+.login-container {
+  background-color: #ffffff;
+  padding: 30px 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #333; /* Cor padrão para o título */
+}
+
+.login-subtitle {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #555;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input::placeholder {
+  color: #aaa;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #007bff; /* Cor de foco genérica */
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+.login-button {
+  background-color: #007bff; /* Cor primária genérica */
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 1.05rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.login-button:hover {
+  background-color: #0056b3; /* Escurecer no hover */
+}
+
+.login-button:active {
+  transform: scale(0.98);
+}
+
+.extra-links {
+  margin-top: 25px;
+  font-size: 0.9rem;
+}
+
+.extra-links p {
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.extra-links a {
+  color: #007bff; /* Cor de link genérica */
+  font-weight: 500;
+}
+
+.extra-links a:hover {
+  text-decoration: underline;
+}
+
+/* =============================================== */
+/* TEMA CLARO (LIGHT THEME) ☀️                    */
+/* =============================================== */
+.light-theme {
+  --bg-color: #f0f2f5;
+  --text-color: #333333;
+  --card-bg-color: #ffffff;
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --primary-color: #007bff;
+  --primary-text-color: #ffffff;
+  --input-border-color: #ced4da;
+  --input-focus-border-color: #80bdff;
+  --input-focus-shadow: rgba(0, 123, 255, 0.25);
+  --link-color: #007bff;
+  --label-color: #495057;
+  --subtitle-color: #6c757d;
+}
+
+.light-theme .app-container { background-color: var(--bg-color); }
+.light-theme .login-container { background-color: var(--card-bg-color); box-shadow: var(--card-shadow); }
+.light-theme .login-title { color: var(--text-color); }
+.light-theme .login-subtitle { color: var(--subtitle-color); }
+.light-theme .form-group label { color: var(--label-color); }
+.light-theme .form-group input {
+  background-color: var(--card-bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--input-border-color);
+}
+.light-theme .form-group input:focus {
+  border-color: var(--input-focus-border-color);
+  box-shadow: 0 0 0 0.2rem var(--input-focus-shadow);
+}
+.light-theme .login-button { background-color: var(--primary-color); color: var(--primary-text-color); }
+.light-theme .login-button:hover { background-color: color-mix(in srgb, var(--primary-color) 85%, black); }
+.light-theme .extra-links p { color: var(--subtitle-color); }
+.light-theme .extra-links a { color: var(--link-color); }
+.light-theme .theme-label { color: var(--label-color); }
+.light-theme .theme-select {
+  background-color: var(--card-bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--input-border-color);
+}
+
+/* =============================================== */
+/* TEMA ESCURO (DARK THEME) 🌙                     */
+/* =============================================== */
+.dark-theme {
+  --bg-color: #1a1a2e; /* Azul escuro profundo */
+  --text-color: #e0e0e0; /* Cinza claro para texto */
+  --card-bg-color: #24243e; /* Azul um pouco mais claro para cards */
+  --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  --primary-color: #7f5af0; /* Roxo vibrante para primário */
+  --primary-text-color: #ffffff;
+  --input-border-color: #4a4a6a; /* Borda sutil para inputs */
+  --input-bg-color: #1e1e36; /* Fundo do input um pouco mais escuro que o card */
+  --input-focus-border-color: #9d7fee; /* Roxo mais claro para foco */
+  --input-focus-shadow: rgba(127, 90, 240, 0.3);
+  --link-color: #7f5af0; /* Mesma cor primária para links */
+  --label-color: #b0b0d0; /* Cinza azulado claro para labels */
+  --subtitle-color: #a0a0c0; /* Cinza azulado para subtítulos */
+}
+
+.dark-theme .app-container { background-color: var(--bg-color); }
+.dark-theme .login-container { background-color: var(--card-bg-color); box-shadow: var(--card-shadow); }
+.dark-theme .login-title { color: var(--text-color); }
+.dark-theme .login-subtitle { color: var(--subtitle-color); }
+.dark-theme .form-group label { color: var(--label-color); }
+.dark-theme .form-group input {
+  background-color: var(--input-bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--input-border-color);
+}
+.dark-theme .form-group input::placeholder { color: #6a6a8a; }
+.dark-theme .form-group input:focus {
+  border-color: var(--input-focus-border-color);
+  box-shadow: 0 0 0 0.2rem var(--input-focus-shadow);
+}
+.dark-theme .login-button { background-color: var(--primary-color); color: var(--primary-text-color); }
+.dark-theme .login-button:hover { background-color: color-mix(in srgb, var(--primary-color) 85%, black); }
+.dark-theme .extra-links p { color: var(--subtitle-color); }
+.dark-theme .extra-links a { color: var(--link-color); }
+.dark-theme .theme-label { color: var(--label-color); }
+.dark-theme .theme-select {
+  background-color: var(--card-bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--input-border-color);
+}
+
+/* =============================================== */
+/* TEMA EXPRESSIVO (EXPRESSIVE THEME) ✨           */
+/* =============================================== */
+.expressive-theme {
+  /* Variáveis de Cores */
+  --expressive-primary: #8A2BE2;        /* Roxo Vibrante (BlueViolet) */
+  --expressive-accent-pink: #FF1493;    /* Rosa Choque (DeepPink) */
+  --expressive-accent-green: #32CD32;   /* Verde Primavera (LimeGreen) */
+  --expressive-surface: #F3EFFF;        /* Lavanda Muito Claro (bg-expressive-surface) */
+  --expressive-text: #333;
+  --expressive-text-on-primary: #FFFFFF;
+  --expressive-card-bg: #FFFFFF;
+  --expressive-input-border: #D1C4E9;   /* Lilás claro para bordas de input */
+  --expressive-input-focus-border: var(--expressive-primary);
+  --expressive-input-focus-shadow: rgba(138, 43, 226, 0.25);
+
+  /* Variáveis de Tipografia */
+  --expressive-font-header: 'Pacifico', cursive;
+  --expressive-font-body: 'Inter', sans-serif;
+
+  /* Variáveis de Formas e Sombras */
+  --expressive-card-radius: 24px;
+  --expressive-button-radius: 16px;
+  --expressive-fab-radius: 50%;
+  --expressive-input-radius: 8px;
+  --expressive-shadow: 0 6px 12px rgba(138, 43, 226, 0.2);
+  --expressive-shadow-hover: 0 8px 16px rgba(138, 43, 226, 0.3);
+
+  /* Aplicação dos estilos base do tema */
+  background-color: var(--expressive-surface);
+  color: var(--expressive-text);
+  font-family: var(--expressive-font-body);
+}
+
+.expressive-theme .app-container { background-color: var(--expressive-surface); }
+.expressive-theme .login-title {
+  font-family: var(--expressive-font-header);
+  color: var(--expressive-primary);
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+}
+.expressive-theme .login-subtitle { color: var(--expressive-text); font-size: 1.1rem; margin-bottom: 35px; }
+.expressive-theme .login-container {
+  background-color: var(--expressive-card-bg);
+  border-radius: var(--expressive-card-radius);
+  box-shadow: var(--expressive-shadow);
+  padding: 40px;
+  transition: box-shadow 0.3s ease-in-out;
+}
+.expressive-theme .login-container:hover { box-shadow: var(--expressive-shadow-hover); }
+.expressive-theme .form-group label { color: var(--expressive-primary); font-weight: normal; font-size: 1rem; }
+.expressive-theme .form-group input {
+  background-color: var(--expressive-card-bg);
+  color: var(--expressive-text);
+  border: 1px solid var(--expressive-input-border);
+  border-radius: var(--expressive-input-radius);
+  padding: 12px 15px;
+  font-family: var(--expressive-font-body);
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.expressive-theme .form-group input::placeholder { color: #aaa; }
+.expressive-theme .form-group input:focus {
+  border-color: var(--expressive-input-focus-border);
+  box-shadow: 0 0 0 3px var(--expressive-input-focus-shadow);
+  outline: none;
+}
+.expressive-theme .login-button {
+  background-color: var(--expressive-primary);
+  color: var(--expressive-text-on-primary);
+  border-radius: var(--expressive-button-radius);
+  font-family: var(--expressive-font-body);
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 14px 20px;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease-out, background-color 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+.expressive-theme .login-button:hover {
+  transform: scale(1.05);
+  background-color: color-mix(in srgb, var(--expressive-primary) 90%, black);
+  box-shadow: var(--expressive-shadow);
+}
+.expressive-theme .extra-links p { color: var(--expressive-text); }
+.expressive-theme .extra-links a {
+  color: var(--expressive-accent-green);
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+.expressive-theme .extra-links a:hover {
+  color: color-mix(in srgb, var(--expressive-accent-green) 80%, black);
+  text-decoration: none;
+}
+.expressive-theme .theme-label { color: var(--expressive-text); }
+.expressive-theme .theme-select {
+    background-color: var(--expressive-card-bg);
+    color: var(--expressive-text);
+    border: 1px solid var(--expressive-input-border);
+    border-radius: var(--expressive-input-radius);
+}
+
+/* Estilos para um Floating Action Button (FAB) - Exemplo */
+.expressive-theme .fab-expressive {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background-color: var(--expressive-accent-pink);
+  color: var(--expressive-text-on-primary);
+  border-radius: var(--expressive-fab-radius);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-family: var(--expressive-font-body);
+  box-shadow: var(--expressive-shadow);
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1000;
+}
+.expressive-theme .fab-expressive:hover {
+  transform: scale(1.15) rotate(20deg);
+  background-color: color-mix(in srgb, var(--expressive-accent-pink) 90%, black);
+  box-shadow: var(--expressive-shadow-hover);
+}
+.expressive-theme .fab-expressive:active { transform: scale(1.05) rotate(10deg); }
