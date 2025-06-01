@@ -8,7 +8,7 @@ body {
   justify-content: center; /* Centraliza o #root horizontalmente */
   align-items: center;    /* Centraliza o #root verticalmente */
   min-height: 100vh;      /* Garante que o body ocupe toda a altura da tela */
-  background-color: #FDF5E6; /* Cor de fundo do seu exemplo HTML */
+  background-color: #FDF5E6; /* Cor de fundo */
   font-family: 'Inter', sans-serif; /* Fonte base para o corpo */
   box-sizing: border-box; /* Melhora o modelo de caixa */
   padding: 1rem;          /* Evita que o texto encoste nas bordas */
