@@ -1,209 +1,34 @@
-/* c:\Repo2024\MD3EmREACT\1_React_Exemplo Material 3 Expressive\00MD3\md3expr\src\App.css */
+/* Importando as fontes do exemplo HTML: Pacifico para o título e Inter como base */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Pacifico&display=swap');
 
-/*
-  Material Design 3 Expressive Theme Styles
-  Inspired by Material Design 3 (M3) guidelines.
-  This file provides a basic light/dark theme implementation.
-*/
-
-/* ------------------------- */
-/* --- THEME DEFINITIONS --- */
-/* ------------------------- */
-
-:root {
-  /* Base Font */
-  --md-font-family-sans: 'Roboto', 'Segoe UI', Arial, sans-serif;
-  /* For "Expressive" style, a distinct display font is often used for headlines. */
-  /* Ensure this font is available (e.g., loaded via @font-face or a service like Google Fonts) */
-  --md-font-family-display: 'Georgia', 'Times New Roman', serif; /* Example expressive display font */
-
-  /* --- Light Theme Color Palette (M3 Inspired) --- */
-  /* Surface Colors */
-  --md-sys-color-surface-light: #FFFBFE;         /* Main background */
-  --md-sys-color-on-surface-light: #1C1B1F;      /* Text/icons on surface */
-  --md-sys-color-surface-variant-light: #E7E0EC; /* Contrasting surface elements */
-  --md-sys-color-on-surface-variant-light: #49454F;/* Text/icons on surface-variant */
-
-  /* Primary Colors */
-  --md-sys-color-primary-light: #6750A4;         /* Key interactive elements */
-  --md-sys-color-on-primary-light: #FFFFFF;
-  --md-sys-color-primary-container-light: #EADDFF;/* Less prominent primary elements */
-  --md-sys-color-on-primary-container-light: #21005D;
-
-  /* --- Typography Scale (Example values based on M3) --- */
-  /* Display Large (for expressive titles) */
-  --md-sys-typescale-display-large-font: var(--md-font-family-display);
-  --md-sys-typescale-display-large-size: 3.5rem; /* ~57px */
-  --md-sys-typescale-display-large-weight: 700;  /* Bold, can be more expressive */
-  --md-sys-typescale-display-large-line-height: 4rem; /* ~64px */
-
-  /* Label Large (for buttons) */
-  --md-sys-typescale-label-large-font: var(--md-font-family-sans);
-  --md-sys-typescale-label-large-size: 0.875rem; /* 14px */
-  --md-sys-typescale-label-large-weight: 500;    /* Medium */
-
-  /* Body Large (for general text) */
-  --md-sys-typescale-body-large-font: var(--md-font-family-sans);
-  --md-sys-typescale-body-large-size: 1rem;      /* 16px */
-  --md-sys-typescale-body-large-weight: 400;     /* Regular */
-  --md-sys-typescale-body-large-line-height: 1.5rem; /* 24px */
-
-  /* --- Shape --- */
-  /* M3 uses specific dp values for corners. These are common examples. */
-  --md-sys-shape-corner-extra-small: 4px;
-  --md-sys-shape-corner-small: 8px;
-  --md-sys-shape-corner-medium: 12px;
-  --md-sys-shape-corner-large: 16px;
-  --md-sys-shape-corner-extra-large: 28px;
-  --md-sys-shape-corner-full: 9999px; /* For pill-shaped elements */
-  /* For a typical M3 button (e.g., 40px height), full rounding is common */
-  --md-sys-shape-button-corner-radius: 20px;
-
-  /* --- Elevation (Shadows - simplified examples) --- */
-  --md-sys-elevation-level-0: none;
-  --md-sys-elevation-level-1: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 2px rgba(0, 0, 0, 0.24);
-  --md-sys-elevation-level-2: 0px 3px 6px rgba(0, 0, 0, 0.16), 0px 3px 6px rgba(0, 0, 0, 0.23);
-
-  /* --- Transitions --- */
-  --md-sys-motion-duration-short: 200ms; /* e.g., short2 in M3 spec */
-  --md-sys-motion-easing-standard: cubic-bezier(0.4, 0.0, 0.2, 1);
-}
-
-[data-theme="dark"] {
-  /* --- Dark Theme Color Palette (M3 Inspired) --- */
-  /* Surface Colors */
-  --md-sys-color-surface-dark: #141218;
-  --md-sys-color-on-surface-dark: #E6E1E5;
-  --md-sys-color-surface-variant-dark: #49454F;
-  --md-sys-color-on-surface-variant-dark: #CAC4D0;
-
-  /* Primary Colors */
-  --md-sys-color-primary-dark: #D0BCFF;
-  --md-sys-color-on-primary-dark: #381E72;
-  --md-sys-color-primary-container-dark: #4F378B;
-  --md-sys-color-on-primary-container-dark: #EADDFF;
-}
-
-/* Assign theme variables based on data-theme attribute for easier use */
-:root {
-  --current-surface: var(--md-sys-color-surface-light);
-  --current-on-surface: var(--md-sys-color-on-surface-light);
-  --current-surface-variant: var(--md-sys-color-surface-variant-light);
-  --current-on-surface-variant: var(--md-sys-color-on-surface-variant-light);
-  --current-primary: var(--md-sys-color-primary-light);
-  --current-on-primary: var(--md-sys-color-on-primary-light);
-  --current-primary-container: var(--md-sys-color-primary-container-light);
-  --current-on-primary-container: var(--md-sys-color-on-primary-container-light);
-}
-
-[data-theme="dark"] {
-  --current-surface: var(--md-sys-color-surface-dark);
-  --current-on-surface: var(--md-sys-color-on-surface-dark);
-  --current-surface-variant: var(--md-sys-color-surface-variant-dark);
-  --current-on-surface-variant: var(--md-sys-color-on-surface-variant-dark);
-  --current-primary: var(--md-sys-color-primary-dark);
-  --current-on-primary: var(--md-sys-color-on-primary-dark);
-  --current-primary-container: var(--md-sys-color-primary-container-dark);
-  --current-on-primary-container: var(--md-sys-color-on-primary-container-dark);
-}
-
-
-/* -------------------- */
-/* --- GLOBAL RESET & BASE STYLES --- */
-/* -------------------- */
-
-html {
-  box-sizing: border-box;
-  font-size: 100%; /* Base font size, typically 16px */
-  scroll-behavior: smooth;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: inherit;
-  margin: 0;
-  padding: 0;
-}
-
+/* Estilos para o corpo da página, inspirados no seu exemplo HTML */
 body {
-  font-family: var(--md-sys-typescale-body-large-font);
-  font-size: var(--md-sys-typescale-body-large-size);
-  font-weight: var(--md-sys-typescale-body-large-weight);
-  line-height: var(--md-sys-typescale-body-large-line-height);
-  background-color: var(--current-surface);
-  color: var(--current-on-surface);
-  min-height: 100vh;
+  margin: 0;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem; /* Add some padding to the body itself */
-  transition: background-color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard),
-              color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  justify-content: center; /* Centraliza o #root horizontalmente */
+  align-items: center;    /* Centraliza o #root verticalmente */
+  min-height: 100vh;      /* Garante que o body ocupe toda a altura da tela */
+  background-color: #FDF5E6; /* Cor de fundo */
+  font-family: 'Inter', sans-serif; /* Fonte base para o corpo */
+  box-sizing: border-box; /* Melhora o modelo de caixa */
+  padding: 1rem;          /* Evita que o texto encoste nas bordas */
 }
 
-/* ------------------------- */
-/* --- COMPONENT STYLES ---- */
-/* ------------------------- */
-
-.app-container {
+/* #root é onde seu App React é renderizado */
+#root {
+  width: 100%;            /* Permite que o conteúdo dentro dele seja centralizado */
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  text-align: center;
-  width: 100%;
-  max-width: 600px; /* Optional: constrain width for larger screens */
+  justify-content: center; /* Centraliza o .expressive-login-title horizontalmente */
+  align-items: center;    /* Centraliza o .expressive-login-title verticalmente */
 }
 
-.app-header {
-  margin-bottom: 2.5rem; /* ~40px */
-  width: 100%;
-}
-
+/* Estilos para o título "Login", inspirados no seu exemplo HTML */
 .expressive-login-title {
-  font-family: var(--md-sys-typescale-display-large-font);
-  font-size: var(--md-sys-typescale-display-large-size);
-  font-weight: var(--md-sys-typescale-display-large-weight);
-  line-height: var(--md-sys-typescale-display-large-line-height);
-  color: var(--current-primary);
-  margin-bottom: 1.5rem; /* ~24px */
-}
-
-.theme-toggle-button {
-  font-family: var(--md-sys-typescale-label-large-font);
-  font-size: var(--md-sys-typescale-label-large-size);
-  font-weight: var(--md-sys-typescale-label-large-weight);
-  background-color: var(--current-primary-container);
-  color: var(--current-on-primary-container);
-  border: none;
-  padding: 0.625rem 1.5rem; /* 10px 24px -> M3 standard button height of 40px */
-  min-height: 40px;
-  border-radius: var(--md-sys-shape-button-corner-radius); /* e.g., 20px for full rounding */
-  cursor: pointer;
+  font-family: 'Pacifico', cursive; /* Fonte do título do seu exemplo HTML */
+  font-size: 4rem;                  /* Tamanho da fonte do seu exemplo HTML */
+  color: #6A0DAD;                   /* Cor do texto do seu exemplo HTML */
   text-align: center;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--md-sys-elevation-level-0); /* Filled buttons often start with no shadow or level 1 */
-  transition: background-color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard),
-              box-shadow var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
-}
-
-.theme-toggle-button:hover {
-  box-shadow: var(--md-sys-elevation-level-1); /* Slight elevation on hover */
-}
-
-.theme-toggle-button:focus-visible {
-  outline: 2px solid var(--current-primary); /* Clear focus indicator */
-  outline-offset: 2px;
-  box-shadow: var(--md-sys-elevation-level-0); /* Maintain or adjust shadow */
-}
-
-.theme-toggle-button:active {
-  box-shadow: var(--md-sys-elevation-level-0); /* Remove or reduce shadow on press */
-  /* Optionally, slightly change background or scale for pressed state */
+  text-shadow: 2px 2px 8px rgba(106, 13, 173, 0.15); /* Sombra do seu exemplo HTML */
+  margin: 0;                        /* Remove margens padrão para centralização precisa */
+  line-height: 1.1;                 /* Ajuste de altura da linha para a fonte */
 }
