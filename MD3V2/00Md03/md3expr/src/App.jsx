@@ -64,10 +64,10 @@ function App() {
   return (
     <>
       {/* Envolvemos todo o conteúdo em um único Fragmento pai */}
-      <div>
-        <p>
+      <div style={{ marginBottom: '20px' }}> {/* Adicionado um pouco de margem para separação visual */}
+        <h1 className="expressive-header"> {/* Alterado para h1 e adicionada a classe */}
           Login
-        </p>
+        </h1>
       </div>
 
       <div className="theme-selector-container">
@@ -80,6 +80,7 @@ function App() {
         >
           <option value="light">Claro ☀️</option>
           <option value="dark">Escuro 🌙</option>
+          <option value="expressive">Expressivo ✨</option>
         </select>
       </div>
 
@@ -100,6 +101,33 @@ function App() {
       </div>
 
       {showProfileCard && <UserProfileCard email={emailValue} username={fetchedUsername} />}
+
+      {/* Seção de Demonstração de Componentes Expressivos Adicionais */}
+      {/* Estes componentes serão estilizados pelo tema ativo, especialmente o .expressive-theme */}
+      <div style={{ marginTop: '50px', borderTop: '1px solid #ccc', paddingTop: '30px' }}>
+        <h2 className="expressive-header" style={{ fontSize: '2.5em' }}>Mais Componentes Expressivos</h2>
+        
+        <div style={{ margin: '30px 0', display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
+          <button className="shape-expressive-button expressive-button-primary shadow-expressive">
+            Botão Primário
+          </button>
+          <button className="shape-expressive-button expressive-button-secondary shadow-expressive">
+            Botão Contornado
+          </button>
+        </div>
+
+        <div className="notification-expressive">
+          <h3 className="expressive-header">Lembrete Amigável!</h3>
+          <p>Esta é uma notificação com um estilo mais solto, usando uma borda tracejada e a cor verde primavera para destaque.</p>
+        </div>
+
+      </div>
+
+      {/* FAB - será posicionado fixamente */}
+      {/* Adicionar a classe shadow-expressive ao FAB se desejar sombra nele também */}
+      <button className="shape-expressive-fab shadow-expressive" aria-label="Adicionar novo item" title="Ação Rápida">
+        +
+      </button>
     </>
   )
 }

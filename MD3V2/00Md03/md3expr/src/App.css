@@ -1,8 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Pacifico&display=swap');
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+
+  /* Expressive Theme Colors & Variables */
+  --expressive-purple: #6A0DAD;         /* Roxo Vibrante */
+  --expressive-purple-rgb: 106, 13, 173;
+  --expressive-pink: #FF1493;           /* Rosa Choque */
+  --expressive-pink-rgb: 255, 20, 147;
+  --expressive-green: #32CD32;          /* Verde Primavera */
+  --expressive-green-rgb: 50, 205, 50;
+  --expressive-lavender-bg: #F3E8FF;    /* Lavanda Muito Claro (Fundo) - bg-expressive-surface */
+  --expressive-text-primary-color: #333333;   /* Cor de texto primária para o fundo lavanda */
+  --expressive-text-primary-color-rgb: 51, 51, 51; /* RGB para alpha */
+  --expressive-text-on-primary: #FFFFFF;/* Cor de texto para usar sobre o roxo/rosa */
+
+  /* Expressive Shapes */
+  --expressive-corner-radius-card: 20px;
+  --expressive-corner-radius-button: 16px;
+  --expressive-corner-radius-fab: 50%;
+  --expressive-corner-radius-avatar: 50%;
 }
 /* c:\Repo2024\MD3EmREACT\MD3V2\00Md03\md3expr\src\App.css */
 
@@ -33,6 +53,18 @@ body {
 .dark-theme .theme-selector-container label {
   color: #ffffff; /* Cor do texto para o seletor no tema escuro */
   background-color: #333333; /* Fundo para o seletor no tema escuro */
+}
+
+/* Estilos para o seletor de tema no tema Expressivo */
+.expressive-theme .theme-selector-container select,
+.expressive-theme .theme-selector-container label {
+  color: var(--expressive-purple);
+  background-color: white;
+  border: 1px solid var(--expressive-purple);
+}
+.expressive-theme .theme-selector:focus {
+  border-color: var(--expressive-pink);
+  box-shadow: 0 0 0 0.2rem rgba(var(--expressive-pink-rgb), 0.25);
 }
 
 
@@ -176,4 +208,189 @@ body {
 .action-button:hover {
   background-color: #0056b3;
   border-color: #0056b3;
+}
+
+/* === Estilos do Tema Expressivo === */
+.expressive-theme {
+  background-color: var(--expressive-lavender-bg);
+  color: var(--expressive-text-primary-color);
+  font-family: 'Inter', sans-serif; /* Corpo do texto padrão */
+}
+
+/* Tipografia Expressiva para Cabeçalhos */
+.expressive-theme h1,
+.expressive-theme h2,
+.expressive-theme h3,
+.expressive-theme .font-display, /* Para o h1 no UserProfileCard */
+.expressive-theme .expressive-header { /* Classe genérica para cabeçalhos expressivos */
+  font-family: 'Pacifico', cursive;
+  color: var(--expressive-purple); /* Cor padrão para cabeçalhos expressivos */
+  margin-bottom: 0.5em;
+}
+
+/* Cores de Texto Específicas do Tema Expressivo */
+.expressive-theme .text-expressive-primary {
+  color: var(--expressive-purple);
+}
+.expressive-theme .text-expressive-on-surface-alpha-80 {
+  color: rgba(var(--expressive-text-primary-color-rgb), 0.8);
+}
+
+/* Fundos Específicos do Tema Expressivo */
+.expressive-theme .bg-expressive-secondary { /* Usado no avatar do UserProfileCard */
+  background-color: var(--expressive-pink);
+  color: var(--expressive-text-on-primary); /* Garante contraste para a inicial no avatar */
+}
+
+/* Formas Acentuadas */
+.expressive-theme .shape-expressive-card {
+  border-radius: var(--expressive-corner-radius-card);
+  background-color: white; /* Contraste com o fundo lavanda */
+  padding: 25px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.expressive-theme .shape-expressive-button {
+  border-radius: var(--expressive-corner-radius-button);
+  padding: 12px 24px;
+  font-size: 1em;
+  font-weight: bold;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.expressive-theme .shape-expressive-button:hover {
+  transform: scale(1.05);
+}
+
+.expressive-theme .shape-expressive-fab {
+  border-radius: var(--expressive-corner-radius-fab);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease-in-out;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: var(--expressive-pink);
+  color: var(--expressive-text-on-primary);
+}
+.expressive-theme .shape-expressive-fab:hover {
+  transform: scale(1.15) rotate(20deg);
+  box-shadow: 0 8px 20px rgba(var(--expressive-pink-rgb), 0.4);
+}
+
+.expressive-theme .shape-expressive-avatar { /* Para o avatar no UserProfileCard */
+  border-radius: var(--expressive-corner-radius-avatar);
+  width: 80px; /* Tamanho de exemplo */
+  height: 80px; /* Tamanho de exemplo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5em; /* Tamanho da inicial */
+  font-family: 'Pacifico', cursive; /* Avatar inicial com a fonte de display */
+}
+
+/* Sombras Coloridas */
+.expressive-theme .shadow-expressive {
+  box-shadow: 0 5px 15px rgba(var(--expressive-purple-rgb), 0.25);
+}
+
+/* Botões Expressivos (Primário e Secundário) */
+.expressive-theme .expressive-button-primary { /* Usado no UserProfileCard */
+  background-color: var(--expressive-purple);
+  color: var(--expressive-text-on-primary);
+}
+.expressive-theme .expressive-button-primary:hover {
+  box-shadow: 0 4px 10px rgba(var(--expressive-purple-rgb), 0.4);
+}
+
+.expressive-theme .expressive-button-secondary {
+  background-color: transparent;
+  color: var(--expressive-purple);
+  border: 2px solid var(--expressive-purple);
+}
+.expressive-theme .expressive-button-secondary:hover {
+  background-color: rgba(var(--expressive-purple-rgb), 0.05);
+}
+
+/* Notificação/Lembrete Expressivo */
+.expressive-theme .notification-expressive {
+  border: 2px dashed var(--expressive-green);
+  padding: 20px;
+  border-radius: var(--expressive-corner-radius-card);
+  background-color: rgba(var(--expressive-green-rgb), 0.08);
+  margin-top: 30px;
+  text-align: left;
+}
+.expressive-theme .notification-expressive .expressive-header { /* Cabeçalho dentro da notificação */
+  color: var(--expressive-green);
+  margin-top: 0;
+  font-size: 1.5em;
+}
+.expressive-theme .notification-expressive p {
+ color: var(--expressive-text-primary-color);
+ font-family: 'Inter', sans-serif;
+ margin-bottom: 0;
+}
+
+/* Ajustes para UserProfileCard - classes que não são explicitamente expressivas mas precisam de contexto */
+.expressive-theme .user-avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.expressive-theme .user-avatar-name {
+  margin-top: 10px;
+  font-size: 1.2em;
+  font-family: 'Inter', sans-serif; /* Nome abaixo do avatar com Inter */
+}
+
+.expressive-theme .login-status-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.expressive-theme .status-indicator.online {
+  width: 10px;
+  height: 10px;
+  background-color: var(--expressive-green);
+  border-radius: 50%;
+  margin-right: 8px;
+}
+.expressive-theme .login-success-text,
+.expressive-theme .welcome-text {
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 10px;
+}
+.expressive-theme .user-profile-actions {
+  margin-top: 20px;
+}
+
+/* Classes utilitárias simples (se não vierem de um framework como Tailwind) */
+.text-center { text-align: center; }
+.mb-8 { margin-bottom: 2rem; } /* 32px */
+.mb-3 { margin-bottom: 0.75rem; } /* 12px */
+.text-5xl { font-size: 3rem; line-height: 1; } /* 48px */
+.text-lg { font-size: 1.125rem; line-height: 1.75rem; } /* 18px */
+/* Tipografia Expressiva para Cabeçalhos */
+.expressive-theme h1,
+.expressive-theme h2,
+.expressive-theme h3,
+.expressive-theme .font-display, /* Para o h1 no UserProfileCard */
+.expressive-theme .expressive-header { /* Classe genérica para cabeçalhos expressivos */
+  font-family: 'Pacifico', cursive;
+  color: var(--expressive-purple); /* Cor padrão para cabeçalhos expressivos */
+  margin-bottom: 0.5em;
 }

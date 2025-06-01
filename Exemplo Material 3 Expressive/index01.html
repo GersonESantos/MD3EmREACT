@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo Material 3 Expressive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-display {
+            font-family: 'Pacifico', cursive; /* Fonte mais expressiva para títulos */
+        }
+        /* Cores personalizadas para o tema Expressive */
+        .bg-expressive-primary { background-color: #8A2BE2; } /* Azul Violeta Vibrante */
+        .text-expressive-primary { color: #8A2BE2; }
+        .border-expressive-primary { border-color: #8A2BE2; }
+
+        .bg-expressive-secondary { background-color: #FF69B4; } /* Rosa Choque */
+        .text-expressive-secondary { color: #FF69B4; }
+
+        .bg-expressive-accent { background-color: #00FF7F; } /* Verde Primavera */
+        .text-expressive-accent { color: #00FF7F; }
+
+        .bg-expressive-surface { background-color: #F8F0FF; } /* Um lavanda muito claro para superfícies */
+        .text-expressive-on-surface { color: #331C42; } /* Cor de texto escura para contraste */
+
+        /* Formas mais expressivas - cantos arredondados de forma mais pronunciada ou assimétrica (simplificado aqui) */
+        .shape-expressive-card {
+            border-radius: 24px; /* Cantos bem arredondados */
+        }
+        .shape-expressive-button {
+            border-radius: 16px; /* Cantos arredondados para botões */
+        }
+        .shape-expressive-fab {
+            border-radius: 28px; /* Arredondamento para FAB */
+        }
+
+        /* Sombra suave para profundidade */
+        .shadow-expressive {
+            box-shadow: 0px 8px 16px rgba(138, 43, 226, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-expressive-surface text-expressive-on-surface min-h-screen flex flex-col items-center justify-center p-4 sm:p-8 selection:bg-expressive-secondary selection:text-white">
+
+    <div class="w-full max-w-3xl space-y-8">
+
+        <header class="text-center">
+            <h1 class="font-display text-5xl sm:text-6xl text-expressive-primary mb-2">Criatividade em Foco!</h1>
+            <p class="text-lg text-expressive-on-surface/80">Um exemplo do estilo Material 3 Expressive.</p>
+        </header>
+
+        <div class="bg-white shape-expressive-card shadow-expressive p-6 sm:p-8">
+            <h2 class="font-display text-3xl text-expressive-secondary mb-4">Nova Ideia Brilhante?</h2>
+            <p class="mb-6 text-gray-700">
+                O estilo expressivo incentiva formas únicas e cores vibrantes para destacar a sua marca e criar uma experiência memorável.
+                Este cartão usa cantos bem arredondados e uma sombra colorida subtil.
+            </p>
+            <div class="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
+                <button class="w-full sm:w-auto bg-expressive-primary text-white font-bold py-3 px-6 shape-expressive-button hover:bg-opacity-90 transition-all duration-300 transform hover:scale-105">
+                    Registar Ideia
+                </button>
+                <button class="w-full sm:w-auto border-2 border-expressive-primary text-expressive-primary font-bold py-3 px-6 shape-expressive-button hover:bg-expressive-primary/10 transition-all duration-300">
+                    Saber Mais
+                </button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white shape-expressive-card shadow-expressive p-6">
+                <div class="flex items-center mb-3">
+                    <div class="w-10 h-10 bg-expressive-accent rounded-full flex items-center justify-center mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-expressive-on-surface">Tarefa Criativa 1</h3>
+                </div>
+                <p class="text-sm text-gray-600 mb-4">Desenhar um novo logótipo com cores expressivas.</p>
+                <span class="text-xs bg-expressive-secondary/20 text-expressive-secondary font-semibold px-3 py-1 rounded-full">Alta Prioridade</span>
+            </div>
+
+            <div class="bg-expressive-primary/10 border-2 border-dashed border-expressive-primary shape-expressive-card p-6 text-center">
+                 <div class="w-12 h-12 bg-expressive-primary text-white rounded-full flex items-center justify-center mx-auto mb-3 shape-expressive-fab">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                </div>
+                <h3 class="text-xl font-semibold text-expressive-primary mb-2">Lembrete!</h3>
+                <p class="text-sm text-expressive-on-surface/90">Não se esqueça da reunião de brainstorming às 15h.</p>
+            </div>
+        </div>
+
+        <div class="fixed bottom-6 right-6 sm:bottom-8 sm:right-8">
+            <button class="bg-expressive-secondary text-white w-16 h-16 shape-expressive-fab shadow-expressive flex items-center justify-center transform hover:scale-110 hover:rotate-12 transition-all duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+            </button>
+        </div>
+
+    </div>
+
+    <div id="messageBox" class="fixed top-0 left-0 right-0 p-4 bg-expressive-accent text-white text-center transform -translate-y-full transition-transform duration-300 ease-in-out z-50">
+        <p id="messageText">A sua ideia foi registada com sucesso!</p>
+    </div>
+
+    <script>
+        // Script para simular uma ação e mostrar mensagem
+        const registerButton = document.querySelector('.bg-expressive-primary');
+        const messageBox = document.getElementById('messageBox');
+        const messageText = document.getElementById('messageText');
+
+        if (registerButton) {
+            registerButton.addEventListener('click', () => {
+                messageText.textContent = 'A sua ideia foi registada com sucesso!';
+                messageBox.classList.remove('-translate-y-full');
+                messageBox.classList.add('translate-y-0');
+
+                setTimeout(() => {
+                    messageBox.classList.remove('translate-y-0');
+                    messageBox.classList.add('-translate-y-full');
+                }, 3000);
+            });
+        }
+
+        // Prevenir que links vazios causem recarregamento
+        document.querySelectorAll('a[href="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+
+</body>
+</html>
