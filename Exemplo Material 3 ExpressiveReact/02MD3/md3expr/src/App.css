@@ -1,6 +1,43 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+
+/* Importando as fontes do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Pacifico&display=swap');
+
+/* Variáveis de Cor do Tema Expressivo (simplificado para este exemplo) */
+:root {
+  --expressive-purple: #6A0DAD;       /* Roxo Vibrante */
+  --expressive-lavender-bg: #F3E8FF;  /* Lavanda Muito Claro (Fundo) */
+  --expressive-text-primary-color: #333333; /* Cor de texto primária para o fundo lavanda */
+}
+
+/* Estilos Globais para o Tema Expressivo */
+body.expressive-theme {
+  background-color: var(--expressive-lavender-bg);
+  color: var(--expressive-text-primary-color);
+  font-family: 'Inter', sans-serif; /* Fonte padrão para o corpo do texto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Para centralizar verticalmente na tela inteira */
+  margin: 0;
   text-align: center;
+}
+
+/* Estilo para o contêiner da nossa frase */
+.container-foco {
+  padding: 2rem;
+}
+
+/* Estilo para o título usando a fonte Pacifico */
+.expressive-theme .expressive-header {
+  font-family: 'Pacifico', cursive;
+  color: var(--expressive-purple);
+  font-size: 4rem; /* Tamanho de exemplo, ajuste como preferir */
+  margin: 0; /* Remove margens padrão do h1 */
+  line-height: 1.2;
+}
+
+/* Se você quiser ser mais específico para o título da criatividade */
+.titulo-criatividade {
+  /* Você pode adicionar estilos específicos aqui se necessário,
+     mas .expressive-header já faz o principal. */
 }
