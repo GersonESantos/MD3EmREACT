@@ -133,3 +133,57 @@ body {
   border-color: var(--title-color); /* Usa a cor do título para o foco, para destaque */
   box-shadow: 0 0 0 2px rgba(var(--title-color), 0.25); /* Adapta a cor do box-shadow */
 }
+/* Adicione estas regras ao seu arquivo App.css */
+
+.form-group {
+  margin-bottom: 15px; /* Mantém um espaçamento vertical consistente com outros elementos, como o theme-selector-container */
+  /* Se você quiser que o rótulo e o input fiquem na mesma linha,
+     você pode descomentar e ajustar as seguintes propriedades:
+     display: flex;
+     align-items: center;
+  */
+}
+
+.form-group label {
+  display: block; /* Faz o rótulo ocupar sua própria linha, acima do campo de entrada. */
+  margin-bottom: 5px; /* Adiciona um pequeno espaço entre o rótulo e o campo de entrada. */
+  font-weight: normal; /* Ou 'bold', dependendo do estilo dos seus outros rótulos (como .theme-label). */
+  /* A família da fonte (font-family) e a cor (color) geralmente são herdadas
+     de elementos pai (como 'body' ou '.app-container').
+     Se você tiver variáveis CSS para cores de texto, pode usá-las aqui.
+     Exemplo: color: var(--text-color-primary); */
+  /* Para garantir a mesma fonte, geralmente não é preciso definir font-family aqui,
+     a menos que seus outros rótulos tenham uma fonte específica. */
+}
+
+.form-group input[type="email"],
+.form-group input[type="text"], /* Adicione outros tipos de input que você possa usar */
+.form-group input[type="password"] {
+  width: 100%; /* Faz o campo de entrada ocupar toda a largura disponível em seu contêiner. */
+  padding: 8px 10px; /* Ajuste este valor para que seja similar ao padding do seu .theme-select. */
+  border: 1px solid #ccc; /* Um estilo de borda padrão. Ajuste a cor para combinar com seu tema. */
+  border-radius: 4px; /* Cantos arredondados. Ajuste para combinar com o .theme-select. */
+  box-sizing: border-box; /* Muito importante! Garante que o padding e a borda não aumentem a largura total do elemento. */
+  font-size: inherit; /* Herda o tamanho da fonte do elemento pai, mantendo a consistência. */
+  font-family: inherit; /* Herda a família da fonte do elemento pai, mantendo a consistência. */
+  /* Se o seu .theme-select ou outros inputs têm cores de fundo ou texto específicas
+     que não são gerenciadas pelas classes de tema globais (light-theme, dark-theme),
+     você pode precisar defini-las aqui também.
+     Exemplo:
+     background-color: var(--input-background);
+     color: var(--input-text-color);
+  */
+}
+
+/* Opcional, mas recomendado para melhor experiência do usuário: Estilos de foco */
+.form-group input[type="email"]:focus,
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus {
+  outline: none; /* Remove o contorno padrão do navegador. */
+  border-color: #007bff; /* Exemplo de cor de borda ao focar. Use uma cor do seu tema. */
+  /* Você pode adicionar um box-shadow para um efeito de "glow" sutil, se desejar.
+     Exemplo: box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+     Ajuste a cor para combinar com a cor da borda de foco.
+  */
+}
+

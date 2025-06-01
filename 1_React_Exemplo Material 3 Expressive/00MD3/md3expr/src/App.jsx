@@ -28,6 +28,7 @@ function App() {
     <div className="app-container">
       <header className="app-header">
         <h1 className="login-title">Login</h1>
+         
         <div className="theme-selector-container">
           <label htmlFor="theme-select" className="theme-label">Tema:</label>
           <select id="theme-select" value={theme} onChange={handleThemeChange} className="theme-select">
@@ -35,6 +36,16 @@ function App() {
             <option value="dark">Escuro 🌙</option>
             <option value="expressive">Expressivo ✨</option>
           </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">Seu Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="exemplo@criativo.com"
+            required
+          />
         </div>
       </header>
       {/* Aqui você poderia adicionar mais conteúdo da sua página de login */}
