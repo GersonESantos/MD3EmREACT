@@ -1,43 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;700&display=swap');
 
-/* Importando as fontes do Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Pacifico&display=swap');
-
-/* Variáveis de Cor do Tema Expressivo (simplificado para este exemplo) */
-:root {
-  --expressive-purple: #6A0DAD;       /* Roxo Vibrante */
-  --expressive-lavender-bg: #F3E8FF;  /* Lavanda Muito Claro (Fundo) */
-  --expressive-text-primary-color: #333333; /* Cor de texto primária para o fundo lavanda */
-}
-
-/* Estilos Globais para o Tema Expressivo */
-body.expressive-theme {
-  background-color: var(--expressive-lavender-bg);
-  color: var(--expressive-text-primary-color);
-  font-family: 'Inter', sans-serif; /* Fonte padrão para o corpo do texto */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh; /* Para centralizar verticalmente na tela inteira */
+body {
   margin: 0;
-  text-align: center;
+  font-family: 'Inter', sans-serif; /* Fonte padrão para o aplicativo */
+  background-color: #F0F4F8; /* Fundo claro e calmante */
+  color: #1D232A; /* Cor de texto padrão */
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  min-height: 100vh; /* Altura total da viewport */
+  padding: 1rem; /* Adiciona preenchimento para telas menores */
+  box-sizing: border-box;
 }
 
-/* Estilo para o contêiner da nossa frase */
-.container-foco {
-  padding: 2rem;
+/* #root conterá nosso componente App. Deixe-o ocupar o espaço disponível. */
+#root {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente o conteúdo do #root */
+  align-items: center;    /* Centraliza verticalmente o conteúdo do #root */
 }
 
-/* Estilo para o título usando a fonte Pacifico */
-.expressive-theme .expressive-header {
-  font-family: 'Pacifico', cursive;
-  color: var(--expressive-purple);
-  font-size: 4rem; /* Tamanho de exemplo, ajuste como preferir */
-  margin: 0; /* Remove margens padrão do h1 */
+.login-container {
+  background-color: #ffffff;
+  padding: 2.5rem 3rem; /* Preenchimento generoso */
+  border-radius: 20px; /* Raio de borda maior e suave (influência MD3) */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Sombra mais suave e difusa */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem; /* Espaço entre os elementos */
+  max-width: 420px;
+  width: 100%; /* Largura responsiva */
+  text-align: center; /* Centraliza o texto dentro do container */
+}
+
+.login-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.75rem; /* Expressivo e proeminente */
+  color: #3A0CA3; /* Roxo Vibrante - "Bellflower" */
+  margin: 0 0 0.25rem 0; /* Ajusta a margem */
   line-height: 1.2;
 }
 
-/* Se você quiser ser mais específico para o título da criatividade */
-.titulo-criatividade {
-  /* Você pode adicionar estilos específicos aqui se necessário,
-     mas .expressive-header já faz o principal. */
+.login-subtitle {
+  font-size: 1rem;
+  color: #5A6470; /* Cinza mais suave para o subtítulo */
+  margin: 0 0 1.5rem 0; /* Espaço abaixo do subtítulo */
+  max-width: 90%;
+}
+
+.form-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem; /* Espaço entre os grupos do formulário */
+}
+
+.form-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alinha os rótulos à esquerda */
+  gap: 0.4rem; /* Espaço entre rótulo e input */
+}
+
+.form-group label {
+  font-size: 0.875rem; /* Rótulo ligeiramente menor */
+  color: #343A40; /* Rótulo mais escuro para melhor contraste */
+  font-weight: 500;
+  padding-left: 0.25rem; /* Pequena indentação para o rótulo */
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.8rem 1rem; /* Preenchimento confortável para o input */
+  border: 1px solid #DDE2E7; /* Borda mais clara */
+  border-radius: 10px; /* Inputs arredondados no estilo MD3 */
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.form-group input::placeholder {
+  color: #A0AEC0; /* Texto de placeholder mais suave */
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #7209B7; /* Foco em Roxo Vibrante - "Electric Purple" */
+  box-shadow: 0 0 0 3px rgba(114, 9, 183, 0.15); /* Sombra de foco mais suave */
+}
+
+.login-button {
+  background-color: #4361EE; /* Azul Brilhante - "Royal Blue" */
+  color: white;
+  padding: 0.85rem 1.5rem;
+  border: none;
+  border-radius: 28px; /* Formato de pílula expressivo */
+  font-size: 1rem;
+  font-weight: 600; /* Texto do botão mais forte */
+  cursor: pointer;
+  transition: background-color 0.25s ease-out, transform 0.15s ease-out;
+  width: 100%;
+  margin-top: 0.75rem; /* Espaço acima do botão */
+  box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3); /* Sombra sutil para o botão */
+}
+
+.login-button:hover {
+  background-color: #3A0CA3; /* Roxo no hover, conectando ao título */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(58, 12, 163, 0.35);
+}
+
+.login-button:active {
+  transform: translateY(0);
+  background-color: #310A8F; /* Roxo ligeiramente mais escuro para estado ativo */
+  box-shadow: 0 2px 8px rgba(58, 12, 163, 0.3);
+}
+
+.extra-links {
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  color: #5A6470;
+}
+
+.extra-links a {
+  color: #4361EE; /* Cor de link consistente */
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.extra-links a:hover {
+  text-decoration: underline;
+  color: #3A0CA3; /* Cor de hover do link */
+}
+
+.extra-links p {
+  margin: 0.5rem 0;
 }
