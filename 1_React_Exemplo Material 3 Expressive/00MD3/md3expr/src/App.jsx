@@ -46,7 +46,7 @@ function App() {
       </header>
        <div className="login-container">
       <h1 className="login-title">Login</h1>
-      <p className="login-subtitle">Desbloqueie seu potencial. Faça login para continuar.</p>
+      <p className="login-subtitle">Faça login para continuar.</p>
       
       <form onSubmit={handleSubmit} className="form-wrapper">
         <div className="form-group">
