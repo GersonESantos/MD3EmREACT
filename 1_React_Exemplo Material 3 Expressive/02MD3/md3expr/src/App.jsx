@@ -1,19 +1,12 @@
-
+// Imports desnecessários removidos para este exemplo minimalista
 import './App.css'
 
 function App() {
-  
   return (
-    <>
-      <div>
-        
-        <p>
-          Login
-        </p>
-      </div>
-      
-      
-    </>
+    // Aplicando uma classe para o estilo expressivo do título
+    <h1 className="expressive-login-title">
+      Login
+    </h1>
   )
 }
 
