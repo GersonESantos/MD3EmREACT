@@ -1,0 +1,135 @@
+/* Importa as fontes do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Pacifico&display=swap');
+
+/* --- Variáveis de Tema e Estilos Base --- */
+:root {
+  /* Fontes base */
+  --font-family-sans: 'Inter', sans-serif;
+  --font-family-display: 'Pacifico', cursive;
+
+  /* Cores padrão (serão sobrescritas pelos temas) */
+  --bg-color: #ffffff;
+  --text-color: #212529;
+  --title-color: #333333;
+  --title-font-family: var(--font-family-sans);
+  --select-bg-color: #f8f9fa;
+  --select-text-color: #495057;
+  --select-border-color: #ced4da;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-sans);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --- Definições de Tema --- */
+
+/* Tema Claro (light-theme) - já coberto pelo :root, mas pode ser explícito */
+.light-theme {
+  --bg-color: #ffffff;
+  --text-color: #212529;
+  --title-color: #333333;
+  --title-font-family: var(--font-family-sans); /* Título padrão no tema claro */
+  --select-bg-color: #f8f9fa;
+  --select-text-color: #495057;
+  --select-border-color: #ced4da;
+}
+
+/* Tema Escuro (dark-theme) */
+.dark-theme {
+  --bg-color: #1a1a1a; /* Um cinza escuro, não preto puro */
+  --text-color: #e0e0e0;
+  --title-color: #f5f5f5;
+  --title-font-family: var(--font-family-sans); /* Título padrão no tema escuro */
+  --select-bg-color: #343a40;
+  --select-text-color: #f8f9fa;
+  --select-border-color: #495057;
+}
+
+/* Tema Expressivo (expressive-theme) */
+.expressive-theme {
+  --bg-color: #F3E8FF; /* Lavanda claro de fundo */
+  --text-color: #4A235A; /* Roxo escuro para texto */
+  --title-color: #6A0DAD; /* Roxo vibrante para o título */
+  --title-font-family: var(--font-family-display); /* Fonte Pacifico para o título */
+  --select-bg-color: #ffffff;
+  --select-text-color: #6A0DAD;
+  --select-border-color: #D1C4E9; /* Borda lavanda mais clara para o select */
+}
+
+/* --- Estilos dos Componentes --- */
+
+.app-container {
+  text-align: center;
+  padding: 2rem;
+  border-radius: 12px;
+  /* Sombra sutil que se adapta ao fundo do body */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  /* O fundo do container pode ser diferente do body para destaque */
+  background-color: var(--bg-color); /* Usa o mesmo do body por padrão, mas pode ser sobrescrito */
+  width: 100%;
+  max-width: 500px;
+}
+
+/* No tema expressivo, o container pode ter um fundo branco para contrastar com o body lavanda */
+.expressive-theme .app-container {
+  background-color: #ffffff;
+  box-shadow: 0 6px 20px rgba(106, 13, 173, 0.15); /* Sombra com cor do tema */
+}
+
+.app-header {
+  margin-bottom: 2rem;
+}
+
+.login-title {
+  font-family: var(--title-font-family);
+  color: var(--title-color);
+  font-size: 3rem; /* Tamanho base do título */
+  margin-bottom: 1.5rem;
+  transition: color 0.3s ease, font-family 0.3s ease;
+}
+
+.expressive-theme .login-title {
+  font-size: 3.5rem; /* Título um pouco maior no tema expressivo */
+}
+
+.theme-selector-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem; /* Espaço entre o label e o select */
+}
+
+.theme-label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--text-color); /* Usa a cor de texto principal do tema */
+}
+
+.theme-select {
+  padding: 0.5em 0.8em;
+  border-radius: 6px;
+  border: 1px solid var(--select-border-color);
+  background-color: var(--select-bg-color);
+  color: var(--select-text-color);
+  font-family: var(--font-family-sans);
+  font-size: 0.9rem;
+  cursor: pointer;
+  min-width: 160px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.theme-select:focus {
+  outline: none;
+  border-color: var(--title-color); /* Usa a cor do título para o foco, para destaque */
+  box-shadow: 0 0 0 2px rgba(var(--title-color), 0.25); /* Adapta a cor do box-shadow */
+}
