@@ -1,437 +1,135 @@
+/* Importa as fontes do Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Pacifico&display=swap');
 
+/* --- Variáveis de Tema e Estilos Base --- */
 :root {
-  /* Expressive Theme Colors & Variables (disponíveis globalmente, mas usadas principalmente em .expressive-theme) */
-  --expressive-purple: #6A0DAD;         /* Roxo Vibrante */
-  --expressive-purple-rgb: 106, 13, 173;
-  --expressive-pink: #FF1493;           /* Rosa Choque */
-  --expressive-pink-rgb: 255, 20, 147;
-  --expressive-green: #32CD32;          /* Verde Primavera */
-  --expressive-green-rgb: 50, 205, 50;
-  --expressive-lavender-bg: #F3E8FF;    /* Lavanda Muito Claro (Fundo) */
-  --expressive-text-primary-color: #333333;   /* Cor de texto primária para o fundo lavanda */
-  --expressive-text-primary-color-rgb: 51, 51, 51; /* RGB para alpha */
-  --expressive-text-on-primary: #FFFFFF;/* Cor de texto para usar sobre o roxo/rosa */
-
-  /* Expressive Shapes */
-  --expressive-corner-radius-card: 20px;
-  --expressive-corner-radius-button: 16px;
-  --expressive-corner-radius-fab: 50%;
-  --expressive-corner-radius-avatar: 50%;
-
-  /* Fontes Base */
+  /* Fontes base */
   --font-family-sans: 'Inter', sans-serif;
   --font-family-display: 'Pacifico', cursive;
+
+  /* Cores padrão (serão sobrescritas pelos temas) */
+  --bg-color: #ffffff;
+  --text-color: #212529;
+  --title-color: #333333;
+  --title-font-family: var(--font-family-sans);
+  --select-bg-color: #f8f9fa;
+  --select-text-color: #495057;
+  --select-border-color: #ced4da;
 }
 
-/* Estilos gerais que podem ser afetados pelo tema */
 body {
   margin: 0;
   font-family: var(--font-family-sans);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
   min-height: 100vh;
   padding: 1rem;
   box-sizing: border-box;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-#root {
-  max-width: 1280px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 2rem 0; /* Ajustado para não ter padding lateral, já que o body tem */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+/* --- Definições de Tema --- */
 
-/* Tema Claro (Padrão) */
+/* Tema Claro (light-theme) - já coberto pelo :root, mas pode ser explícito */
 .light-theme {
-  background-color: #ffffff;
-  color: #242424;
+  --bg-color: #ffffff;
+  --text-color: #212529;
+  --title-color: #333333;
+  --title-font-family: var(--font-family-sans); /* Título padrão no tema claro */
+  --select-bg-color: #f8f9fa;
+  --select-text-color: #495057;
+  --select-border-color: #ced4da;
 }
 
-/* Tema Escuro */
+/* Tema Escuro (dark-theme) */
 .dark-theme {
-  background-color: #242424;
-  color: #ffffff;
+  --bg-color: #1a1a1a; /* Um cinza escuro, não preto puro */
+  --text-color: #e0e0e0;
+  --title-color: #f5f5f5;
+  --title-font-family: var(--font-family-sans); /* Título padrão no tema escuro */
+  --select-bg-color: #343a40;
+  --select-text-color: #f8f9fa;
+  --select-border-color: #495057;
 }
 
-/* === Estilos para o seletor de tema === */
-.theme-selector-container {
-  margin-top: 20px;
-  margin-bottom: 30px; /* Espaço antes do input de email */
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Centraliza o seletor */
-  padding: 10px;
-  border-radius: 8px;
-}
-
-.theme-selector-label {
-  margin-right: 10px;
-  font-size: 1em;
-  font-weight: bold;
-}
-
-.theme-selector {
-  padding: 8px 12px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  font-size: 1em;
-  cursor: pointer;
-  min-width: 180px; /* Para acomodar os textos com emojis */
-}
-
-.theme-selector:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-}
-
-/* Seletor de tema no tema claro */
-.light-theme .theme-selector-container {
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
-}
-.light-theme .theme-selector-label {
-  color: #242424;
-}
-.light-theme .theme-selector {
-  color: #242424;
-  background-color: #ffffff;
-  border-color: #ced4da;
-}
-
-/* Seletor de tema no tema escuro */
-.dark-theme .theme-selector-container {
-  background-color: #343a40;
-  border: 1px solid #495057;
-}
-.dark-theme .theme-selector-label {
-  color: #ffffff;
-}
-.dark-theme .theme-selector {
-  color: #ffffff;
-  background-color: #495057;
-  border-color: #6c757d;
-}
-.dark-theme .theme-selector:focus {
-  border-color: #80bdff;
-  box-shadow: 0 0 0 0.2rem rgba(128,189,255,.25);
-}
-
-/* === Estilos para o campo de email === */
-.email-input-container {
-  margin-top: 20px;
-  margin-bottom: 20px; /* Espaço antes do cartão de perfil */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 400px; /* Limita a largura do container do email */
-}
-
-.email-input-label {
-  margin-bottom: 8px;
-  font-size: 1em;
-  font-weight: bold;
-  align-self: flex-start; /* Alinha o label à esquerda dentro do container */
-}
-
-.email-input {
-  padding: 10px 15px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  font-size: 1em;
-  width: 100%; 
-  box-sizing: border-box;
-}
-
-.email-input:focus {
-  outline: none;
-  border-color: #007bff; 
-  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-}
-
-/* Input de email nos temas claro e escuro */
-.light-theme .email-input {
-  background-color: #ffffff;
-  color: #242424;
-  border-color: #ced4da;
-}
-.light-theme .email-input::placeholder { color: #6c757d; }
-
-.dark-theme .email-input-label { color: #ffffff; }
-.dark-theme .email-input {
-  background-color: #495057;
-  color: #ffffff;
-  border-color: #6c757d;
-}
-.dark-theme .email-input::placeholder { color: #adb5bd; }
-.dark-theme .email-input:focus {
-  border-color: #80bdff;
-  box-shadow: 0 0 0 0.2rem rgba(128,189,255,.25);
-}
-
-/* === Estilo para o botão de ação genérico === */
-.action-button {
-  padding: 10px 20px;
-  margin-top: 15px;
-  border-radius: 4px;
-  border: 1px solid #007bff;
-  background-color: #007bff;
-  color: white;
-  font-size: 1em;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
-}
-
-.action-button:hover {
-  background-color: #0056b3;
-  border-color: #0056b3;
-}
-.action-button:disabled {
-  background-color: #6c757d;
-  border-color: #6c757d;
-  cursor: not-allowed;
-}
-
-.dark-theme .action-button {
-  border-color: #007bff; /* Pode manter o mesmo azul ou ajustar */
-  background-color: #007bff;
-}
-.dark-theme .action-button:hover {
-  background-color: #0056b3;
-  border-color: #0056b3;
-}
-.dark-theme .action-button:disabled {
-  background-color: #495057;
-  border-color: #495057;
-}
-
-/* === Estilos do Tema Expressivo === */
+/* Tema Expressivo (expressive-theme) */
 .expressive-theme {
-  background-color: var(--expressive-lavender-bg);
-  color: var(--expressive-text-primary-color);
-  font-family: var(--font-family-sans); /* Corpo do texto padrão */
+  --bg-color: #F3E8FF; /* Lavanda claro de fundo */
+  --text-color: #4A235A; /* Roxo escuro para texto */
+  --title-color: #6A0DAD; /* Roxo vibrante para o título */
+  --title-font-family: var(--font-family-display); /* Fonte Pacifico para o título */
+  --select-bg-color: #ffffff;
+  --select-text-color: #6A0DAD;
+  --select-border-color: #D1C4E9; /* Borda lavanda mais clara para o select */
 }
 
-/* Tipografia Expressiva para Cabeçalhos */
-.expressive-theme .expressive-header,
-.expressive-theme h1, /* Aplicar a todos os h1 no tema expressivo */
-.expressive-theme h2,
-.expressive-theme h3 {
-  font-family: var(--font-family-display);
-  color: var(--expressive-purple);
-  margin-bottom: 0.5em;
-}
+/* --- Estilos dos Componentes --- */
 
-/* Seletor de tema no tema Expressivo */
-.expressive-theme .theme-selector-container {
-  background-color: rgba(255,255,255,0.8);
-  border: 1px solid rgba(var(--expressive-purple-rgb), 0.3);
-}
-.expressive-theme .theme-selector-label {
-  color: var(--expressive-purple);
-}
-.expressive-theme .theme-selector {
-  color: var(--expressive-purple);
-  background-color: white;
-  border: 1px solid var(--expressive-purple);
-}
-.expressive-theme .theme-selector:focus {
-  border-color: var(--expressive-pink);
-  box-shadow: 0 0 0 0.2rem rgba(var(--expressive-pink-rgb), 0.25);
-}
-
-/* Input de email no tema Expressivo */
-.expressive-theme .email-input-label {
-  color: var(--expressive-purple);
-}
-.expressive-theme .email-input {
-  background-color: #ffffff;
-  color: var(--expressive-text-primary-color);
-  border: 1px solid rgba(var(--expressive-purple-rgb), 0.5);
-}
-.expressive-theme .email-input::placeholder {
-  color: rgba(var(--expressive-text-primary-color-rgb), 0.6);
-}
-.expressive-theme .email-input:focus {
-  border-color: var(--expressive-pink);
-  box-shadow: 0 0 0 0.2rem rgba(var(--expressive-pink-rgb), 0.25);
-}
-
-/* Botão de ação no tema Expressivo */
-.expressive-theme .action-button {
-  background-color: var(--expressive-purple);
-  color: var(--expressive-text-on-primary);
-  border-color: var(--expressive-purple);
-  font-family: var(--font-family-sans); /* Manter Inter para consistência de botões */
-}
-.expressive-theme .action-button:hover {
-  background-color: var(--expressive-pink);
-  border-color: var(--expressive-pink);
-  box-shadow: 0 2px 8px rgba(var(--expressive-pink-rgb), 0.3);
-}
-.expressive-theme .action-button:disabled {
-  background-color: rgba(var(--expressive-purple-rgb), 0.5);
-  border-color: rgba(var(--expressive-purple-rgb), 0.5);
-}
-
-/* Cores de Texto Específicas do Tema Expressivo */
-.expressive-theme .text-expressive-primary { color: var(--expressive-purple); }
-.expressive-theme .text-expressive-on-surface-alpha-80 { color: rgba(var(--expressive-text-primary-color-rgb), 0.8); }
-
-/* Fundos Específicos do Tema Expressivo */
-.expressive-theme .bg-expressive-secondary {
-  background-color: var(--expressive-pink);
-  color: var(--expressive-text-on-primary);
-}
-
-/* Formas Acentuadas */
-.expressive-theme .shape-expressive-card {
-  border-radius: var(--expressive-corner-radius-card);
-  background-color: white;
-  padding: 25px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 15px rgba(var(--expressive-purple-rgb), 0.1);
-}
-
-.expressive-theme .shape-expressive-button {
-  border-radius: var(--expressive-corner-radius-button);
-  padding: 12px 24px;
-  font-size: 1em;
-  font-weight: bold;
-  font-family: var(--font-family-sans);
-  cursor: pointer;
-  border: none;
-  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-.expressive-theme .shape-expressive-button:hover { transform: scale(1.05); }
-
-.expressive-theme .shape-expressive-fab {
-  border-radius: var(--expressive-corner-radius-fab);
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  cursor: pointer;
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease-in-out;
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background-color: var(--expressive-pink);
-  color: var(--expressive-text-on-primary);
-  z-index: 1000; /* Para garantir que fique sobre outros elementos */
-}
-.expressive-theme .shape-expressive-fab:hover {
-  transform: scale(1.15) rotate(20deg);
-  box-shadow: 0 8px 20px rgba(var(--expressive-pink-rgb), 0.4);
-}
-
-.expressive-theme .shape-expressive-avatar {
-  border-radius: var(--expressive-corner-radius-avatar);
-  width: 80px;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.5em;
-  font-family: var(--font-family-display);
-}
-
-/* Sombras Coloridas */
-.expressive-theme .shadow-expressive { box-shadow: 0 5px 15px rgba(var(--expressive-purple-rgb), 0.25); }
-
-/* Botões Expressivos (Primário e Secundário) */
-.expressive-theme .expressive-button-primary {
-  background-color: var(--expressive-purple);
-  color: var(--expressive-text-on-primary);
-}
-.expressive-theme .expressive-button-primary:hover { box-shadow: 0 4px 10px rgba(var(--expressive-purple-rgb), 0.4); }
-
-.expressive-theme .expressive-button-secondary {
-  background-color: transparent;
-  color: var(--expressive-purple);
-  border: 2px solid var(--expressive-purple);
-}
-.expressive-theme .expressive-button-secondary:hover { background-color: rgba(var(--expressive-purple-rgb), 0.05); }
-
-/* Notificação/Lembrete Expressivo */
-.expressive-theme .notification-expressive {
-  border: 2px dashed var(--expressive-green);
-  padding: 20px;
-  border-radius: var(--expressive-corner-radius-card);
-  background-color: rgba(var(--expressive-green-rgb), 0.08);
-  margin-top: 30px;
-  text-align: left; /* Ajustado para esquerda para melhor leitura */
+.app-container {
+  text-align: center;
+  padding: 2rem;
+  border-radius: 12px;
+  /* Sombra sutil que se adapta ao fundo do body */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  /* O fundo do container pode ser diferente do body para destaque */
+  background-color: var(--bg-color); /* Usa o mesmo do body por padrão, mas pode ser sobrescrito */
   width: 100%;
-  max-width: 600px; /* Limita a largura da notificação */
-}
-.expressive-theme .notification-expressive .expressive-header {
-  color: var(--expressive-green);
-  margin-top: 0;
-  font-size: 1.5em;
-}
-.expressive-theme .notification-expressive p {
- color: var(--expressive-text-primary-color);
- font-family: var(--font-family-sans);
- margin-bottom: 0;
+  max-width: 500px;
 }
 
-/* Ajustes para UserProfileCard no tema expressivo */
-.expressive-theme .user-avatar-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
+/* No tema expressivo, o container pode ter um fundo branco para contrastar com o body lavanda */
+.expressive-theme .app-container {
+  background-color: #ffffff;
+  box-shadow: 0 6px 20px rgba(106, 13, 173, 0.15); /* Sombra com cor do tema */
 }
-.expressive-theme .user-avatar-name {
-  margin-top: 10px;
-  font-size: 1.2em;
-  font-family: var(--font-family-sans);
-  color: var(--expressive-text-primary-color);
+
+.app-header {
+  margin-bottom: 2rem;
 }
-.expressive-theme .login-status-container {
+
+.login-title {
+  font-family: var(--title-font-family);
+  color: var(--title-color);
+  font-size: 3rem; /* Tamanho base do título */
+  margin-bottom: 1.5rem;
+  transition: color 0.3s ease, font-family 0.3s ease;
+}
+
+.expressive-theme .login-title {
+  font-size: 3.5rem; /* Título um pouco maior no tema expressivo */
+}
+
+.theme-selector-container {
   display: flex;
-  align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+  align-items: center;
+  gap: 0.5rem; /* Espaço entre o label e o select */
 }
-.expressive-theme .status-indicator.online {
-  width: 10px;
-  height: 10px;
-  background-color: var(--expressive-green);
-  border-radius: 50%;
-  margin-right: 8px;
+
+.theme-label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--text-color); /* Usa a cor de texto principal do tema */
 }
-.expressive-theme .login-success-text,
-.expressive-theme .welcome-text {
+
+.theme-select {
+  padding: 0.5em 0.8em;
+  border-radius: 6px;
+  border: 1px solid var(--select-border-color);
+  background-color: var(--select-bg-color);
+  color: var(--select-text-color);
   font-family: var(--font-family-sans);
-  margin-bottom: 10px;
-  color: var(--expressive-text-primary-color);
+  font-size: 0.9rem;
+  cursor: pointer;
+  min-width: 160px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
-.expressive-theme .user-profile-actions { margin-top: 20px; }
 
-/* Classes utilitárias simples */
-.text-center { text-align: center; }
-.mb-8 { margin-bottom: 2rem; }
-.mb-3 { margin-bottom: 0.75rem; }
-.text-5xl { font-size: 3rem; line-height: 1; }
-.text-lg { font-size: 1.125rem; line-height: 1.75rem; }
-
-/* Garantir que o UserProfileCard também use as variáveis do tema expressivo */
-.expressive-theme .UserProfileCard { /* Supondo que UserProfileCard tenha essa classe ou use .shape-expressive-card */
-  /* Se UserProfileCard não usar .shape-expressive-card diretamente, aplique estilos aqui */
-  /* Exemplo: background-color: white; border-radius: var(--expressive-corner-radius-card); */
+.theme-select:focus {
+  outline: none;
+  border-color: var(--title-color); /* Usa a cor do título para o foco, para destaque */
+  box-shadow: 0 0 0 2px rgba(var(--title-color), 0.25); /* Adapta a cor do box-shadow */
 }
