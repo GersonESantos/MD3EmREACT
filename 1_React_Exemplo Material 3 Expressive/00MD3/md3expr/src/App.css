@@ -98,6 +98,13 @@ body {
   transition: color 0.3s ease, font-family 0.3s ease;
 }
 
+.login-subtitle {
+  font-size: 1rem;
+  color: var(--text-color);
+  margin-top: -1rem; /* Aproxima um pouco do título */
+  margin-bottom: 1.5rem; /* Espaço antes do seletor de tema / formulário */
+}
+
 .expressive-theme .login-title {
   font-size: 3.5rem; /* Título um pouco maior no tema expressivo */
 }
@@ -132,4 +139,74 @@ body {
   outline: none;
   border-color: var(--title-color); /* Usa a cor do título para o foco, para destaque */
   box-shadow: 0 0 0 2px rgba(var(--title-color), 0.25); /* Adapta a cor do box-shadow */
+}
+
+/* --- Estilos do Formulário de Login --- */
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem; /* Espaço entre os grupos de formulário e o botão */
+  margin-top: 2rem; /* Espaço entre o header e o formulário */
+  width: 100%; /* Ocupar a largura do app-container */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left; /* Alinha o label à esquerda */
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: var(--text-color); /* Usa a cor de texto do tema */
+}
+
+.form-group input {
+  padding: 0.8em 1em;
+  border-radius: 6px;
+  border: 1px solid var(--select-border-color); /* Reutiliza a cor da borda do select */
+  background-color: var(--select-bg-color); /* Reutiliza o fundo do select */
+  color: var(--select-text-color); /* Reutiliza a cor de texto do select */
+  font-family: var(--font-family-sans);
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.form-group input::placeholder {
+  color: var(--select-text-color);
+  opacity: 0.7;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--title-color); /* Destaque com a cor do título no foco */
+  box-shadow: 0 0 0 2px rgba(var(--title-color), 0.25); /* Sombra sutil no foco */
+}
+
+.login-button {
+  padding: 0.9em 1.5em;
+  border-radius: 6px;
+  border: none;
+  background-color: var(--title-color); /* Usa a cor do título como fundo */
+  color: var(--bg-color); /* Texto contrasta com o fundo do botão */
+  font-family: var(--font-family-sans);
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
+  margin-top: 0.5rem; /* Pequeno espaço acima do botão */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.login-button:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
+
+.expressive-theme .login-button {
+  color: #ffffff; /* Garante texto branco no botão roxo do tema expressivo */
+}
 }

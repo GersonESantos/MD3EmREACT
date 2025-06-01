@@ -24,10 +24,22 @@ function App() {
     setTheme(event.target.value);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Lógica de submissão do formulário aqui
+    console.log('Formulário enviado!');
+    // Exemplo de como pegar os valores:
+    // const email = event.target.email.value;
+    // const password = event.target.password.value;
+    // console.log('Email:', email, 'Senha:', password);
+    alert('Formulário enviado! Verifique o console para mais detalhes.');
+  };
+
   return (
     <div className="app-container">
       <header className="app-header">
         <h1 className="login-title">Login</h1>
+         <p className="login-subtitle">Desbloqueie seu potencial. Faça login para continuar.</p>
         <div className="theme-selector-container">
           <label htmlFor="theme-select" className="theme-label">Tema:</label>
           <select id="theme-select" value={theme} onChange={handleThemeChange} className="theme-select">
@@ -37,7 +49,37 @@ function App() {
           </select>
         </div>
       </header>
-      {/* Aqui você poderia adicionar mais conteúdo da sua página de login */}
+
+      <form onSubmit={handleSubmit} className="form-wrapper">
+        <div className="form-group">
+          <label htmlFor="email">Seu Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="exemplo@criativo.com"
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="password">Sua Senha</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="••••••••"
+            required
+          />
+        </div>
+
+        <button type="submit" className="login-button">
+          Entrar na Plataforma
+        </button>
+      </form>
+
+      {/* Você pode adicionar links extras aqui, se necessário */}
+      {/* <div className="extra-links">...</div> */}
     </div>
   );
 }
