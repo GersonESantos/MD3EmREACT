@@ -94,53 +94,62 @@
         /* Estilos para o formulário de login */
         .login-container {
             margin-top: 30px;
-            padding: 20px;
-            background-color: rgba(var(--shadow-color-primary-rgb), 0.05);
+            padding: 25px;
+            background-color: rgba(var(--shadow-color-primary-rgb), 0.03); /* Fundo sutil para o container */
+            border: 1px solid rgba(var(--shadow-color-primary-rgb), 0.1);
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(var(--shadow-color-primary-rgb), 0.1);
+            box-shadow: 0 4px 12px rgba(var(--shadow-color-primary-rgb), 0.08);
             width: 90%;
-            max-width: 350px;
+            max-width: 380px; /* Largura máxima para o formulário */
         }
+
         [data-theme="expressive"] .login-container {
              background-color: #fff; /* Fundo branco para o card no tema expressivo */
              border: 1px solid rgba(var(--shadow-color-primary-rgb), 0.2);
+             box-shadow: 2px 2px 10px rgba(var(--shadow-color-primary-rgb), 0.15);
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: bold;
             color: var(--text-color);
+            font-size: 0.9rem;
         }
 
         .form-group input[type="email"] {
-            width: calc(100% - 22px); /* Ajuste para padding e borda */
-            padding: 10px;
+            width: calc(100% - 24px); /* Ajuste para padding e borda */
+            padding: 10px 12px;
             border: 1px solid var(--primary-color);
             border-radius: 4px;
             font-family: var(--body-font);
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-size: 1rem;
+            background-color: var(--bg-color); /* Para consistência com o tema */
+            color: var(--text-color); /* Para consistência com o tema */
         }
 
         .login-button {
             width: 100%;
-            padding: 10px 15px;
+            padding: 12px 15px;
             background-color: var(--primary-color);
-            color: var(--bg-color); /* Garante contraste */
+            color: var(--bg-color); /* Garante contraste, geralmente branco/claro sobre cor primária */
             border: none;
             border-radius: 4px;
             font-family: var(--body-font);
+            font-weight: bold;
             font-size: 1rem;
             cursor: pointer;
-            transition: filter 0.2s ease;
+            transition: filter 0.2s ease-out, transform 0.1s ease-out;
         }
         .login-button:hover {
             filter: brightness(110%);
+        }
+        .login-button:active {
+            transform: scale(0.99);
         }
     </style>
 </head>
@@ -157,8 +166,8 @@
     <div class="login-container">
         <form id="loginForm">
             <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required placeholder="seuemail@exemplo.com">
+                <label for="email">Seu Email:</label>
+                <input type="email" id="email" name="email" required placeholder="digite.seu.email@aqui.com">
             </div>
             <button type="submit" class="login-button">Entrar</button>
         </form>
@@ -196,7 +205,7 @@
                 applyTheme(defaultTheme); // Aplica o tema padrão se nada estiver salvo ou se o valor salvo for inválido
             }
 
-            // Lógica de Login
+            // --- Lógica de Login ---
             const loginForm = document.getElementById('loginForm');
             if (loginForm) {
                 loginForm.addEventListener('submit', async (event) => {
@@ -206,31 +215,34 @@
                     const email = emailInput.value.trim();
 
                     if (!email) {
-                        alert('Por favor, insira um e-mail.');
+                        alert('Por favor, insira um endereço de e-mail.');
                         return;
                     }
 
                     try {
+                        // Usando a dica fornecida para a URL do fetch
                         const response = await fetch(`http://localhost:3000/login?email=${encodeURIComponent(email)}`);
 
                         if (!response.ok) {
+                            // Tenta obter uma mensagem de erro do backend, se houver
                             const errorData = await response.json().catch(() => ({ message: `Erro HTTP: ${response.status}` }));
                             throw new Error(errorData.message || `Falha ao buscar usuário. Status: ${response.status}`);
                         }
 
                         const data = await response.json();
 
-                        // O backend retorna um array, mesmo que seja um único usuário
+                        // Seu backend retorna um array, mesmo que seja um único usuário
                         if (data && data.length > 0) {
                             const user = data[0];
-                            const userName = user.username || user.name || 'Usuário'; // Tenta 'username', depois 'name', depois um fallback
-                            alert('Bem-vindo, ' + userName + '!');
+                            // Tenta 'username', depois 'name', e um fallback "Usuário"
+                            const userName = user.username || user.name || 'Usuário';
+                            alert('Bem-vindo, ' + userName + '!'); // Exibe o nome do usuário
                         } else {
                             alert('Usuário não encontrado ou e-mail incorreto.');
                         }
                     } catch (error) {
-                        console.error('Erro no login:', error);
-                        alert('Erro ao tentar fazer login: ' + error.message);
+                        console.error('Erro durante o login:', error);
+                        alert('Ocorreu um erro ao tentar fazer login: ' + error.message);
                     }
                 });
             }
