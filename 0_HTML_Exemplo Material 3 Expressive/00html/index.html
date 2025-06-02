@@ -11,6 +11,7 @@
             --text-color: #333333; /* Light theme default text */
             --primary-color: #007bff; /* Light theme primary (e.g., blue) */
             --shadow-color-primary-rgb: 0, 123, 255;
+            --text-on-primary: #FFFFFF; /* Default white text on primary color */
             --display-font: 'Pacifico', cursive;
             --body-font: 'Inter', sans-serif;
             --switcher-bg-color: rgba(200, 200, 200, 0.5);
@@ -25,13 +26,24 @@
         }
 
         [data-theme="expressive"] {
-            --bg-color: #FDF5E6; /* Original expressive background */
+            /* Tipografia Expressiva já definida em :root */
+            /* Cores Vibrantes */
+            --bg-color: #F3E8FF; /* Lavanda muito claro - bg-expressive-surface */
             --text-color: #333333; /* Dark text for expressive theme body */
-            --primary-color: #6A0DAD; /* Original expressive primary */
+            --primary-color: #6A0DAD; /* Roxo vibrante */
+            --accent-color-pink: #FF007F; /* Rosa choque */
+            --accent-color-green: #00FF7F; /* Verde primavera */
             --shadow-color-primary-rgb: 106, 13, 173;
-            --switcher-bg-color: rgba(230, 220, 200, 0.6);
-        }
+            --text-on-primary: #FFFFFF; /* White text on purple */
+            --switcher-bg-color: rgba(220, 200, 250, 0.7); /* Ajustado para o novo fundo */
 
+            /* Formas Acentuadas e Sombras Coloridas */
+            --shape-expressive-card-radius: 24px;
+            --shape-expressive-button-radius: 16px;
+            --shape-expressive-fab-radius: 50%; /* Circular FAB */
+            --shadow-expressive: 3px 3px 10px rgba(var(--shadow-color-primary-rgb), 0.25);
+            --text-shadow-expressive: 2px 2px 6px rgba(var(--shadow-color-primary-rgb), 0.3);
+        }
         body {
             display: flex;
             flex-direction: column; /* To stack h1 and potential future content */
@@ -44,6 +56,10 @@
             color: var(--text-color);
             transition: background-color 0.3s ease, color 0.3s ease;
         }
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
 
         h1 {
             font-family: var(--display-font);
@@ -54,6 +70,10 @@
             transition: color 0.3s ease, text-shadow 0.3s ease;
             margin-top: 80px; /* Add some margin if theme switcher is at the top */
         }
+        [data-theme="expressive"] h1 {
+            text-shadow: var(--text-shadow-expressive);
+        }
+
 
         .theme-switcher {
             position: fixed;
@@ -82,17 +102,221 @@
 
         .theme-switcher button:hover {
             background-color: var(--primary-color);
-            color: var(--bg-color); /* Text color contrasts with primary color */
+            color: var(--text-on-primary);
         }
 
         .theme-switcher button.active {
             background-color: var(--primary-color);
-            color: var(--bg-color); /* Text color contrasts with primary color */
+            color: var(--text-on-primary);
             font-weight: bold;
         }
+        [data-theme="expressive"] .theme-switcher button {
+            border-radius: var(--shape-expressive-button-radius);
+        }
+
+        /* Expressive Components Styling for Login */
+        .expressive-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+            padding: 20px;
+            width: 90%;
+            max-width: 480px; /* Suitable for a login form */
+            margin-top: 30px;
+            margin-bottom: 100px; /* Space for FAB */
+        }
+
+        .card {
+            background-color: var(--bg-color); 
+            padding: 30px 35px;
+            border-radius: var(--shape-expressive-card-radius, 16px);
+            box-shadow: var(--shadow-expressive, 2px 2px 8px rgba(0,0,0,0.1));
+            width: 100%;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        [data-theme="expressive"] .card {
+            border: 1px solid rgba(var(--shadow-color-primary-rgb), 0.1);
+            background-color: #fff; /* White card on lavender bg for more contrast */
+        }
+
+        .card h2 { /* For login card title */
+            font-family: var(--display-font);
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-family: var(--body-font);
+            font-weight: 500;
+            color: var(--text-color);
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        [data-theme="expressive"] .form-group label {
+            color: var(--primary-color);
+        }
+
+        .form-group input[type="email"],
+        .form-group input[type="password"],
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            font-family: var(--body-font);
+            font-size: 1rem;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px; /* Slightly less rounded than main buttons */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        [data-theme="expressive"] .form-group input[type="email"],
+        [data-theme="expressive"] .form-group input[type="password"],
+        [data-theme="expressive"] .form-group input[type="text"] {
+            border-color: rgba(var(--shadow-color-primary-rgb), 0.3);
+            background-color: #fff; /* White inputs on white card */
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(var(--shadow-color-primary-rgb), 0.15);
+        }
+
+        .form-actions {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .form-link {
+            text-align: center;
+            margin-top: 20px;
+            font-family: var(--body-font);
+            font-size: 0.9rem;
+        }
+        .form-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .form-link a:hover {
+            text-decoration: underline;
+            filter: brightness(110%);
+        }
+        [data-theme="expressive"] .form-link a {
+            color: var(--accent-color-pink);
+        }
+        [data-theme="expressive"] .form-link a:hover {
+            color: var(--primary-color);
+        }
+
+        .button-primary, .button-secondary {
+            padding: 12px 24px;
+            font-family: var(--body-font);
+            font-size: 1rem;
+            font-weight: 700; /* Bolder buttons */
+            border-radius: var(--shape-expressive-button-radius, 8px);
+            cursor: pointer;
+            transition: transform 0.2s ease-out, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.2s ease-out;
+            border: 2px solid transparent;
+            text-align: center;
+            width: 100%; /* Full width buttons in form */
+        }
+
+        .button-primary {
+            background-color: var(--primary-color);
+            color: var(--text-on-primary);
+            box-shadow: 0 2px 5px rgba(var(--shadow-color-primary-rgb), 0.2);
+        }
+        .button-primary:hover {
+            transform: scale(1.03) translateY(-1px);
+            filter: brightness(110%);
+            box-shadow: 0 4px 8px rgba(var(--shadow-color-primary-rgb), 0.3);
+        }
+
+        .button-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+        .button-secondary:hover {
+            transform: scale(1.03) translateY(-1px);
+            background-color: rgba(var(--shadow-color-primary-rgb), 0.08);
+        }
+
+        .fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            background-color: var(--accent-color-green); /* Green FAB */
+            color: #333; /* Dark text on spring green */
+            border-radius: var(--shape-expressive-fab-radius, 50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: var(--shadow-expressive, 3px 3px 10px rgba(0,0,0,0.2));
+            cursor: pointer;
+            border: none;
+            transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+            z-index: 1001;
+        }
+        [data-theme="expressive"] .fab {
+            box-shadow: 3px 3px 10px rgba(0, 255, 127, 0.35); /* Green shadow for green FAB */
+        }
+
+        .fab svg {
+            fill: currentColor;
+            width: 24px;
+            height: 24px;
+        }
+
+        .fab:hover {
+            transform: scale(1.1) rotate(15deg);
+            filter: brightness(110%);
+            box-shadow: 0 6px 15px rgba(0, 255, 127, 0.45);
+        }
+
+        .notification {
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: var(--shape-expressive-card-radius, 16px);
+            border: 2px dashed var(--accent-color-pink, #FF007F);
+            background-color: rgba(var(--shadow-color-primary-rgb), 0.03);
+            color: var(--text-color);
+            width: 100%;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+        [data-theme="expressive"] .notification {
+            border-color: var(--accent-color-pink);
+            background-color: rgba(255, 0, 127, 0.05); /* Light pinkish bg for notification */
+        }
+
+        .notification p {
+            margin: 0;
+            font-family: var(--body-font);
+        }
+        .notification strong {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        [data-theme="expressive"] .notification strong {
+            color: var(--accent-color-pink); /* Pink for strong text in notification */
+        }
+
     </style>
 </head>
-<body data-theme="expressive"> {/* Define o tema expressivo como padrão inicial */}
+<body data-theme="expressive"> 
+    <!-- Define o tema expressivo como padrão inicial -->
 
     <div class="theme-switcher">
         <button data-theme-set="light">Light</button>
@@ -100,7 +324,36 @@
         <button data-theme-set="expressive">Expressive</button>
     </div>
 
-    <h1>Login</h1>
+    <h1>Login de Usuários</h1>
+
+    <div class="expressive-container">
+        <div class="card login-card">
+            <h2>Acesse sua Conta</h2>
+            <form id="loginForm" onsubmit="event.preventDefault();">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="seu.email@provedor.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="button-primary">Entrar</button>
+                    <button type="button" class="button-secondary">Criar Conta</button>
+                </div>
+            </form>
+            <p class="form-link"><a href="#">Esqueceu a senha?</a></p>
+        </div>
+
+        <div class="notification">
+            <p><strong>Lembrete!</strong> Mantenha suas credenciais seguras e nunca as compartilhe.</p>
+        </div>
+    </div>
+
+    <button class="fab" aria-label="Ajuda">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"/></svg>
+    </button>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
