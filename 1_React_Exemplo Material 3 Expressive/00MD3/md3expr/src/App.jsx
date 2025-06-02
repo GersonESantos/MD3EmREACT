@@ -1,150 +1,112 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import UserProfileCard from './UserProfileCard'; // Vamos criar este componente
+import UserProfileCard from './UserProfileCard'; // Importar o UserProfileCard
 
 function App() {
   // 1. Estado para o tema atual
-  // Inicializa com o tema salvo no localStorage ou 'light' como padrão.
+  // Estado para controlar o tema atual, inicializando com o valor do localStorage ou 'light' como padrão
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem('theme');
     return savedTheme || 'light';
   });
 
-  // Novos estados para o formulário de login e dados do usuário
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [currentUser, setCurrentUser] = useState(null);
-  const [loginError, setLoginError] = useState('');
-  const [isLoading, setIsLoading] = useState(false); // Estado para feedback de carregamento
+  // Estado para o valor do email e para controlar a visibilidade do cartão
+  const [emailValue, setEmailValue] = useState('');
+  const [showProfileCard, setShowProfileCard] = useState(false);
+  const [fetchedUsername, setFetchedUsername] = useState(null); // Para armazenar o nome do usuário vindo da API
+  const [isLoading, setIsLoading] = useState(false); // Para feedback de carregamento
 
   // 2. Efeito para aplicar o tema e salvar no localStorage
+  // Efeito para aplicar a classe do tema ao body e salvar no localStorage
   useEffect(() => {
-    // Remove classes de tema anteriores para evitar conflitos
-    document.documentElement.classList.remove('light-theme', 'dark-theme', 'expressive-theme');
-    // Adiciona a classe do tema atual ao elemento <html>
-    document.documentElement.classList.add(`${theme}-theme`);
-    // Salva a preferência do tema no localStorage
+    document.body.className = ''; // Limpa classes anteriores
+    document.body.classList.add(`${theme}-theme`);
     localStorage.setItem('theme', theme);
   }, [theme]); // Este efeito roda sempre que o estado 'theme' mudar
 
-  // 3. Função para lidar com a mudança de tema pelo select
-  const handleThemeChange = (event) => {
-    setTheme(event.target.value);
-  };
+  const handleShowCard = async () => {
+    if (emailValue.trim() === '') {
+      alert('Por favor, digite um email para mostrar o cartão.');
+      return;
+    }
 
-  // 4. Função para lidar com o envio do formulário de login (agora assíncrona)
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    setLoginError(''); // Limpa erros anteriores
-    setIsLoading(true); // Ativa o estado de carregamento
+    setIsLoading(true);
+    setShowProfileCard(false); // Esconde o cartão enquanto busca novos dados
+    setFetchedUsername(null);  // Reseta o nome de usuário anterior
 
     try {
-      // Nota: Em uma aplicação real, você enviaria email E senha para validação.
-      // O backend atual só usa o email.
-      const response = await fetch(`http://localhost:3000/login?email=${encodeURIComponent(email)}`);
+      const response = await fetch(`http://localhost:3000/login?email=${encodeURIComponent(emailValue)}`);
       if (!response.ok) {
         // Tenta ler uma mensagem de erro do backend se houver
-        let errorData = 'Falha ao conectar com o servidor.';
-        try {
-          errorData = await response.text();
-        } catch (e) {
-          // Mantém a mensagem padrão se não conseguir ler o corpo do erro
-        }
+        const errorData = await response.text();
         throw new Error(`Erro na API: ${response.statusText} - ${errorData}`);
       }
-      const data = await response.json();
-      // O backend retorna um array. Se o array não estiver vazio, o usuário existe.
-      // Em um cenário real, você também validaria a senha aqui ou no backend.
-      if (data.length > 0) {
-        // Supondo que o primeiro usuário encontrado é o correto
-        // E que a senha bate (validação de senha não implementada no backend atual)
-        setCurrentUser(data[0]);
-        setEmail(''); // Limpa os campos após o login
-        setPassword('');
+      const users = await response.json();
+
+      if (users.length > 0) {
+        // Assumindo que o objeto do usuário tem um campo 'name' ou 'username'
+        // Ajuste 'users[0].name' se o nome da coluna no seu DB for diferente (ex: users[0].nome_completo)
+        const userNameFromDB = users[0].name || users[0].username; // Prioriza 'name', depois 'username'
+        setFetchedUsername(userNameFromDB); // Pode ser null se nem 'name' nem 'username' existirem
+        setShowProfileCard(true);
       } else {
-        setLoginError('Email ou senha inválidos.');
-        setCurrentUser(null);
+        alert('Usuário não encontrado.');
+        setShowProfileCard(false); // Garante que o cartão não seja mostrado se o usuário não for encontrado
       }
     } catch (error) {
-      console.error('Erro no login:', error);
-      setLoginError('Erro ao tentar fazer login. Tente novamente mais tarde.');
-      setCurrentUser(null);
+      console.error("Erro ao buscar usuário:", error);
+      alert(`Não foi possível buscar o usuário: ${error.message}`);
+      setShowProfileCard(false);
     } finally {
-      setIsLoading(false); // Desativa o estado de carregamento
+      setIsLoading(false);
     }
   };
 
-  const handleLogout = () => {
-    setCurrentUser(null);
-    // Opcional: Limpar localStorage específico do usuário se houver
-  };
-
   return (
-    <div className="app-container">
-      <header className="app-header">
+    <>
+      {/* Envolvemos todo o conteúdo em um único Fragmento pai */}
+      <div style={{ marginBottom: '20px' }}> {/* Adicionado um pouco de margem para separação visual */}
+        <h1 className="expressive-header"> {/* Alterado para h1 e adicionada a classe */}
+          Login
+        </h1>
+      </div>
 
-        <div className="theme-selector-container">
-          <label htmlFor="theme-select" className="theme-label">Tema:</label>
-          <select id="theme-select" value={theme} onChange={handleThemeChange} className="theme-select">
-            <option value="light">Claro ☀️</option>
-            <option value="dark">Escuro 🌙</option>
-            <option value="expressive">Expressivo ✨</option>
-          </select>
-        </div>
-      </header>
+      <div className="theme-selector-container">
+        <label htmlFor="theme-select" className="theme-selector-label">Selecionar Tema: </label>
+        <select
+          id="theme-select"
+          value={theme}
+          onChange={(e) => setTheme(e.target.value)}
+          className="theme-selector"
+        >
+          <option value="light">Claro ☀️</option>
+          <option value="dark">Escuro 🌙</option>
+          <option value="expressive">Expressivo ✨</option>
+        </select>
+      </div>
 
-      {currentUser ? (
-        <UserProfileCard user={currentUser} onLogout={handleLogout} />
-      ) : (
-        <div className="login-container">
-          <h1 className="login-title">Login</h1>
-          <p className="login-subtitle">Faça login para continuar.</p>
-          
-          {loginError && <p style={{ color: 'red', marginBottom: '15px' }}>{loginError}</p>}
+      {/* Caixa de email */}
+      <div className="email-input-container">
+        <label htmlFor="email" className="email-input-label">Email:</label>
+        <input
+          type="email"
+          id="email"
+          className="email-input"
+          placeholder="Digite seu email aqui"
+          value={emailValue}
+          onChange={(e) => setEmailValue(e.target.value)}
+        />
+        <button onClick={handleShowCard} className="action-button" disabled={isLoading}>
+          {isLoading ? 'Buscando...' : 'Mostrar Cartão'}
+        </button>
+      </div>
 
-          <form onSubmit={handleSubmit} className="form-wrapper">
-            <div className="form-group">
-              <label htmlFor="email">Seu Email</label>
-              <input 
-                type="email" 
-                id="email" 
-                name="email" 
-                placeholder="exemplo@criativo.com" 
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            
-            <div className="form-group">
-              <label htmlFor="password">Sua Senha</label>
-              <input 
-                type="password" 
-                id="password" 
-                name="password" 
-                placeholder="••••••••" 
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            
-            <button type="submit" className="login-button" disabled={isLoading}>
-              {isLoading ? 'Entrando...' : 'Entrar na Plataforma'}
-            </button>
-          </form>
-          
-          <div className="extra-links">
-            <p>Ainda não faz parte? <a href="#">Crie sua conta!</a></p>
-            <p><a href="#">Esqueceu a senha?</a></p>
-          </div>
-        </div>
-      )}
+      {showProfileCard && <UserProfileCard email={emailValue} username={fetchedUsername} />}
 
       {/* Seção de Demonstração de Componentes Expressivos Adicionais */}
       {/* Estes componentes serão estilizados pelo tema ativo, especialmente o .expressive-theme */}
-      <div style={{ marginTop: '50px', borderTop: '1px solid #ccc', paddingTop: '30px', width: '100%', maxWidth: '600px', textAlign: 'center' }}>
-        <h2 className="login-title" style={{ fontSize: '2em' }}>Mais Componentes Expressivos</h2>
+      <div style={{ marginTop: '50px', borderTop: '1px solid #ccc', paddingTop: '30px' }}>
+        <h2 className="expressive-header" style={{ fontSize: '2.5em' }}>Mais Componentes Expressivos</h2>
         
         <div style={{ margin: '30px 0', display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
           <button className="shape-expressive-button expressive-button-primary shadow-expressive">
@@ -155,16 +117,19 @@ function App() {
           </button>
         </div>
 
-        {/* Adaptação da notificação para usar classes de tema existentes se possível, ou defina .notification-expressive em App.css */}
-        <div className="login-container" style={{ borderColor: 'var(--expressive-accent-green)', borderStyle: 'dashed', borderWidth: '2px', marginTop: '20px' }}>
-          <h3 className="login-title" style={{color: 'var(--expressive-accent-green)', fontSize: '1.5em'}}>Lembrete Amigável!</h3>
+        <div className="notification-expressive">
+          <h3 className="expressive-header">Lembrete Amigável!</h3>
           <p>Esta é uma notificação com um estilo mais solto, usando uma borda tracejada e a cor verde primavera para destaque.</p>
         </div>
+
       </div>
 
-      {/* FAB - será posicionado fixamente e estilizado via App.css */}
-      <button className="fab-expressive shape-expressive-fab shadow-expressive" aria-label="Adicionar novo item" title="Ação Rápida">+</button>
-    </div>
+      {/* FAB - será posicionado fixamente */}
+      {/* Adicionar a classe shadow-expressive ao FAB se desejar sombra nele também */}
+      <button className="shape-expressive-fab shadow-expressive" aria-label="Adicionar novo item" title="Ação Rápida">
+        +
+      </button>
+    </>
   );
 }
 
