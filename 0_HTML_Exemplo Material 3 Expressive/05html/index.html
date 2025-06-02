@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criatividade Expressiva</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Pacifico&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #FFFFFF; /* Light theme default */
+            --text-color: #333333; /* Light theme default text */
+            --primary-color: #007bff; /* Light theme primary (e.g., blue) */
+            --shadow-color-primary-rgb: 0, 123, 255;
+            --display-font: 'Pacifico', cursive;
+            --body-font: 'Inter', sans-serif;
+            --switcher-bg-color: rgba(200, 200, 200, 0.5);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1E1E1E;
+            --text-color: #E0E0E0;
+            --primary-color: #BB86FC; /* Material Design dark theme purple */
+            --shadow-color-primary-rgb: 187, 134, 252;
+            --switcher-bg-color: rgba(50, 50, 50, 0.7);
+        }
+
+        [data-theme="expressive"] {
+            --bg-color: #FDF5E6; /* Original expressive background */
+            --text-color: #333333; /* Dark text for expressive theme body */
+            --primary-color: #6A0DAD; /* Original expressive primary */
+            --shadow-color-primary-rgb: 106, 13, 173;
+            --switcher-bg-color: rgba(230, 220, 200, 0.6);
+        }
+
+        body {
+            /* Existing body styles */
+            display: flex;
+            flex-direction: column; /* To stack h1 and potential future content */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: var(--bg-color);
+            font-family: var(--body-font);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            padding-top: 60px; /* Add padding to prevent overlap with fixed theme switcher */
+        }
+
+        h1 {
+            font-family: var(--display-font);
+            font-size: 4rem;
+            color: var(--primary-color);
+            text-align: center;
+            text-shadow: 2px 2px 8px rgba(var(--shadow-color-primary-rgb), 0.15);
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            margin-top: 20px; /* Adjusted margin */
+            margin-bottom: 30px;
+        }
+
+        .theme-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            padding: 10px;
+            background-color: var(--switcher-bg-color);
+            border-radius: 8px;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        .theme-switcher button {
+            padding: 8px 12px;
+            border: 1px solid var(--primary-color);
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            font-family: var(--body-font);
+            font-size: 0.9rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .theme-switcher button:hover {
+            background-color: var(--primary-color);
+            color: var(--bg-color); /* Text color contrasts with primary color */
+        }
+
+        .theme-switcher button.active {
+            background-color: var(--primary-color);
+            color: var(--bg-color); /* Text color contrasts with primary color */
+            font-weight: bold;
+        }
+
+        /* Login Form Styles */
+        .login-form-container {
+            background-color: var(--switcher-bg-color); /* Use switcher-bg for some contrast or define a new card bg */
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(var(--shadow-color-primary-rgb), 0.1);
+            width: 100%;
+            max-width: 400px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        [data-theme="expressive"] .login-form-container {
+            background-color: #fff; /* White card for expressive theme */
+            box-shadow: 3px 3px 10px rgba(var(--shadow-color-primary-rgb), 0.25);
+            border: 1px solid rgba(var(--shadow-color-primary-rgb), 0.1);
+        }
+
+        .login-form-container h2 {
+            font-family: var(--display-font);
+            color: var(--primary-color);
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-size: 2em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+        .form-group input[type="email"] {
+            width: calc(100% - 24px); /* Account for padding */
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-family: var(--body-font);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input[type="email"]:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        [data-theme="expressive"] .form-group input[type="email"] {
+            border-color: rgba(var(--shadow-color-primary-rgb), 0.4);
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: var(--primary-color);
+            color: var(--bg-color); /* Ensure contrast */
+            border: none;
+            border-radius: 8px;
+            font-family: var(--body-font);
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+        .login-button:hover {
+            filter: brightness(110%);
+        }
+        .login-button:active {
+            transform: scale(0.98);
+        }
+        [data-theme="expressive"] .login-button {
+             color: #FFFFFF; /* Explicit white text on expressive primary */
+             border-radius: 16px; /* Expressive button shape */
+        }
+
+    </style>
+</head>
+<body data-theme="expressive"> {/* Define o tema expressivo como padrão inicial */}
+
+    <div class="theme-switcher">
+        <button data-theme-set="light">Light</button>
+        <button data-theme-set="dark">Dark</button>
+        <button data-theme-set="expressive">Expressive</button>
+    </div>
+
+    <h1>Bem-vindo!</h1>
+
+    <div class="login-form-container">
+        <h2>Acesse sua Conta</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required placeholder="seu.email@exemplo.com">
+            </div>
+            <button type="submit" class="login-button">Entrar</button>
+        </form>
+    </div>
+
+    <div id="loginMessage" style="margin-top: 20px; color: var(--primary-color);"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeButtons = document.querySelectorAll('.theme-switcher button[data-theme-set]');
+            const body = document.body;
+            const defaultTheme = 'expressive'; // O tema 'expressive' é o visual padrão original
+
+            function setActiveButton(themeName) {
+                themeButtons.forEach(button => {
+                    button.classList.toggle('active', button.dataset.themeSet === themeName);
+                });
+            }
+
+            function applyTheme(themeName) {
+                body.dataset.theme = themeName;
+                localStorage.setItem('selectedTheme', themeName);
+                setActiveButton(themeName);
+            }
+
+            themeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    applyTheme(button.dataset.themeSet);
+                });
+            });
+
+            const savedTheme = localStorage.getItem('selectedTheme');
+            if (savedTheme && ['light', 'dark', 'expressive'].includes(savedTheme)) {
+                applyTheme(savedTheme);
+            } else {
+                applyTheme(defaultTheme); // Aplica o tema padrão se nada estiver salvo ou se o valor salvo for inválido
+            }
+
+            // Login form logic
+            const loginForm = document.getElementById('loginForm');
+            const loginMessageDiv = document.getElementById('loginMessage');
+
+            if (loginForm) {
+                loginForm.addEventListener('submit', async (event) => {
+                    event.preventDefault(); // Prevent default form submission
+                    loginMessageDiv.textContent = ''; // Clear previous messages
+
+                    const emailInput = document.getElementById('email');
+                    const email = emailInput.value.trim();
+
+                    if (!email) {
+                        alert('Por favor, insira seu email.');
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch(`http://localhost:3000/login?email=${encodeURIComponent(email)}`);
+
+                        if (!response.ok) {
+                            // Try to parse error from backend if available
+                            const errorData = await response.json().catch(() => null);
+                            const errorMessage = errorData?.message || `Erro: ${response.status} ${response.statusText}`;
+                            throw new Error(errorMessage);
+                        }
+
+                        const data = await response.json();
+
+                        if (data && data.length > 0) {
+                            const userData = data[0]; // Backend returns an array
+                            // IMPORTANT: Adjust 'userData.name' if your user name column is different (e.g., 'username')
+                            const userName = userData.name || userData.username || 'Usuário'; // Fallback if name/username is not present
+                            alert(`Bem-vindo, ${userName}!`);
+                            loginMessageDiv.textContent = `Login bem-sucedido como ${userName}.`;
+                        } else {
+                            alert('Usuário não encontrado ou email incorreto.');
+                            loginMessageDiv.textContent = 'Falha no login. Verifique seu email.';
+                        }
+                    } catch (error) {
+                        console.error('Erro no login:', error);
+                        alert(`Erro ao tentar fazer login: ${error.message}`);
+                        loginMessageDiv.textContent = 'Ocorreu um erro durante o login.';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
