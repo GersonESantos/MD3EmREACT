@@ -9,6 +9,11 @@ function App() {
     return savedTheme || 'light';
   });
 
+  // Estados para controlar os inputs do formulário e o carregamento
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
   // 2. Efeito para aplicar o tema e salvar no localStorage
   useEffect(() => {
     // Remove classes de tema anteriores para evitar conflitos
@@ -24,11 +29,48 @@ function App() {
     setTheme(event.target.value);
   };
 
-  // 4. Função para lidar com o envio do formulário de login
-  const handleSubmit = (event) => {
+  // 4. Função para lidar com o envio do formulário de login (agora assíncrona)
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Em uma aplicação real, aqui você implementaria a lógica de login.
-    alert('Botão Entrar clicado! (Implemente a lógica de login aqui)');
+    if (!email) { // Validação básica
+      alert('Por favor, insira seu email.');
+      return;
+    }
+    setIsLoading(true);
+
+    try {
+      // A rota /login no seu server.js busca pelo email.
+      // A validação de senha precisaria ser implementada no backend para um app real.
+      const response = await fetch(`http://localhost:3000/login?email=${encodeURIComponent(email)}`);
+
+      if (!response.ok) {
+        const errorData = await response.text(); // Tenta obter mais detalhes do erro do backend
+        throw new Error(`Falha na autenticação: ${errorData || response.statusText}`);
+      }
+
+      const users = await response.json(); // O backend retorna um array de usuários
+
+      if (users && users.length > 0) {
+        // Usuário encontrado. Assumimos que o primeiro resultado é o correto.
+        // O campo 'username' do seu banco é o que você quer mostrar.
+        const usernameFromDB = users[0].username; 
+        if (usernameFromDB) {
+          alert(`Bem-vindo(a), ${usernameFromDB}!`);
+        } else {
+          alert('Usuário encontrado, mas o nome de usuário não está definido.');
+        }
+        // Opcional: Limpar campos após o "login"
+        // setEmail('');
+        // setPassword('');
+      } else {
+        alert('Usuário não encontrado. Verifique seu email.');
+      }
+    } catch (error) {
+      console.error("Erro durante o login:", error);
+      alert(`Erro ao tentar fazer login: ${error.message}`);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -55,8 +97,10 @@ function App() {
             type="email" 
             id="email" 
             name="email" 
-            placeholder="exemplo@criativo.com" 
-            required 
+            placeholder="exemplo@criativo.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </div>
         
@@ -66,13 +110,15 @@ function App() {
             type="password" 
             id="password" 
             name="password" 
-            placeholder="••••••••" 
-            required 
+            placeholder="••••••••"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </div>
         
-        <button type="submit" className="login-button">
-          Entrar na Plataforma
+        <button type="submit" className="login-button" disabled={isLoading}>
+          {isLoading ? 'Entrando...' : 'Entrar na Plataforma'}
         </button>
       </form>
       
@@ -80,7 +126,6 @@ function App() {
         <p>Ainda não faz parte? <a href="#">Crie sua conta!</a></p>
         <p><a href="#">Esqueceu a senha?</a></p>
       </div>
-    </div>
     </div>
   );
 }
