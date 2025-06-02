@@ -1,0 +1,291 @@
+/* c:\Repo2024\MD3EmREACT\1_React_Exemplo Material 3 Expressive\00MD3\md3expr\src\UserProfileCard.css */
+
+/* Wrapper principal do card */
+.user-profile-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Cabeçalho acima do card */
+.user-profile-card-wrapper .text-center {
+  text-align: center;
+}
+.user-profile-card-wrapper .mb-8 {
+  margin-bottom: 2rem; /* 32px */
+}
+.user-profile-card-wrapper .mb-3 {
+  margin-bottom: 0.75rem; /* 12px */
+}
+.user-profile-card-wrapper .text-5xl {
+  font-size: 3rem; /* 48px */
+  line-height: 1;
+}
+.user-profile-card-wrapper .text-lg {
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.75rem; /* 28px */
+}
+
+/* Estilos base para o card (Tema Claro como padrão) */
+.card-header-title {
+  color: #1c1b1f; /* Cor de texto primária para tema claro */
+  font-weight: bold;
+}
+
+.card-header-subtitle {
+  color: #49454f; /* Cor de texto secundária para tema claro */
+}
+
+.user-profile-card-container {
+  padding: 24px;
+  border-radius: 16px; /* Raio de borda padrão */
+  background-color: #fff; /* Fundo do card para tema claro */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sombra padrão */
+  width: 100%;
+  max-width: 400px; /* Largura máxima do card */
+  text-align: center;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.user-avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.user-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%; /* Avatar redondo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem; /* Tamanho da inicial */
+  font-weight: bold;
+  margin-bottom: 8px;
+  background-color: #e0e0e0; /* Fundo do avatar para tema claro */
+  color: #333333; /* Cor da inicial para tema claro */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.user-avatar-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 8px;
+  color: #1c1b1f; /* Cor do nome de usuário para tema claro */
+  transition: color 0.3s ease;
+}
+
+.login-status-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  color: #4CAF50; /* Verde para sucesso */
+}
+
+.status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.status-indicator.online {
+  background-color: #4CAF50; /* Verde */
+}
+
+.login-success-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.welcome-text {
+  font-size: 1rem;
+  margin-bottom: 24px;
+  color: #49454f; /* Cor do texto de boas-vindas */
+  transition: color 0.3s ease;
+}
+
+.welcome-text .themed-username-text {
+  font-weight: bold;
+  color: #0062a1; /* Cor primária para o nome no tema claro */
+  transition: color 0.3s ease;
+}
+
+.user-profile-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Espaço entre botões */
+}
+
+/* Estilos base para botões */
+.button {
+  padding: 10px 20px;
+  border: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
+.button-look {
+  border-radius: 20px; /* Raio de borda padrão para botões */
+}
+
+.button-primary {
+  background-color: #0062a1; /* Cor primária do botão para tema claro */
+  color: #ffffff;
+}
+.button-primary:hover {
+  background-color: #004a7c;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.button-secondary {
+  background-color: #e0e0e0; /* Cor secundária do botão para tema claro */
+  color: #333333;
+  border: 1px solid #cccccc;
+}
+.button-secondary:hover {
+  background-color: #d4d4d4;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* --- Tema Escuro --- */
+.dark-theme .card-header-title {
+  color: #e1e3e6; /* Branco suave para títulos */
+}
+.dark-theme .card-header-subtitle {
+  color: #a0a3a7; /* Cinza claro para subtítulos */
+}
+.dark-theme .user-profile-card-container.card-look {
+  background-color: #2c2c2c; /* Fundo do card para tema escuro */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+.dark-theme .user-avatar.avatar-look {
+  background-color: #4a4a4a; /* Fundo do avatar para tema escuro */
+  color: #e1e3e6; /* Cor da inicial para tema escuro */
+}
+.dark-theme .user-avatar-name.themed-username-text,
+.dark-theme .welcome-text .themed-username-text {
+  color: #a8c7fa; /* Cor primária para nomes de usuário no tema escuro (azul claro) */
+}
+.dark-theme .user-avatar-name { /* Nome abaixo do avatar */
+   color: #e1e3e6;
+}
+.dark-theme .welcome-text {
+  color: #a0a3a7; /* Cor do texto de boas-vindas no tema escuro */
+}
+.dark-theme .login-status-container {
+  color: #81C784; /* Verde mais claro para sucesso no tema escuro */
+}
+.dark-theme .status-indicator.online {
+  background-color: #81C784;
+}
+.dark-theme .button-primary {
+  background-color: #a8c7fa; /* Cor primária do botão para tema escuro */
+  color: #1e2022; /* Texto escuro para contraste */
+}
+.dark-theme .button-primary:hover {
+  background-color: #82aeeF;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+}
+.dark-theme .button-secondary {
+  background-color: #4a4a4a; /* Cor secundária do botão para tema escuro */
+  color: #e1e3e6;
+  border: 1px solid #5f5f5f;
+}
+.dark-theme .button-secondary:hover {
+  background-color: #5a5a5a;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* --- Tema Expressivo --- */
+/* (Valores baseados nas classes expressive-* originais) */
+.expressive-theme .card-header-title {
+  color: #6750A4; /* text-expressive-primary */
+}
+.expressive-theme .card-header-subtitle {
+  color: rgba(28, 27, 31, 0.8); /* text-expressive-on-surface-alpha-80 */
+}
+.expressive-theme .user-profile-card-container.card-look {
+  background-color: #F3EDF7; /* shape-expressive-card (surface-container-high) */
+  border-radius: 28px;      /* shape-expressive-card */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15), 0px 1px 3px rgba(0, 0, 0, 0.3); /* shadow-expressive */
+}
+.expressive-theme .user-avatar.avatar-look {
+  background-color: #E8DEF8; /* bg-expressive-secondary (secondary-container) */
+  color: #1D192B;           /* on-secondary-container */
+  border-radius: 50%;       /* shape-expressive-avatar (já é padrão, mas reforça) */
+}
+.expressive-theme .user-avatar-name.themed-username-text,
+.expressive-theme .welcome-text .themed-username-text {
+  color: #6750A4; /* text-expressive-primary */
+}
+.expressive-theme .user-avatar-name { /* Nome abaixo do avatar */
+   color: #1D192B; /* Cor mais escura para contraste com fundo claro do card */
+}
+.expressive-theme .welcome-text {
+  color: #1C1B1F; /* on-surface */
+}
+.expressive-theme .login-status-container {
+  color: #38761D; /* Um verde mais alinhado com o tema expressivo, se necessário */
+}
+.expressive-theme .status-indicator.online {
+  background-color: #38761D;
+}
+.expressive-theme .button.button-look { /* Aplica a forma do botão expressivo */
+  border-radius: 100px; /* shape-expressive-button (pill shape) */
+}
+.expressive-theme .button-primary {
+  background-color: #6750A4; /* expressive-button-primary (primary) */
+  color: #FFFFFF;           /* on-primary */
+}
+.expressive-theme .button-primary:hover {
+  background-color: #543f85;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+}
+.expressive-theme .button-secondary {
+  /* Para um botão secundário no estilo "outlined" ou "text" do Material 3 Expressive */
+  background-color: transparent;
+  color: #6750A4; /* primary */
+  border: 1px solid #79747E; /* outline */
+}
+.expressive-theme .button-secondary:hover {
+  background-color: rgba(103, 80, 164, 0.08); /* Leve fundo roxo no hover */
+  border-color: #6750A4;
+}
+
+
+/* Animação de entrada do card */
+.card-enter-animation {
+  animation: cardEnter 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Fontes (assumindo que font-display e font-name são definidas globalmente ou via importação) */
+/* Exemplo:
+.font-display { font-family: 'SeuDisplayFont', sans-serif; }
+.font-name { font-family: 'SuaFonteParaNomes', sans-serif; }
+*/
