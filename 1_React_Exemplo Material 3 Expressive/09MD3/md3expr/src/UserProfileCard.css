@@ -1,0 +1,138 @@
+/* =============================================== */
+/* ESTILOS PARA UserProfileCard.jsx                */
+/* =============================================== */
+
+.user-profile-card-wrapper {
+  width: 100%;
+  max-width: 500px; /* Ajuste conforme necessário */
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.user-profile-card-wrapper .text-center {
+  text-align: center;
+}
+
+.user-profile-card-wrapper .mb-8 {
+  margin-bottom: 2rem; /* 32px */
+}
+
+.user-profile-card-wrapper .mb-3 {
+  margin-bottom: 0.75rem; /* 12px */
+}
+
+/* Estilizando o título principal do card wrapper (Nossa Comunidade) */
+/* As variáveis de tema (--expressive-font-header, --expressive-primary, etc.) 
+   são definidas em App.css e aplicadas globalmente quando o tema está ativo. */
+.user-profile-card-wrapper .font-display {
+  font-family: var(--expressive-font-header, 'Pacifico', cursive); /* Fallback se a variável não estiver disponível */
+  color: var(--expressive-primary, #8A2BE2); /* Fallback */
+  /* font-size já está inline, mas poderia ser definido aqui */
+}
+
+.user-profile-card-wrapper .text-expressive-on-surface-alpha-80 {
+  color: color-mix(in srgb, var(--expressive-text, #333) 80%, transparent); /* Fallback */
+  font-size: 1.1rem;
+}
+
+.user-profile-card-container {
+  background-color: var(--expressive-card-bg, #fff); /* Usa variável do tema ou fallback */
+  padding: 30px; /* Aumentar padding interno do card */
+  text-align: center;
+  /* As classes shape-expressive-card e shadow-expressive já são aplicadas via JSX */
+  /* A animação card-enter-animation precisaria ser definida se desejada */
+}
+
+.user-avatar-container {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 100px; /* Tamanho do avatar */
+  height: 100px;
+  border-radius: var(--expressive-fab-radius, 50%); /* Para um círculo perfeito, se shape-expressive-avatar for 50% */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem; /* Tamanho da inicial */
+  font-weight: bold;
+  margin-bottom: 10px;
+  background-color: var(--expressive-accent-pink, #FF1493); /* Cor de destaque para o avatar */
+  color: var(--expressive-text-on-primary, #FFFFFF);
+  /* bg-expressive-secondary e font-name já são aplicadas via JSX, mas podemos reforçar aqui */
+}
+
+.user-avatar-name {
+  font-family: var(--expressive-font-header, 'Pacifico', cursive); /* Usar a fonte de cabeçalho para o nome */
+  color: var(--expressive-primary, #8A2BE2);
+  font-size: 1.5rem; /* Tamanho do nome abaixo do avatar */
+}
+
+.login-status-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.status-indicator.online {
+  width: 12px;
+  height: 12px;
+  background-color: var(--expressive-accent-green, #32CD32); /* Verde para online */
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--expressive-accent-green, #32CD32);
+}
+
+/* Ajuste para o texto dentro do login-status-container */
+.login-status-container .login-success-text {
+  margin-bottom: 0; /* Remove a margem inferior especificamente aqui para esta linha */
+}
+
+.login-success-text,
+.welcome-text {
+  color: var(--expressive-text, #333);
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+}
+
+.welcome-text strong {
+  font-family: var(--expressive-font-header, 'Pacifico', cursive);
+  color: var(--expressive-primary, #8A2BE2);
+}
+
+.user-profile-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Espaço entre botões */
+}
+
+/* Os botões dentro de user-profile-actions já usam classes como 
+   expressive-button, expressive-button-primary, expressive-button-secondary, 
+   shape-expressive-button, que são definidas em App.css e herdam as variáveis do tema.
+   Se precisar de estilos MUITO específicos para os botões DENTRO do card que não
+   se aplicam a outros botões expressivos, você pode adicioná-los aqui.
+   Por exemplo:
+   .user-profile-actions .expressive-button-secondary {
+     border-width: 3px; // Apenas um exemplo de sobrescrita
+   }
+*/
+
+/* Animação de entrada para o card (opcional) */
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.card-enter-animation {
+  animation: cardEnter 0.5s ease-out forwards;
+}
