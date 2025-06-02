@@ -33,7 +33,6 @@
         }
 
         body {
-            /* Existing body styles */
             display: flex;
             flex-direction: column; /* To stack h1 and potential future content */
             justify-content: center;
@@ -44,7 +43,6 @@
             font-family: var(--body-font);
             color: var(--text-color);
             transition: background-color 0.3s ease, color 0.3s ease;
-            padding-top: 60px; /* Add padding to prevent overlap with fixed theme switcher */
         }
 
         h1 {
@@ -54,8 +52,7 @@
             text-align: center;
             text-shadow: 2px 2px 8px rgba(var(--shadow-color-primary-rgb), 0.15);
             transition: color 0.3s ease, text-shadow 0.3s ease;
-            margin-top: 20px; /* Adjusted margin */
-            margin-bottom: 30px;
+            margin-top: 80px; /* Add some margin if theme switcher is at the top */
         }
 
         .theme-switcher {
@@ -93,83 +90,6 @@
             color: var(--bg-color); /* Text color contrasts with primary color */
             font-weight: bold;
         }
-
-        /* Login Form Styles */
-        .login-form-container {
-            background-color: var(--switcher-bg-color); /* Use switcher-bg for some contrast or define a new card bg */
-            padding: 30px 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(var(--shadow-color-primary-rgb), 0.1);
-            width: 100%;
-            max-width: 400px;
-            margin-top: 20px;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-        }
-        [data-theme="expressive"] .login-form-container {
-            background-color: #fff; /* White card for expressive theme */
-            box-shadow: 3px 3px 10px rgba(var(--shadow-color-primary-rgb), 0.25);
-            border: 1px solid rgba(var(--shadow-color-primary-rgb), 0.1);
-        }
-
-        .login-form-container h2 {
-            font-family: var(--display-font);
-            color: var(--primary-color);
-            text-align: center;
-            margin-top: 0;
-            margin-bottom: 25px;
-            font-size: 2em;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: var(--text-color);
-        }
-        .form-group input[type="email"] {
-            width: calc(100% - 24px); /* Account for padding */
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-family: var(--body-font);
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-        .form-group input[type="email"]:focus {
-            border-color: var(--primary-color);
-            outline: none;
-        }
-        [data-theme="expressive"] .form-group input[type="email"] {
-            border-color: rgba(var(--shadow-color-primary-rgb), 0.4);
-        }
-
-        .login-button {
-            width: 100%;
-            padding: 12px 15px;
-            background-color: var(--primary-color);
-            color: var(--bg-color); /* Ensure contrast */
-            border: none;
-            border-radius: 8px;
-            font-family: var(--body-font);
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.1s ease;
-        }
-        .login-button:hover {
-            filter: brightness(110%);
-        }
-        .login-button:active {
-            transform: scale(0.98);
-        }
-        [data-theme="expressive"] .login-button {
-             color: #FFFFFF; /* Explicit white text on expressive primary */
-             border-radius: 16px; /* Expressive button shape */
-        }
-
     </style>
 </head>
 <body data-theme="expressive"> {/* Define o tema expressivo como padrão inicial */}
@@ -180,20 +100,7 @@
         <button data-theme-set="expressive">Expressive</button>
     </div>
 
-    <h1>Bem-vindo!</h1>
-
-    <div class="login-form-container">
-        <h2>Acesse sua Conta</h2>
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required placeholder="seu.email@exemplo.com">
-            </div>
-            <button type="submit" class="login-button">Entrar</button>
-        </form>
-    </div>
-
-    <div id="loginMessage" style="margin-top: 20px; color: var(--primary-color);"></div>
+    <h1>Login</h1>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -224,53 +131,6 @@
                 applyTheme(savedTheme);
             } else {
                 applyTheme(defaultTheme); // Aplica o tema padrão se nada estiver salvo ou se o valor salvo for inválido
-            }
-
-            // Login form logic
-            const loginForm = document.getElementById('loginForm');
-            const loginMessageDiv = document.getElementById('loginMessage');
-
-            if (loginForm) {
-                loginForm.addEventListener('submit', async (event) => {
-                    event.preventDefault(); // Prevent default form submission
-                    loginMessageDiv.textContent = ''; // Clear previous messages
-
-                    const emailInput = document.getElementById('email');
-                    const email = emailInput.value.trim();
-
-                    if (!email) {
-                        alert('Por favor, insira seu email.');
-                        return;
-                    }
-
-                    try {
-                        const response = await fetch(`http://localhost:3000/login?email=${encodeURIComponent(email)}`);
-
-                        if (!response.ok) {
-                            // Try to parse error from backend if available
-                            const errorData = await response.json().catch(() => null);
-                            const errorMessage = errorData?.message || `Erro: ${response.status} ${response.statusText}`;
-                            throw new Error(errorMessage);
-                        }
-
-                        const data = await response.json();
-
-                        if (data && data.length > 0) {
-                            const userData = data[0]; // Backend returns an array
-                            // IMPORTANT: Adjust 'userData.name' if your user name column is different (e.g., 'username')
-                            const userName = userData.name || userData.username || 'Usuário'; // Fallback if name/username is not present
-                            alert(`Bem-vindo, ${userName}!`);
-                            loginMessageDiv.textContent = `Login bem-sucedido como ${userName}.`;
-                        } else {
-                            alert('Usuário não encontrado ou email incorreto.');
-                            loginMessageDiv.textContent = 'Falha no login. Verifique seu email.';
-                        }
-                    } catch (error) {
-                        console.error('Erro no login:', error);
-                        alert(`Erro ao tentar fazer login: ${error.message}`);
-                        loginMessageDiv.textContent = 'Ocorreu um erro durante o login.';
-                    }
-                });
             }
         });
     </script>
