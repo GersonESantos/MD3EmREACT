@@ -9,9 +9,9 @@ function App() {
     return savedTheme || 'light';
   });
 
-  // Estados para controlar os inputs do formulário e o carregamento
+  // Estados para controlar os inputs do formulário e o estado de carregamento
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState(''); // Mantido para estrutura do formulário, mas não usado no fetch atual
   const [isLoading, setIsLoading] = useState(false);
 
   // 2. Efeito para aplicar o tema e salvar no localStorage
@@ -32,36 +32,35 @@ function App() {
   // 4. Função para lidar com o envio do formulário de login (agora assíncrona)
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!email) { // Validação básica
+    if (!email) { // Validação básica para o email
       alert('Por favor, insira seu email.');
       return;
     }
     setIsLoading(true);
 
     try {
-      // A rota /login no seu server.js busca pelo email.
-      // A validação de senha precisaria ser implementada no backend para um app real.
+      // Seu backend server.js deve ter uma rota /login que aceita o email como query param
+      // Exemplo: GET /login?email=usuario@exemplo.com
+      // IMPORTANTE: Em uma aplicação real, a senha também seria enviada (de forma segura, via POST)
+      // e validada no backend. O backend atual busca apenas pelo email.
       const response = await fetch(`http://localhost:3000/login?email=${encodeURIComponent(email)}`);
 
       if (!response.ok) {
-        const errorData = await response.text(); // Tenta obter mais detalhes do erro do backend
+        const errorData = await response.text(); // Tenta obter mais detalhes do erro
         throw new Error(`Falha na autenticação: ${errorData || response.statusText}`);
       }
 
-      const users = await response.json(); // O backend retorna um array de usuários
+      const users = await response.json(); // O backend deve retornar um array de usuários
 
       if (users && users.length > 0) {
-        // Usuário encontrado. Assumimos que o primeiro resultado é o correto.
-        // O campo 'username' do seu banco é o que você quer mostrar.
+        // Usuário encontrado. Assumimos que o primeiro é o correto.
+        // O campo 'username' do seu banco de dados é o que queremos mostrar.
         const usernameFromDB = users[0].username; 
         if (usernameFromDB) {
           alert(`Bem-vindo(a), ${usernameFromDB}!`);
         } else {
-          alert('Usuário encontrado, mas o nome de usuário não está definido.');
+          alert('Usuário encontrado, mas o nome de usuário (username) não está definido no banco.');
         }
-        // Opcional: Limpar campos após o "login"
-        // setEmail('');
-        // setPassword('');
       } else {
         alert('Usuário não encontrado. Verifique seu email.');
       }
@@ -126,6 +125,7 @@ function App() {
         <p>Ainda não faz parte? <a href="#">Crie sua conta!</a></p>
         <p><a href="#">Esqueceu a senha?</a></p>
       </div>
+    </div>
     </div>
   );
 }
