@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css';
+import UserProfileCard from './UserProfileCard'; // Importar o UserProfileCard
 
 function App() {
   // 1. Estado para o tema atual
@@ -13,6 +14,8 @@ function App() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState(''); // Mantido para estrutura do formulário, mas não usado no fetch atual
   const [isLoading, setIsLoading] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null); // Estado para o usuário logado
+  const [loginError, setLoginError] = useState(''); // Estado para mensagens de erro de login
 
   // 2. Efeito para aplicar o tema e salvar no localStorage
   useEffect(() => {
@@ -37,6 +40,7 @@ function App() {
       return;
     }
     setIsLoading(true);
+    setLoginError(''); // Limpa erros anteriores
 
     try {
       // Seu backend server.js deve ter uma rota /login que aceita o email como query param
@@ -54,22 +58,28 @@ function App() {
 
       if (users && users.length > 0) {
         // Usuário encontrado. Assumimos que o primeiro é o correto.
-        // O campo 'username' do seu banco de dados é o que queremos mostrar.
-        const usernameFromDB = users[0].username; 
-        if (usernameFromDB) {
-          alert(`Bem-vindo(a), ${usernameFromDB}!`);
-        } else {
-          alert('Usuário encontrado, mas o nome de usuário (username) não está definido no banco.');
-        }
+        setCurrentUser(users[0]); // Armazena os dados do usuário no estado
+        // Limpar campos do formulário após login bem-sucedido
+        setEmail('');
+        setPassword('');
       } else {
-        alert('Usuário não encontrado. Verifique seu email.');
+        setLoginError('Usuário não encontrado. Verifique seu email.');
+        setCurrentUser(null);
       }
     } catch (error) {
       console.error("Erro durante o login:", error);
-      alert(`Erro ao tentar fazer login: ${error.message}`);
+      setLoginError(`Erro ao tentar fazer login: ${error.message}`);
+      setCurrentUser(null);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  // 5. Função para logout
+  const handleLogout = () => {
+    setCurrentUser(null);
+    // Adicione aqui qualquer outra lógica de limpeza de sessão, se necessário
+    // Por exemplo, limpar tokens do localStorage, etc.
   };
 
   return (
@@ -85,47 +95,62 @@ function App() {
           </select>
         </div>
       </header>
-       <div className="login-container">
-      <h1 className="login-title">Login</h1>
-      <p className="login-subtitle">Faça login para continuar.</p>
-      
-      <form onSubmit={handleSubmit} className="form-wrapper">
-        <div className="form-group">
-          <label htmlFor="email">Seu Email</label>
-          <input 
-            type="email" 
-            id="email" 
-            name="email" 
-            placeholder="exemplo@criativo.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+
+      {currentUser ? (
+        // Se currentUser existir, mostra o UserProfileCard
+        <UserProfileCard
+          username={currentUser.username} // Passa o username do usuário logado
+          email={currentUser.email}       // Passa o email do usuário logado
+          // A prop onLogout não é usada pelo UserProfileCard.jsx fornecido,
+          // mas é uma boa prática passá-la se o card puder ter um botão de logout.
+          // onLogout={handleLogout} 
+        />
+      ) : (
+        // Caso contrário, mostra o formulário de login
+        <div className="login-container">
+          <h1 className="login-title">Login</h1>
+          <p className="login-subtitle">Faça login para continuar.</p>
+
+          {loginError && <p style={{ color: 'red', marginBottom: '15px', textAlign: 'center' }}>{loginError}</p>}
+          
+          <form onSubmit={handleSubmit} className="form-wrapper">
+            <div className="form-group">
+              <label htmlFor="email">Seu Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                placeholder="exemplo@criativo.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            
+            <div className="form-group">
+              <label htmlFor="password">Sua Senha</label>
+              <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            
+            <button type="submit" className="login-button" disabled={isLoading}>
+              {isLoading ? 'Entrando...' : 'Entrar na Plataforma'}
+            </button>
+          </form>
+          
+          <div className="extra-links">
+            <p>Ainda não faz parte? <a href="#">Crie sua conta!</a></p>
+            <p><a href="#">Esqueceu a senha?</a></p>
+          </div>
         </div>
-        
-        <div className="form-group">
-          <label htmlFor="password">Sua Senha</label>
-          <input 
-            type="password" 
-            id="password" 
-            name="password" 
-            placeholder="••••••••"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        
-        <button type="submit" className="login-button" disabled={isLoading}>
-          {isLoading ? 'Entrando...' : 'Entrar na Plataforma'}
-        </button>
-      </form>
-      
-      <div className="extra-links">
-        <p>Ainda não faz parte? <a href="#">Crie sua conta!</a></p>
-        <p><a href="#">Esqueceu a senha?</a></p>
-      </div>
-    </div>
+      )}
     </div>
   );
 }
