@@ -412,3 +412,147 @@ button {
   box-shadow: var(--expressive-shadow-hover);
 }
 .expressive-theme .fab-expressive:active { transform: scale(1.05) rotate(10deg); }
+
+/* =============================================== */
+/* ESTILOS PARA UserProfileCard.jsx                */
+/* =============================================== */
+
+.user-profile-card-wrapper {
+  width: 100%;
+  max-width: 500px; /* Ajuste conforme necessário */
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.user-profile-card-wrapper .text-center {
+  text-align: center;
+}
+
+.user-profile-card-wrapper .mb-8 {
+  margin-bottom: 2rem; /* 32px */
+}
+
+.user-profile-card-wrapper .mb-3 {
+  margin-bottom: 0.75rem; /* 12px */
+}
+
+/* Estilizando o título principal do card wrapper (Nossa Comunidade) */
+.expressive-theme .user-profile-card-wrapper .font-display {
+  font-family: var(--expressive-font-header);
+  color: var(--expressive-primary);
+  /* font-size já está inline, mas poderia ser definido aqui */
+}
+
+.expressive-theme .user-profile-card-wrapper .text-expressive-on-surface-alpha-80 {
+  color: color-mix(in srgb, var(--expressive-text) 80%, transparent);
+  font-size: 1.1rem;
+}
+
+.user-profile-card-container {
+  background-color: var(--expressive-card-bg, #fff); /* Usa variável do tema ou fallback */
+  padding: 30px; /* Aumentar padding interno do card */
+  text-align: center;
+  /* As classes shape-expressive-card e shadow-expressive já são aplicadas via JSX */
+  /* A animação card-enter-animation precisaria ser definida se desejada */
+}
+
+.user-avatar-container {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 100px; /* Tamanho do avatar */
+  height: 100px;
+  border-radius: var(--expressive-fab-radius); /* Para um círculo perfeito, se shape-expressive-avatar for 50% */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem; /* Tamanho da inicial */
+  font-weight: bold;
+  margin-bottom: 10px;
+  /* bg-expressive-secondary e font-name já são aplicadas via JSX */
+}
+
+.expressive-theme .user-avatar {
+  background-color: var(--expressive-accent-pink); /* Cor de destaque para o avatar */
+  color: var(--expressive-text-on-primary);
+}
+
+.expressive-theme .user-avatar-name {
+  font-family: var(--expressive-font-header); /* Usar a fonte de cabeçalho para o nome */
+  color: var(--expressive-primary);
+  font-size: 1.5rem; /* Tamanho do nome abaixo do avatar */
+}
+
+.login-status-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.status-indicator.online {
+  width: 12px;
+  height: 12px;
+  background-color: var(--expressive-accent-green); /* Verde para online */
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--expressive-accent-green);
+}
+
+.expressive-theme .login-success-text {
+  color: var(--expressive-text);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.expressive-theme .welcome-text {
+  color: var(--expressive-text);
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+}
+
+.expressive-theme .welcome-text strong {
+  font-family: var(--expressive-font-header);
+  color: var(--expressive-primary);
+}
+
+.user-profile-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Espaço entre botões */
+}
+
+/* Estilos para botões dentro do UserProfileCard, se diferentes dos globais */
+/* As classes expressive-button, expressive-button-primary, shape-expressive-button já são aplicadas */
+/* Se precisar de um botão de logout com estilo secundário, por exemplo: */
+.expressive-theme .user-profile-actions .expressive-button-secondary {
+  background-color: transparent;
+  color: var(--expressive-primary);
+  border: 2px solid var(--expressive-primary);
+}
+
+.expressive-theme .user-profile-actions .expressive-button-secondary:hover {
+  background-color: rgba(138, 43, 226, 0.1); /* Roxo bem claro no hover */
+  color: var(--expressive-primary);
+  transform: scale(1.03); /* Efeito de escala menor que o primário */
+}
+
+/* Animação de entrada para o card (opcional) */
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.card-enter-animation {
+  animation: cardEnter 0.5s ease-out forwards;
+}

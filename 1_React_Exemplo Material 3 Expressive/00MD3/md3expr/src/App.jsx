@@ -101,9 +101,7 @@ function App() {
         <UserProfileCard
           username={currentUser.username} // Passa o username do usuário logado
           email={currentUser.email}       // Passa o email do usuário logado
-          // A prop onLogout não é usada pelo UserProfileCard.jsx fornecido,
-          // mas é uma boa prática passá-la se o card puder ter um botão de logout.
-          // onLogout={handleLogout} 
+          onLogout={handleLogout} // Passa a função de logout para o UserProfileCard
         />
       ) : (
         // Caso contrário, mostra o formulário de login
