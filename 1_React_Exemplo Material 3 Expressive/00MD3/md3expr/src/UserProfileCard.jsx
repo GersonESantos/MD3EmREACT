@@ -5,7 +5,7 @@ import React from 'react';
 // If you prefer a separate CSS file for this component:
 // import './UserProfileCard.css';
 
-function UserProfileCard({ username, email }) {
+function UserProfileCard({ username, email, onLogout }) {
   // Lógica aprimorada para determinar o nome de exibição
   let finalDisplayName;
 
@@ -62,6 +62,12 @@ function UserProfileCard({ username, email }) {
           <button className="expressive-button expressive-button-primary shape-expressive-button">
             Ver Perfil
           </button>
+          {/* Adicionando o botão Voltar/Sair que utiliza a prop onLogout */}
+          {onLogout && (
+            <button onClick={onLogout} className="expressive-button expressive-button-secondary shape-expressive-button" style={{ marginLeft: '10px' }}>
+              Voltar
+            </button>
+          )}
         </div>
       </div>
     </div>
