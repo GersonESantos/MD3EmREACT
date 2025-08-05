@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <title>Material Design 3 com Grid em HTML Puro</title>
+    <meta charset="UTF-8">
+
+    <!-- Usamos Material Design 3 desde un CDN -->
+      document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+    <!-- Usamos Material Design 3 desde un CDN -->
+
+    <style>
+      body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f8f9fa;
+        padding: 16px;
+      }
+
+      .grid-container {
+        display: grid;
+        /* Cria colunas responsivas: no mínimo 300px, crescendo para preencher o espaço. */
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 16px; /* Espaçamento entre os cards */
+        max-width: 1200px;
+        margin: 24px auto;
+      }
+
+      .card-content {
+        padding: 16px;
+      }
+
+      h2 {
+        margin-top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="md-typescale-display-medium">Exemplo de Grid com Material Design 3</h1>
+
+    <div class="grid-container">
+      <!-- Itens da Grade -->
+      <div class="grid-item">
+        <md-filled-card>
+          <div class="card-content">
+            <h2 class="md-typescale-title-large">Card 1</h2>
+            <p class="md-typescale-body-medium">Este é um card dentro de um layout de grade responsivo. Ele se ajustará ao tamanho da tela.</p>
+            <div style="display: flex; justify-content: flex-end; padding-top: 8px;"><md-text-button>Ação</md-text-button></div>
+          </div>
+        </md-filled-card>
+      </div>
+
+      <div class="grid-item">
+        <md-filled-card>
+          <div class="card-content">
+            <h2 class="md-typescale-title-large">Card 2</h2>
+            <p class="md-typescale-body-medium">Este é outro card na grade. A propriedade 'gap' no CSS cria o espaçamento entre eles.</p>
+            <div style="display: flex; justify-content: flex-end; padding-top: 8px;"><md-text-button>Saiba Mais</md-text-button></div>
+          </div>
+        </md-filled-card>
+      </div>
+
+      <div class="grid-item">
+        <md-filled-card>
+          <div class="card-content">
+            <h2 class="md-typescale-title-large">Card 3</h2>
+            <p class="md-typescale-body-medium">Tente redimensionar a janela do navegador para ver como os cards se reorganizam automaticamente.</p>
+            <div style="display: flex; justify-content: flex-end; padding-top: 8px;"><md-text-button>Ver Detalhes</md-text-button></div>
+          </div>
+        </md-filled-card>
+      </div>
+
+      <div class="grid-item">
+        <md-filled-card>
+          <div class="card-content">
+            <h2 class="md-typescale-title-large">Card 4</h2>
+            <p class="md-typescale-body-medium">Usamos 'auto-fit' para que novas colunas sejam criadas quando houver espaço suficiente.</p>
+            <div style="display: flex; justify-content: flex-end; padding-top: 8px;"><md-text-button>Confirmar</md-text-button></div>
+          </div>
+        </md-filled-card>
+      </div>
+    </div>
+  </body>
+</html>
+
